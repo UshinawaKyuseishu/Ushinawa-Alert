@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ushinawa Kyuseishu Academy - ระบบส่วนกลาง</title>
+    <title>Ushinawa Kyuseishu - ระบบแจ้งเตือนภัยและเบาะแส</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -63,18 +63,25 @@
         }
         .system-badge {
             background: #800517;
-            color: #ffffff;
+            color: #ff4d4d;
             font-size: 10px;
             padding: 3px 8px;
             border-radius: 4px;
             font-weight: 600;
             letter-spacing: 1px;
+            border: 1px solid #ff4d4d;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
         }
         h1 {
             color: #ff4d4d;
             margin: 0 0 12px 0;
             text-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
         }
         /* แถบเมนูด้านบน */
@@ -92,7 +99,7 @@
             border: 1px solid #330000;
             padding: 6px 10px;
             border-radius: 6px;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
             font-family: 'Noto Sans Thai', sans-serif;
             white-space: nowrap;
@@ -126,7 +133,7 @@
             font-weight: 600;
         }
         .card-title {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 700;
             color: #ffffff;
             margin-bottom: 5px;
@@ -165,53 +172,58 @@
 
     <div class="container">
         <div class="header-top">
-            <div class="school-title">USHINAWA ACADEMY</div>
-            <div class="system-badge">ONLINE</div>
+            <div class="school-title">USHINAWA EMERGENCY NET</div>
+            <div class="system-badge">ALERT ACTIVE</div>
         </div>
 
-        <h1>ระบบข้อมูลส่วนกลาง</h1>
+        <h1>ระบบแจ้งเตือนภัยและเบาะแส</h1>
 
-        <!-- เมนูปุ่มกดเปลี่ยนหมวดหมู่ (เหลือ 3 แท็บ) -->
+        <!-- เมนูปุ่มกดเปลี่ยนหมวดหมู่ (3 แท็บธีมภัยพิบัติและคีย์หลัก) -->
         <div class="nav-tabs">
-            <button class="tab-btn active" onclick="switchTab(event, 'tab1')">🔴 แจ้งเตือน</button>
-            <button class="tab-btn" onclick="switchTab(event, 'tab2')">📋 บอร์ดข่าว</button>
-            <button class="tab-btn" onclick="switchTab(event, 'tab3')">🗂️ Personal List</button>
+            <button class="tab-btn active" onclick="switchTab(event, 'tab1')">🚨 แจ้งเตือนภัย</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab2')">👁️ สิ่งแปลกปลอม</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab3')">🗝️ เบาะแส</button>
         </div>
         
-        <!-- หมวดที่ 1: ระบบแจ้งเตือนสถานการณ์ -->
+        <!-- หมวดที่ 1: แจ้งเตือนภัยพิบัติ -->
         <div id="tab1" class="tab-content active">
             <div class="card" style="border-left-color: #ff4d4d;">
-                <div class="card-tag">🚨 [ฉุกเฉิน] เขตหวงห้าม</div>
-                <div class="card-title">ประกาศปิดทางรถไฟชั่วคราว</div>
-                <p class="card-desc">เนื่องจากตรวจพบความผิดปกติในละแวกอุโมงค์ทางรถไฟ จึงอยากขอความร่วมมือ ให้ผู้พักอาศัยทุกท่านงดเข้าออกในพื้นที่ดังกล่าวจนกว่าจะมีคำสั่งเปลี่ยนแปลง</p>
+                <div class="card-tag">🚨 [ภัยพิบัติฉุกเฉิน] เขตอุโมงค์ทางรถไฟ</div>
+                <div class="card-title">ประกาศปิดกั้นพื้นที่และห้ามเข้าใกล้</div>
+                <p class="card-desc">ตรวจพบความผิดปกติทางคลื่นพลังงานและอาณาเขตบิดเบี้ยว ขอให้ผู้พักอาศัยหลบเลี่ยงเส้นทางดังกล่าวทันทีจนกว่าจะมีประกาศยกเลิก</p>
             </div>
             <div class="card" style="border-left-color: #ffaa00;">
-                <div class="card-tag">⚠️ [เฝ้าระวัง] อาคารเรียน</div>
-                <div class="card-title">พบร่องรอยโยวไคผิดปกติ</div>
-                <p class="card-desc">รายงานจากสภานักเรียน พบร่องรอยพลังงานต้องสงสัยบริเวณชั้น 3 อาคารเรียนหลัก โปรดระมัดระวังในการเดินทางคนเดียว</p>
+                <div class="card-tag">⚠️ [ประกาศเฝ้าระวัง] เขตที่อยู่อาศัย</div>
+                <div class="card-title">คำเตือนช่วงเวลากลางคืน</div>
+                <p class="card-desc">เนื่องจากหมอกหนาผิดธรรมชาติและเสียงกระดิ่งปริศนาในยามวิกาล ขอความร่วมมือทุกท่านล็อกประตูและงดออกนอกเคหสถานคนเดียว</p>
             </div>
         </div>
 
-        <!-- หมวดที่ 2: กระดานประกาศโรงเรียน -->
+        <!-- หมวดที่ 2: สิ่งแปลกปลอม -->
         <div id="tab2" class="tab-content">
             <div class="card" style="border-left-color: #cc6666;">
-                <div class="card-tag">🏫 สภานักเรียน</div>
-                <div class="card-title">ตารางกิจกรรมประจำสัปดาห์</div>
-                <p class="card-desc">ตรวจสอบตารางเรียนพิเศษและกิจกรรมชุมนุมได้ที่บอร์ดประชาสัมพันธ์หลักของแต่ละอาคาร</p>
+                <div class="card-tag">👁️ [รายงานสิ่งแปลกปลอม] อาคารเรียนเก่า</div>
+                <div class="card-title">เงาร่างไร้หน้าและรอยเท้าปริศนา</div>
+                <p class="card-desc">มีผู้พบเห็นเงาร่างผิดรูปเคลื่อนไหวบริเวณชั้น 3 ของอาคารร้าง หากพบเจอสิ่งมีลักษณะดังกล่าว ห้ามเข้าใกล้และให้รีบแจ้งเจ้าหน้าที่ทันที</p>
             </div>
             <div class="card" style="border-left-color: #cc6666;">
-                <div class="card-tag">🔍 ตามหาของหาย</div>
-                <div class="card-title">ประกาศตามหาเครื่องรางประจำตัว</div>
-                <p class="card-desc">พบเครื่องรางตกอยู่บริเวณโรงอาหาร ใครเป็นเจ้าของติดต่อรับคืนได้ที่ห้องสภานักเรียน</p>
+                <div class="card-tag">👁️ [สิ่งผิดปกติ] เขตศาลเจ้า</div>
+                <div class="card-title">การเปลี่ยนแปลงของเขตอาคม</div>
+                <p class="card-desc">พบความผิดปกติของเสาโทริอิและกลีบดอกฮิกังบานะที่บานผิดฤดูกาล ส่อเค้าลางเหตุการณ์ไม่ปกติในพื้นที่</p>
             </div>
         </div>
 
-        <!-- หมวดที่ 3: Ushinawa Kyuseishu personal list -->
+        <!-- หมวดที่ 3: เบาะแส (Ushinawa Kyuseishu personal list / คีย์ลับ) -->
         <div id="tab3" class="tab-content">
             <div class="card" style="border-left-color: #800517;">
-                <div class="card-tag">👤 DIRECTORY</div>
-                <div class="card-title">Ushinawa Kyuseishu personal list</div>
-                <p class="card-desc">รวบรวมข้อมูลโปรไฟล์ รายชื่อ และสถานะของตัวละครในคอมมู Ushinawa Kyuseishu ทั้งหมด</p>
+                <div class="card-tag">🗝️ [คีย์หลักที่ต้องตามหา] บันทึกหน้าหาย</div>
+                <div class="card-title">ร่องรอยผู้กอบกู้และเงื่อนงำในหมู่บ้าน</div>
+                <p class="card-desc">รวบรวมเบาะแส คีย์เวิร์ดสำคัญ และชิ้นส่วนความทรงจำที่กระจัดกระจาย เพื่อไขปริศนาและหาทางออกให้กับหมู่บ้าน Ushinawa</p>
+            </div>
+            <div class="card" style="border-left-color: #800517;">
+                <div class="card-tag">📌 [เป้าหมายสืบสวน] สัญญาณปริศนา</div>
+                <div class="card-title">รหัสลับจากสถานีวิทยุร้าง</div>
+                <p class="card-desc">ถอดรหัสข้อความเสียงที่ขาดหายเพื่อเข้าถึงเบาะแสระดับลึกของคอมมู ที่ซ่อนอยู่ภายใต้ความเงียบงันของเมืองนี้</p>
             </div>
         </div>
 
