@@ -8,188 +8,80 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
         body {
             font-family: 'Noto Sans Thai', sans-serif, Arial;
             background-color: #000000;
             color: #ffffff;
-            margin: 0;
-            padding: 0;
-            width: 100vw;
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-            display: flex;
-            flex-direction: column;
+            margin: 0; padding: 0;
+            width: 100vw; min-height: 100vh;
+            overflow-x: hidden; position: relative;
+            display: flex; flex-direction: column;
         }
-
-        /* เอฟเฟกต์กลีบดอกไม้ฮิกังบานะโปรยปรายเต็มจอ */
         .petal {
-            position: fixed;
-            background-color: #ff4d4d;
-            border-radius: 150% 0 150% 0;
-            opacity: 0.5;
-            animation: fall linear infinite;
-            z-index: 1;
-            pointer-events: none;
+            position: fixed; background-color: #ff4d4d;
+            border-radius: 150% 0 150% 0; opacity: 0.5;
+            animation: fall linear infinite; z-index: 1; pointer-events: none;
         }
         @keyframes fall {
             0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
             20% { opacity: 0.7; }
             100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
         }
-
-        /* หน้าจอ Login / Register */
         #auth-screen {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #080000;
-            z-index: 100;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #080000; z-index: 100;
+            display: flex; justify-content: center; align-items: center; padding: 20px;
         }
         .auth-box {
-            background: #110000;
-            border: 2px solid #800517;
-            padding: 25px;
-            border-radius: 12px;
-            width: 100%;
-            max-width: 400px;
-            box-shadow: 0 0 30px rgba(128, 5, 23, 0.6);
-            text-align: center;
+            background: #110000; border: 2px solid #800517;
+            padding: 25px; border-radius: 12px; width: 100%; max-width: 400px;
+            box-shadow: 0 0 30px rgba(128, 5, 23, 0.6); text-align: center;
         }
-        .auth-box h2 {
-            color: #ff4d4d;
-            margin-top: 0;
-            font-size: 20px;
-        }
+        .auth-box h2 { color: #ff4d4d; margin-top: 0; font-size: 20px; }
         .auth-input {
-            width: 100%;
-            background: #1a0505;
-            border: 1px solid #440000;
-            padding: 12px;
-            border-radius: 6px;
-            color: #fff;
-            font-family: 'Noto Sans Thai', sans-serif;
-            font-size: 14px;
-            margin: 10px 0;
-            outline: none;
+            width: 100%; background: #1a0505; border: 1px solid #440000;
+            padding: 12px; border-radius: 6px; color: #fff;
+            font-family: 'Noto Sans Thai', sans-serif; font-size: 14px;
+            margin: 10px 0; outline: none;
         }
-        .auth-input:focus {
-            border-color: #ff4d4d;
-        }
+        .auth-input:focus { border-color: #ff4d4d; }
         .auth-btn {
-            width: 100%;
-            background: #800517;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 6px;
-            font-family: 'Noto Sans Thai', sans-serif;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 10px;
+            width: 100%; background: #800517; color: white; border: none;
+            padding: 12px; border-radius: 6px; font-family: 'Noto Sans Thai', sans-serif;
+            font-weight: 600; font-size: 14px; cursor: pointer; transition: background 0.2s; margin-top: 10px;
         }
-        .auth-btn:hover {
-            background: #ff4d4d;
-            color: #000;
-        }
-        .auth-switch {
-            font-size: 12px;
-            color: #cc6666;
-            margin-top: 15px;
-            cursor: pointer;
-            text-decoration: underline;
-        }
+        .auth-btn:hover { background: #ff4d4d; color: #000; }
+        .auth-switch { font-size: 12px; color: #cc6666; margin-top: 15px; cursor: pointer; text-decoration: underline; }
 
-        /* โครงสร้างแอปหลัก */
         #app-container {
-            display: none;
-            flex-direction: column;
-            width: 100%;
-            min-height: 100vh;
-            background: #0d0000;
-            position: relative;
-            z-index: 2;
+            display: none; flex-direction: column; width: 100%; min-height: 100vh;
+            background: #0d0000; position: relative; z-index: 2;
         }
-
-        /* Header */
         header {
-            background: #110000;
-            border-bottom: 2px solid #800517;
-            padding: 10px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 10;
+            background: #110000; border-bottom: 2px solid #800517;
+            padding: 10px 15px; display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 10;
         }
-        .app-brand-area {
-            display: flex;
-            flex-direction: column;
-        }
-        .app-brand {
-            font-size: 13px;
-            color: #ff4d4d;
-            letter-spacing: 1px;
-            font-weight: 700;
-        }
-        .app-sub {
-            font-size: 10px;
-            color: #995555;
-        }
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+        .app-brand-area { display: flex; flex-direction: column; }
+        .app-brand { font-size: 13px; color: #ff4d4d; letter-spacing: 1px; font-weight: 700; }
+        .app-sub { font-size: 10px; color: #995555; }
+        .header-right { display: flex; align-items: center; gap: 8px; }
         .user-badge {
-            background: #800517;
-            color: #ff4d4d;
-            font-size: 11px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-weight: 600;
-            border: 1px solid #ff4d4d;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
+            background: #800517; color: #ff4d4d; font-size: 11px;
+            padding: 4px 10px; border-radius: 20px; font-weight: 600;
+            border: 1px solid #ff4d4d; display: flex; align-items: center; gap: 5px; cursor: pointer;
         }
-        .logout-link {
-            font-size: 11px;
-            color: #cc6666;
-            cursor: pointer;
-            text-decoration: underline;
-            margin-left: 5px;
-        }
+        .logout-link { font-size: 11px; color: #cc6666; cursor: pointer; text-decoration: underline; margin-left: 5px; }
 
-        /* แถบสถานะระบบสด */
         .status-ticker {
-            background: #1a0202;
-            border-bottom: 1px solid #330000;
-            padding: 6px 15px;
-            font-size: 11px;
-            color: #cc6666;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: #1a0202; border-bottom: 1px solid #330000;
+            padding: 6px 15px; font-size: 11px; color: #cc6666;
+            display: flex; justify-content: space-between; align-items: center;
         }
         .live-dot {
-            height: 8px;
-            width: 8px;
-            background-color: #ff4d4d;
-            border-radius: 50%;
-            display: inline-block;
-            box-shadow: 0 0 8px #ff4d4d;
-            animation: pulse-dot 1.5s infinite;
+            height: 8px; width: 8px; background-color: #ff4d4d; border-radius: 50%;
+            display: inline-block; box-shadow: 0 0 8px #ff4d4d; animation: pulse-dot 1.5s infinite;
         }
         @keyframes pulse-dot {
             0% { transform: scale(0.95); opacity: 0.8; }
@@ -197,365 +89,116 @@
             100% { transform: scale(0.95); opacity: 0.8; }
         }
 
-        /* ส่วนแสดงเนื้อหาหลัก */
-        main {
-            flex: 1;
-            padding: 15px;
-            max-width: 600px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
+        main { flex: 1; padding: 15px; max-width: 600px; width: 100%; margin: 0 auto; }
         h1 {
-            color: #ff4d4d;
-            margin: 0 0 15px 0;
-            font-size: 18px;
-            font-weight: 700;
-            text-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            color: #ff4d4d; margin: 0 0 15px 0; font-size: 18px; font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 77, 77, 0.3); display: flex; justify-content: space-between; align-items: center;
         }
-
-        /* เมนูแท็บ */
         .nav-tabs {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 20px;
-            border-bottom: 1px solid #330000;
-            padding-bottom: 10px;
-            overflow-x: auto;
+            display: flex; gap: 5px; margin-bottom: 20px;
+            border-bottom: 1px solid #330000; padding-bottom: 10px; overflow-x: auto;
         }
         .tab-btn {
-            background: #1a0505;
-            color: #cc6666;
-            border: 1px solid #330000;
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-size: 11px;
-            cursor: pointer;
-            font-family: 'Noto Sans Thai', sans-serif;
-            white-space: nowrap;
-            transition: all 0.2s;
+            background: #1a0505; color: #cc6666; border: 1px solid #330000;
+            padding: 6px 10px; border-radius: 6px; font-size: 11px; cursor: pointer;
+            font-family: 'Noto Sans Thai', sans-serif; white-space: nowrap; transition: all 0.2s;
         }
-        .tab-btn.active {
-            background: #660000;
-            color: #ffffff;
-            border-color: #800517;
-            font-weight: 600;
-        }
+        .tab-btn.active { background: #660000; color: #ffffff; border-color: #800517; font-weight: 600; }
         .tab-btn.glitch-tab {
-            color: #ff4d4d;
-            border-color: #800517;
-            animation: tab-glitch 2s infinite;
+            color: #ff4d4d; border-color: #800517; animation: tab-glitch 2s infinite;
         }
         @keyframes tab-glitch {
-            0% { opacity: 1; }
-            50% { opacity: 0.5; border-color: #ff0000; }
-            100% { opacity: 1; }
+            0% { opacity: 1; } 50% { opacity: 0.5; border-color: #ff0000; } 100% { opacity: 1; }
         }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
 
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-
-        /* การ์ดข่าวสาร / ภัยพิบัติ */
         .card {
-            background: #140202;
-            border: 1px solid #330000;
-            border-left-width: 5px;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            background: #140202; border: 1px solid #330000; border-left-width: 5px;
+            padding: 15px; border-radius: 8px; margin-bottom: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
-        .card-tag {
-            font-size: 11px;
-            color: #ff4d4d;
-            margin-bottom: 6px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .card-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 6px;
-        }
-        .card-desc {
-            font-size: 13px;
-            color: #cccccc;
-            margin: 0 0 10px 0;
-            line-height: 1.5;
-        }
-        .archive-year {
-            font-size: 10px;
-            color: #884444;
-            background: #220000;
-            padding: 2px 6px;
-            border-radius: 4px;
-            display: inline-block;
-            margin-bottom: 5px;
-        }
+        .card-tag { font-size: 11px; color: #ff4d4d; margin-bottom: 6px; font-weight: 600; text-transform: uppercase; }
+        .card-title { font-size: 15px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
+        .card-desc { font-size: 13px; color: #cccccc; margin: 0 0 10px 0; line-height: 1.5; }
+        .archive-year { font-size: 10px; color: #884444; background: #220000; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-bottom: 5px; }
 
-        /* ปุ่ม Interactive ภายใน Card */
-        .card-action-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid #260505;
-            padding-top: 10px;
-            margin-top: 10px;
-        }
-        .action-info {
-            font-size: 11px;
-            color: #885555;
-        }
+        .card-action-bar { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #260505; padding-top: 10px; margin-top: 10px; }
+        .action-info { font-size: 11px; color: #885555; }
         .interact-btn {
-            background: #200505;
-            color: #ff4d4d;
-            border: 1px solid #800517;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 11px;
-            cursor: pointer;
-            font-family: 'Noto Sans Thai', sans-serif;
-            transition: all 0.2s;
+            background: #200505; color: #ff4d4d; border: 1px solid #800517;
+            padding: 5px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;
+            font-family: 'Noto Sans Thai', sans-serif; transition: all 0.2s;
         }
-        .interact-btn:hover {
-            background: #800517;
-            color: #fff;
-        }
-        .interact-btn.checked {
-            background: #052005;
-            color: #4dff4d;
-            border-color: #058005;
-        }
+        .interact-btn:hover { background: #800517; color: #fff; }
+        .interact-btn.checked { background: #052005; color: #4dff4d; border-color: #058005; }
 
-        /* แผงเช็กอิน */
         .user-status-panel {
-            background: #180303;
-            border: 1px solid #550000;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: #180303; border: 1px solid #550000; padding: 12px;
+            border-radius: 8px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;
         }
-        .user-status-panel div span {
-            font-weight: 700;
-            color: #ff4d4d;
-        }
+        .user-status-panel div span { font-weight: 700; color: #ff4d4d; }
         .checkin-btn {
-            background: #800517;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 12px;
-            cursor: pointer;
-            font-family: 'Noto Sans Thai', sans-serif;
-            font-weight: 600;
+            background: #800517; color: white; border: none; padding: 8px 12px;
+            border-radius: 6px; font-size: 12px; cursor: pointer; font-family: 'Noto Sans Thai', sans-serif; font-weight: 600;
         }
-        .checkin-btn:hover {
-            background: #ff4d4d;
-            color: #000;
-        }
+        .checkin-btn:hover { background: #ff4d4d; color: #000; }
 
-        /* ห้องแชท */
         .chat-container {
-            background: #110000;
-            border: 1px solid #440000;
-            border-radius: 8px;
-            height: 350px;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
+            background: #110000; border: 1px solid #440000; border-radius: 8px;
+            height: 350px; display: flex; flex-direction: column; overflow: hidden;
         }
-        .chat-messages {
-            flex: 1;
-            padding: 10px;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-        .chat-msg {
-            background: #1a0505;
-            border: 1px solid #330000;
-            padding: 8px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-        }
-        .chat-user {
-            font-weight: 700;
-            color: #ff4d4d;
-            margin-bottom: 2px;
-        }
-        .chat-text {
-            color: #ddd;
-            word-break: break-all;
-        }
-        .chat-time {
-            font-size: 9px;
-            color: #774444;
-            text-align: right;
-            margin-top: 2px;
-        }
-        .chat-input-area {
-            display: flex;
-            padding: 8px;
-            background: #0c0000;
-            border-top: 1px solid #440000;
-            gap: 5px;
-        }
+        .chat-messages { flex: 1; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
+        .chat-msg { background: #1a0505; border: 1px solid #330000; padding: 8px 10px; border-radius: 6px; font-size: 12px; }
+        .chat-user { font-weight: 700; color: #ff4d4d; margin-bottom: 2px; }
+        .chat-text { color: #ddd; word-break: break-all; }
+        .chat-time { font-size: 9px; color: #774444; text-align: right; margin-top: 2px; }
+        .chat-input-area { display: flex; padding: 8px; background: #0c0000; border-top: 1px solid #440000; gap: 5px; }
         .chat-input {
-            flex: 1;
-            background: #1a0505;
-            border: 1px solid #440000;
-            padding: 8px;
-            border-radius: 4px;
-            color: #fff;
-            font-family: 'Noto Sans Thai', sans-serif;
-            font-size: 12px;
-            outline: none;
+            flex: 1; background: #1a0505; border: 1px solid #440000; padding: 8px;
+            border-radius: 4px; color: #fff; font-family: 'Noto Sans Thai', sans-serif; font-size: 12px; outline: none;
         }
         .chat-send-btn {
-            background: #800517;
-            color: white;
-            border: none;
-            padding: 0 15px;
-            border-radius: 4px;
-            font-family: 'Noto Sans Thai', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            font-size: 12px;
+            background: #800517; color: white; border: none; padding: 0 15px;
+            border-radius: 4px; font-family: 'Noto Sans Thai', sans-serif; font-weight: 600; cursor: pointer; font-size: 12px;
         }
-        .chat-send-btn:hover {
-            background: #ff4d4d;
-            color: #000;
-        }
+        .chat-send-btn:hover { background: #ff4d4d; color: #000; }
 
-        /* ปฏิทินเทศกาล */
         .festival-card {
-            background: #140202;
-            border: 1px solid #440000;
-            border-left: 5px solid #ff4d4d;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 10px;
+            background: #140202; border: 1px solid #440000; border-left: 5px solid #ff4d4d;
+            padding: 12px; border-radius: 6px; margin-bottom: 10px;
         }
-        .festival-date {
-            font-size: 11px;
-            color: #ff4d4d;
-            font-weight: 700;
-        }
-        .festival-name {
-            font-size: 14px;
-            font-weight: 700;
-            color: #fff;
-            margin: 2px 0 5px 0;
-        }
+        .festival-date { font-size: 11px; color: #ff4d4d; font-weight: 700; }
+        .festival-name { font-size: 14px; font-weight: 700; color: #fff; margin: 2px 0 5px 0; }
 
-        /* หน้าต่างตั้งค่าโปรไฟล์ (Modal) */
         #profile-modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8);
-            z-index: 200;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 200; display: none; justify-content: center; align-items: center; padding: 20px;
         }
-        .modal-box {
-            background: #110000;
-            border: 2px solid #800517;
-            padding: 20px;
-            border-radius: 10px;
-            width: 100%;
-            max-width: 400px;
-        }
-        .modal-box h3 {
-            color: #ff4d4d;
-            margin-top: 0;
-            font-size: 16px;
-        }
+        .modal-box { background: #110000; border: 2px solid #800517; padding: 20px; border-radius: 10px; width: 100%; max-width: 400px; }
+        .modal-box h3 { color: #ff4d4d; margin-top: 0; font-size: 16px; }
         .modal-input {
-            width: 100%;
-            background: #1a0505;
-            border: 1px solid #440000;
-            padding: 10px;
-            border-radius: 6px;
-            color: #fff;
-            font-family: 'Noto Sans Thai', sans-serif;
-            font-size: 13px;
-            margin: 8px 0 12px 0;
-            outline: none;
+            width: 100%; background: #1a0505; border: 1px solid #440000; padding: 10px;
+            border-radius: 6px; color: #fff; font-family: 'Noto Sans Thai', sans-serif; font-size: 13px; margin: 8px 0 12px 0; outline: none;
         }
-        .modal-input:focus {
-            border-color: #ff4d4d;
-        }
-        .modal-actions {
-            display: flex;
-            gap: 8px;
-            margin-top: 15px;
-        }
+        .modal-input:focus { border-color: #ff4d4d; }
+        .modal-actions { display: flex; gap: 8px; margin-top: 15px; }
 
-        /* แท็บความลับ */
         .glitch-card {
-            background: #1c0000;
-            border: 1px dashed #ff4d4d;
-            border-left-width: 5px;
-            border-left-color: #ff0000;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            position: relative;
-            overflow: hidden;
+            background: #1c0000; border: 1px dashed #ff4d4d; border-left-width: 5px;
+            border-left-color: #ff0000; padding: 15px; border-radius: 8px; margin-bottom: 12px; position: relative; overflow: hidden;
             animation: glitch-box 3s infinite;
         }
         @keyframes glitch-box {
-            0% { transform: translate(0); }
-            20% { transform: translate(-1px, 1px); border-color: #800517; }
-            40% { transform: translate(1px, -1px); border-color: #ff4d4d; }
-            100% { transform: translate(0); }
+            0% { transform: translate(0); } 20% { transform: translate(-1px, 1px); border-color: #800517; } 100% { transform: translate(0); }
         }
-        .glitch-text {
-            color: #ff4d4d;
-            font-family: monospace;
-            letter-spacing: 1px;
-            animation: text-flicker 1.5s infinite;
-        }
-        @keyframes text-flicker {
-            0% { opacity: 1; }
-            50% { opacity: 0.4; }
-            100% { opacity: 1; }
-        }
-        .corrupted {
-            color: #880000;
-            background-color: #220000;
-            padding: 0 4px;
-            text-decoration: line-through;
-        }
+        .glitch-text { color: #ff4d4d; font-family: monospace; letter-spacing: 1px; animation: text-flicker 1.5s infinite; }
+        @keyframes text-flicker { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+        .corrupted { color: #880000; background-color: #220000; padding: 0 4px; text-decoration: line-through; }
 
-        footer {
-            text-align: center;
-            font-size: 11px;
-            color: #666;
-            padding: 15px;
-            border-top: 1px solid #220000;
-            background: #080000;
-        }
+        footer { text-align: center; font-size: 11px; color: #666; padding: 15px; border-top: 1px solid #220000; background: #080000; }
     </style>
 </head>
 <body>
-    <!-- เอฟเฟกต์กลีบดอกไม้โปรย -->
     <script>
         for (let i = 0; i < 15; i++) {
             let p = document.createElement('div');
@@ -570,7 +213,7 @@
         }
     </script>
 
-    <!-- หน้าจอ Login / Register (ระบบฐานข้อมูล) -->
+    <!-- หน้าจอ Login / Register -->
     <div id="auth-screen">
         <div class="auth-box">
             <h2 id="auth-title">USHINAWA EMERGENCY NET</h2>
@@ -607,4 +250,388 @@
                 <div class="app-sub">Secure Emergency & Community Portal</div>
             </div>
             <div class="header-right">
-                <div class="user-badge" onclick="openProfile
+                <div class="user-badge" onclick="openProfileModal()" title="คลิกเพื่อแก้ไขโปรไฟล์">
+                    <span>👤</span> <span id="display-user">ผู้ใช้งาน</span> ⚙️
+                </div>
+                <span class="logout-link" onclick="logout()">[ออก]</span>
+            </div>
+        </header>
+
+        <div class="status-ticker">
+            <span><span class="live-dot"></span> สภาพอากาศ: หมอกลงจัด / เฝ้าระวังภัยพิบัติและเงาผิดปกติ</span>
+            <span id="system-time">00:00:00</span>
+        </div>
+
+        <main>
+            <h1>
+                <span>ศูนย์กลางเครือข่ายอุชินาวะ</span>
+                <span id="user-bio-tag" style="font-size: 11px; color: #885555; font-weight: normal;">สเตตัส: ปกติ</span>
+            </h1>
+
+            <div class="nav-tabs">
+                <button class="tab-btn active" onclick="switchTab(event, 'tab1')">🚨 ภัยพิบัติ & ข่าวสาร</button>
+                <button class="tab-btn" onclick="switchTab(event, 'tab2')">👁️ สิ่งแปลกปลอม</button>
+                <button class="tab-btn" onclick="switchTab(event, 'tab3')">💬 ห้องแชท</button>
+                <button class="tab-btn" onclick="switchTab(event, 'tab4')">📅 ปฏิทินเมือง</button>
+                <button class="tab-btn glitch-tab" onclick="switchTab(event, 'tab5')">⚠️ ERR_404</button>
+            </div>
+            
+            <div id="tab1" class="tab-content active">
+                <div class="user-status-panel">
+                    <div>
+                        <div style="font-size: 12px; color: #aaa;">สถานะความปลอดภัยของคุณ:</div>
+                        <div id="my-safety-status" style="font-size: 14px; color: #ffaa00;">⚠️ ยังไม่ได้เช็กอินยืนยันตัวตน</div>
+                    </div>
+                    <button class="checkin-btn" onclick="toggleCheckIn()" id="checkin-btn-text">เช็กอินว่าปลอดภัย</button>
+                </div>
+
+                <h3 style="color: #ff4d4d; font-size: 14px; margin: 15px 0 10px 0;">📰 คลังข่าวสารและบันทึกเหตุการณ์ย้อนหลัง (Archive)</h3>
+
+                <div class="card" style="border-left-color: #ff4d4d;">
+                    <span class="archive-year">ปี ค.ศ. 2026 (ปัจจุบัน)</span>
+                    <div class="card-tag">🚨 [ภัยพิบัติฉุกเฉิน] เขตอุโมงค์ทางรถไฟ</div>
+                    <div class="card-title">ประกาศเตือน: เสียงกระดิ่งปริศนาและภัยกระจกสะท้อน</div>
+                    <p class="card-desc">รายงานเหตุการณ์ระทึกขวัญในพื้นที่ พบเสียงเด็กร้องไห้และเสียงกระดิ่งกังวานยามวิกาล ห้ามส่องกระจกหลังเที่ยงคืนเด็ดขาด</p>
+                    <div class="card-action-bar">
+                        <span class="action-info">ผู้รับทราบประกาศ: <strong id="count-1">142</strong> คน</span>
+                        <button class="interact-btn" onclick="ackAlert(this, 'count-1')">รับทราบคำเตือน</button>
+                    </div>
+                </div>
+
+                <div class="card" style="border-left-color: #ffaa00;">
+                    <span class="archive-year">ปี ค.ศ. 2022</span>
+                    <div class="card-tag">⚠️ [ประกาศประจำวัน] ภัยธรรมชาติและข่าวลือ</div>
+                    <div class="card-title">เหตุการณ์น้ำท่วมเฉียบพลันและไฟไหม้ป่ารอบหมู่บ้าน</div>
+                    <p class="card-desc">พายุฝนกระหน่ำส่งผลให้น้ำท่วมย่านการค้าเก่า พร้อมเกิดเหตุเพลิงไหม้ปริศนาบริเวณชายป่า ชาวบ้านต่างลือกันว่าเห็นเงาร่างคนเดินฝ่าเปลวไฟโดยไม่ได้รับอันตราย</p>
+                    <div class="card-action-bar">
+                        <span class="action-info">ผู้รับทราบประกาศ: <strong id="count-2">98</strong> คน</span>
+                        <button class="interact-btn" onclick="ackAlert(this, 'count-2')">รับทราบคำเตือน</button>
+                    </div>
+                </div>
+
+                <div class="card" style="border-left-color: #cc6666;">
+                    <span class="archive-year">ปี ค.ศ. 2011</span>
+                    <div class="card-tag">📜 [บันทึกประวัติศาสตร์] ยุคหลังแผ่นดินไหวครั้งใหญ่</div>
+                    <div class="card-title">ประกาศควบคุมการใช้น้ำและไฟ หลังเกิดอาฟเตอร์ช็อกรุนแรง</div>
+                    <p class="card-desc">ประกาศจากทางการเมืองอุชินาวะให้ทุกครัวเรือนสำรองน้ำและระวังภัยไฟไหม้ลุกลาม มีรายงานชาวบ้านได้ยินเสียงเด็กร้องไห้มาจากท่อระบายน้ำร้างช่วงไฟฟ้าดับทั่วเมือง</p>
+                </div>
+
+                <div class="card" style="border-left-color: #884444;">
+                    <span class="archive-year">ปี ค.ศ. 2004</span>
+                    <div class="card-tag">💾 [กระดานข่าวเก่า] ยุคเริ่มต้นอินเทอร์เน็ตไดอัลอัพ</div>
+                    <div class="card-title">กระดานเตือนภัย: ระวังเสียงกระดิ่งและเงาผิดรูปในกระจก</div>
+                    <p class="card-desc">บันทึกยุคแรกเริ่มที่ระบบเครือข่ายท้องถิ่นถูกติดตั้ง เตือนภัยชาวบ้านเรื่องกระจกโบราณตามบ้านเรือนที่สะท้อนภาพผิดเพี้ยน และห้ามออกนอกบ้านยามวิกาลหากได้ยินเสียงกระดิ่งลม</p>
+                </div>
+            </div>
+
+            <div id="tab2" class="tab-content">
+                <div class="card" style="border-left-color: #cc6666;">
+                    <div class="card-tag">👁️ [รายงานสิ่งแปลกปลอม] อาคารเรียนเก่า</div>
+                    <div class="card-title">เงาร่างไร้หน้าและรอยเท้าปริศนา</div>
+                    <p class="card-desc">มีผู้พบเห็นเงาร่างผิดรูปเคลื่อนไหวบริเวณชั้น 3 ของอาคารร้าง หากพบเจอสิ่งมีลักษณะดังกล่าว ห้ามเข้าใกล้และให้รีบแจ้งเจ้าหน้าที่ทันที</p>
+                    <div class="card-action-bar">
+                        <span class="action-info">ยืนยันการพบเห็น: <strong id="sighting-1">19</strong> รายงาน</span>
+                        <button class="interact-btn" onclick="confirmSighting('sighting-1')">ฉันเคยพบเห็นสิ่งนี้</button>
+                    </div>
+                </div>
+
+                <div class="card" style="border-left-color: #cc6666;">
+                    <div class="card-tag">👁️ [สิ่งผิดปกติ] เขตศาลเจ้า</div>
+                    <div class="card-title">การเปลี่ยนแปลงของเขตอาคม</div>
+                    <p class="card-desc">พบความผิดปกติของเสาโทริอิและกลีบดอกฮิกังบานะที่บานผิดฤดูกาล ส่อเค้าลางเหตุการณ์ไม่ปกติในพื้นที่</p>
+                    <div class="card-action-bar">
+                        <span class="action-info">ยืนยันการพบเห็น: <strong id="sighting-2">31</strong> รายงาน</span>
+                        <button class="interact-btn" onclick="confirmSighting('sighting-2')">ฉันเคยพบเห็นสิ่งนี้</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab3" class="tab-content">
+                <div class="chat-container">
+                    <div class="chat-messages" id="chat-messages-box"></div>
+                    <div class="chat-input-area">
+                        <input type="text" id="chat-input-field" class="chat-input" placeholder="พิมพ์ข้อความพูดคุยในแชทนี้..." autocomplete="off">
+                        <button class="chat-send-btn" onclick="sendChatMessage()">ส่ง</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab4" class="tab-content">
+                <h3 style="color: #ff4d4d; font-size: 15px; margin-top: 0;">📅 ปฏิทินเทศกาล & วันสำคัญเมืองอุชินาวะ</h3>
+                
+                <div class="festival-card">
+                    <div class="festival-date">14 เมษายน</div>
+                    <div class="festival-name">วันเงาแรก (影始めの日)</div>
+                    <p class="card-desc" style="margin:0;">ห้ามเดินข้างกำแพงหรือตรอกหลังพระอาทิตย์ตก เด็กพกกระดิ่งที่เอว ศาลเจ้าตะวันตกจุดไฟพิธีถึงรุ่งเช้า</p>
+                </div>
+
+                <div class="festival-card">
+                    <div class="festival-date">5 พฤษภาคม</div>
+                    <div class="festival-name">เทศกาลสายลมโบราณ (古風祭)</div>
+                    <p class="card-desc" style="margin:0;">ธงลมสัตว์ตำนานท้องถิ่น ขบวนโยไคจากนักเรียน เรียวกัง/ออนเซ็นเปิดบริการฟรีช่วงพิเศษ</p>
+                </div>
+
+                <div class="festival-card">
+                    <div class="festival-date">20 กรกฎาคม</div>
+                    <div class="festival-name">คืนแห่งโคมเงา (影灯しの夜)</div>
+                    <p class="card-desc" style="margin:0;">บ้านจุดโคมกระดาษหน้าประตู ย่านโคมแดงจัดขบวนโคมเต้นรำ แจกขนม "เก็นมะอิ" (ข้าวปิ้งรูปเงาคน)</p>
+                </div>
+
+                <div class="festival-card">
+                    <div class="festival-date">1 กันยายน</div>
+                    <div class="festival-name">วันห้ามเงาสะท้อน (影封じ)</div>
+                    <p class="card-desc" style="margin:0;">ห้ามส่องกระจก น้ำ หรือหน้าจอ หลัง 22:22 ศาลเจ้าตะวันออกผูกริบบิ้นสีดำ ร้านสะดวกซื้อคลุมตู้แช่ด้วยผ้าสีม่วง</p>
+                </div>
+
+                <div class="festival-card">
+                    <div class="festival-date">13 ธันวาคม</div>
+                    <div class="festival-name">คืนรอยต่อสองโลก (逢間の夜)</div>
+                    <p class="card-desc" style="margin:0;">คนตายและคนเป็นอาจพบกันในเงา จุดเทียน วางดอกไม้หน้าบ้าน ศาลเจ้าเปิดให้เขียนคำอธิษฐานส่งถึงวิญญาณ</p>
+                </div>
+            </div>
+
+            <div id="tab5" class="tab-content">
+                <div class="glitch-card">
+                    <div class="card-tag glitch-text">⚠️ CRITICAL_ERR // OVERRIDE_DATA</div>
+                    <div class="card-title" style="color: #ff4d4d;">ไฟล์ข้อมูล<span class="corrupted">ถูกเขียนทับ</span> / บันทึกที่สูญหาย</div>
+                    <p class="card-desc glitch-text">
+                        ...พิกัด... <span class="corrupted">ไม่สามารถระบุได้</span> ...สัญญาณชีพจากเป้าหมายขาดหาย... ค้นหาสิ่งที่ถูกซ่อนไว้ลึก <span class="corrupted">███████</span> 
+                        <br><br>...หากค้นพบสิ่งที่หลบซ่อนอยู่นั้นแล้ว จง<span class="corrupted" style="color: #ff0000; font-weight: bold;">เผามันให้สิ้นเสีย</span>...
+                    </p>
+                </div>
+
+                <div class="glitch-card" style="animation-delay: 0.5s;">
+                    <div class="card-tag glitch-text" style="color: #ff0055;">⚠️ WARNING // KERNEL_PANIC_09</div>
+                    <div class="card-title" style="color: #ff6666;">เสียงกระซิบจาก<span class="corrupted">ฟากฝั่งนั้น</span></div>
+                    <p class="card-desc" style="color: #bbb; font-family: monospace;">
+                        [SYSTEM ERROR]: เซิร์ฟเวอร์หลักตอบสนองผิดปกติ... 
+                        <br><span class="corrupted">"ใครเป็นคนเปิดประตูรึเปล่า...?"</span> 
+                        <br>ตรวจสอบพบการรั่วไหลของอาคมบริเวณพิกัด 0-0-Kyu... โปรดระวังเงาที่สะท้อนในกระจกหลังเที่ยงคืน...
+                    </p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            Ushinawa Kyuseishu Community Network &bull; Emergency Response System
+        </footer>
+    </div>
+
+    <script>
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('system-time').innerText = now.toLocaleTimeString('th-TH');
+        }, 1000);
+
+        let isRegisterMode = false;
+
+        window.onload = function() {
+            let currentUser = localStorage.getItem('ushinaig_current_user');
+            if(currentUser) {
+                applyUserData(currentUser);
+                document.getElementById('auth-screen').style.display = 'none';
+                document.getElementById('app-container').style.display = 'flex';
+                loadChatMessages();
+            }
+        }
+
+        function toggleAuthMode() {
+            isRegisterMode = !isRegisterMode;
+            let title = document.getElementById('auth-title');
+            let desc = document.getElementById('auth-desc');
+            let btn = document.getElementById('auth-submit-btn');
+            let switchText = document.getElementById('auth-switch-text');
+
+            if(isRegisterMode) {
+                title.innerText = "ลงทะเบียนสมาชิกใหม่";
+                desc.innerText = "สร้างบัญชีผู้ใช้สำหรับเข้าสู่ระบบเครือข่ายอุชินาวะ";
+                btn.innerText = "สมัครสมาชิก";
+                switchText.innerText = "มีบัญชีอยู่แล้ว? เข้าสู่ระบบ";
+            } else {
+                title.innerText = "USHINAWA EMERGENCY NET";
+                desc.innerText = "กรุณากรอกชื่อผู้ใช้และรหัสผ่านเพื่อเข้าสู่ระบบ";
+                btn.innerText = "เข้าสู่ระบบ";
+                switchText.innerText = "ยังไม่มีบัญชี? สมัครสมาชิกใหม่";
+            }
+        }
+
+        function handleAuth(e) {
+            e.preventDefault();
+            let user = document.getElementById('auth-user').value.trim();
+            let pass = document.getElementById('auth-pass').value.trim();
+
+            if(!user || !pass) return;
+
+            let usersDB = JSON.parse(localStorage.getItem('ushinaig_users_db') || '{}');
+
+            if(isRegisterMode) {
+                if(usersDB[user]) {
+                    alert("ชื่อผู้ใช้นี้ถูกใช้งานแล้ว กรุณาใช้ชื่ออื่น");
+                    return;
+                }
+                usersDB[user] = {
+                    password: pass,
+                    displayName: user,
+                    statusMsg: "สเตตัส: ปกติ"
+                };
+                localStorage.setItem('ushinaig_users_db', JSON.stringify(usersDB));
+                alert("สมัครสมาชิกสำเร็จ! กรุณาเข้าสู่ระบบ");
+                toggleAuthMode();
+            } else {
+                if(usersDB[user] && usersDB[user].password === pass) {
+                    localStorage.setItem('ushinaig_current_user', user);
+                    applyUserData(user);
+                    document.getElementById('auth-screen').style.display = 'none';
+                    document.getElementById('app-container').style.display = 'flex';
+                    loadChatMessages();
+                } else {
+                    alert("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
+                }
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('ushinaig_current_user');
+            location.reload();
+        }
+
+        function applyUserData(username) {
+            let usersDB = JSON.parse(localStorage.getItem('ushinaig_users_db') || '{}');
+            let userData = usersDB[username];
+            let displayName = userData ? (userData.displayName || username) : username;
+            let statusMsg = userData ? (userData.statusMsg || "สเตตัส: ปกติ") : "สเตตัส: ปกติ";
+
+            document.getElementById('display-user').innerText = displayName;
+            document.getElementById('user-bio-tag').innerText = statusMsg;
+        }
+
+        function openProfileModal() {
+            let username = localStorage.getItem('ushinaig_current_user');
+            let usersDB = JSON.parse(localStorage.getItem('ushinaig_users_db') || '{}');
+            let userData = usersDB[username] || {};
+
+            document.getElementById('profile-display-name').value = userData.displayName || username;
+            document.getElementById('profile-status-msg').value = userData.statusMsg || "สเตตัส: ปกติ";
+            document.getElementById('profile-modal').style.display = 'flex';
+        }
+
+        function closeProfileModal() {
+            document.getElementById('profile-modal').style.display = 'none';
+        }
+
+        function saveProfile() {
+            let username = localStorage.getItem('ushinaig_current_user');
+            let newName = document.getElementById('profile-display-name').value.trim();
+            let newStatus = document.getElementById('profile-status-msg').value.trim();
+
+            if(!newName) return;
+
+            let usersDB = JSON.parse(localStorage.getItem('ushinaig_users_db') || '{}');
+            if(usersDB[username]) {
+                usersDB[username].displayName = newName;
+                usersDB[username].statusMsg = newStatus;
+                localStorage.setItem('ushinaig_users_db', JSON.stringify(usersDB));
+            }
+
+            applyUserData(username);
+            closeProfileModal();
+            alert("บันทึกข้อมูลโปรไฟล์เรียบร้อยแล้ว");
+        }
+
+        function switchTab(evt, tabName) {
+            let contents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+            let buttons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+            
+            if(tabName === 'tab3') {
+                let box = document.getElementById('chat-messages-box');
+                box.scrollTop = box.scrollHeight;
+            }
+        }
+
+        let isCheckedIn = false;
+        function toggleCheckIn() {
+            isCheckedIn = !isCheckedIn;
+            let statusText = document.getElementById('my-safety-status');
+            let btnText = document.getElementById('checkin-btn-text');
+            if(isCheckedIn) {
+                statusText.innerHTML = "✅ ปลอดภัย (เช็กอินเมื่อ " + new Date().toLocaleTimeString('th-TH', {hour: '2-digit', minute:'2-digit'}) + " น.)";
+                statusText.style.color = "#4dff4d";
+                btnText.innerText = "ยกเลิกเช็กอิน";
+                btnText.style.background = "#330000";
+            } else {
+                statusText.innerHTML = "⚠️ ยังไม่ได้เช็กอินยืนยันตัวตน";
+                statusText.style.color = "#ffaa00";
+                btnText.innerText = "เช็กอินว่าปลอดภัย";
+                btnText.style.background = "#800517";
+            }
+        }
+
+        function ackAlert(btn, countId) {
+            if(!btn.classList.contains('checked')) {
+                let counter = document.getElementById(countId);
+                counter.innerText = parseInt(counter.innerText) + 1;
+                btn.innerText = "รับทราบแล้ว ✓";
+                btn.classList.add('checked');
+            }
+        }
+
+        function confirmSighting(countId) {
+            let counter = document.getElementById(countId);
+            counter.innerText = parseInt(counter.innerText) + 1;
+            alert("บันทึกการยืนยันพิกัดเข้าสู่ระบบส่วนกลางเรียบร้อย");
+        }
+
+        function loadChatMessages() {
+            let box = document.getElementById('chat-messages-box');
+            let messages = JSON.parse(localStorage.getItem('ushinaig_chat_msgs') || '[]');
+            
+            if(messages.length === 0) {
+                messages = [
+                    {user: 'ระบบกลาง', text: 'ยินดีต้อนรับสู่แชทนี้ โปรดระวังตัวยามค่ำคืน', time: '00:00'}
+                ];
+            }
+
+            box.innerHTML = '';
+            messages.forEach(msg => {
+                let div = document.createElement('div');
+                div.className = 'chat-msg';
+                div.innerHTML = `<div class="chat-user">${msg.user}</div><div class="chat-text">${msg.text}</div><div class="chat-time">${msg.time}</div>`;
+                box.appendChild(div);
+            });
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function sendChatMessage() {
+            let input = document.getElementById('chat-input-field');
+            let text = input.value.trim();
+            if(!text) return;
+
+            let username = localStorage.getItem('ushinaig_current_user') || 'ผู้ใช้งาน';
+            let usersDB = JSON.parse(localStorage.getItem('ushinaig_users_db') || '{}');
+            let currentDisplayName = usersDB[username] ? usersDB[username].displayName : username;
+            let time = new Date().toLocaleTimeString('th-TH', {hour: '2-digit', minute:'2-digit'});
+
+            let messages = JSON.parse(localStorage.getItem('ushinaig_chat_msgs') || '[]');
+            messages.push({user: currentDisplayName, text: text, time: time});
+            localStorage.setItem('ushinaig_chat_msgs', JSON.stringify(messages));
+
+            input.value = '';
+            loadChatMessages();
+        }
+
+        document.getElementById('chat-input-field').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendChatMessage();
+            }
+        });
+    </script>
+</body>
+</html>
