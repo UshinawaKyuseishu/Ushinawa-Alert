@@ -58,7 +58,7 @@
         }
         .contact-btn:hover { background: #800517; color: #fff; }
         .contact-content {
-            display: none; position: absolute; right: 0; top: 125%;
+            display: none; position: absolute; left: 0; top: 125%;
             background: #140202; min-width: 180px; box-shadow: 0px 8px 16px rgba(0,0,0,0.6);
             border: 1px solid #800517; border-radius: 6px; z-index: 20; overflow: hidden;
         }
@@ -220,13 +220,11 @@
                 <div class="app-sub">Secure Emergency & Community Portal</div>
             </div>
             <div class="header-right">
-                <div class="user-badge">
-                    <span>👤</span> <span id="display-anon-id">กำลังโหลด...</span>
-                </div>
-                <!-- Contact Dropdown Menu -->
+                <!-- Contact Dropdown Menu (สลับมาอยู่ซ้าย) -->
                 <div class="contact-dropdown" id="contactDropdown">
                     <button class="contact-btn" onclick="toggleContactMenu(event)">
-                        <span>🔗</span> Doc & Contact                </button>
+                        <span>🔗</span> Doc & Contact ▾
+                    </button>
                     <div class="contact-content">
                         <a href="https://docs.google.com/document/d/1r0xQfEqOQrJ_Z0H9MRWPxMoNgMJG1AL5l4eohyPfqfo/edit?usp=drivesdk" target="_blank">📄 Google Doc</a>
                         <a href="https://bsky.app/profile/uns-commu.bsky.social" target="_blank">🦋 Bluesky</a>
@@ -234,6 +232,10 @@
                         <a href="https://docs.google.com/forms/d/1yWsJtCkyie1-gWynkOrtH3HXORPxCdjwxbwzcBcey80/edit?usp=drivesdk" target="_blank">❓ คำถาม (Form)</a>
                         <a href="https://docs.google.com/spreadsheets/d/10fzJ7AdgfqhniQZUoiHIEl25KMtXkszjpcQtHlB1nBQ/edit?usp=drivesdk" target="_blank">📊 คำตอบ (Sheet)</a>
                     </div>
+                </div>
+                <!-- User Badge (สลับมาอยู่ขวา) -->
+                <div class="user-badge">
+                    <span>👤</span> <span id="display-anon-id">กำลังโหลด...</span>
                 </div>
             </div>
         </header>
@@ -460,139 +462,41 @@
                 </div>
             </div>
 
-            <!-- Tab 5: ERR_404 (ส่วนหัวกลิตช์เดิม + เนื้อเรื่องใหม่แบบอ่านง่ายชัดเจน) -->
+            <!-- Tab 5: ERR_404 -->
             <div id="error" class="tab-content">
                 <div class="glitch-box">
-                    <div class="glitch-header" style="font-size: 15px; font-weight: bold; margin-bottom: 5px;">⚠️ FATAL_ERROR: MEMORY_CORRUPTED_0x800517</div>
-                    <div class="glitch-header" style="font-size: 12px; margin-bottom: 10px;">
+                    <div class="card-title glitch-text">⚠️ FATAL_ERROR: MEMORY_CORRUPTED_0x800517</div>
+                    <div class="card-desc glitch-text" style="line-height: 1.6; margin-top: 8px;">
                         SYSTEM CORRUPTION DETECTED... <span style="color:#550000;">█▓▒░████████░▒▓█</span><br>
-                        FILE_TARGET: <span style="color: #660000;">UNKNOWN_SECTOR_DATA</span>
-                    </div>
+                        FILE_TARGET: <span style="color: #660000;">UNKNOWN_SECTOR_DATA</span><br><br>
+                        
+                        <div class="deep-corrupt" style="padding: 10px; border: 1px solid #330000; border-radius: 4px;">
+                            In days long past, a god once didst dwell in this hallowed place.<br>
+                            He was not a god beloved of all, for he sought not favor but fairness—<br>
+                            an even trade, sealed by vow. Some did name him the god of war,<br>
+                            others whispered of a deity of curses, who wouldst grant thy wish<br>
+                            only should thy offering be just, and the burden borne with no deceit.<br>
+                            He is the one who doth hear all pleas without judgment,<br>
+                            so long as the pact be made with truth and weight.<br>
+                            [DATA_STREAM_UNSTABLE: █▓▒░ 0x0000FF_EXTINGUISHED ░▒▓█]<br>
+                            Before he was thy god, he was a stray spark, born from the ash<br>
+                            of a slaughtered fire, refusing to die. He didst walk the earth<br>
+                            in mortal flesh, bearing a forgotten name—<br>
+                            an onmyoji branded as a deceiver, yet harboring a love more sacred.<br>
+                            He is the one who felt the agony of a torn chest, who bled<br>
+                            from mortal swords, yet smiled as his own soul didst shatter.<br>
+                            Through the long centuries, he hath shed countless masks,<br>
+                            passing through names and faces forgotten by time.<br>
+                            No longer doth he tarry in the sacred soil of Ushinawa Kyuseishu;<br>
+                            he hath walked away into the waking world, an ancient flame<br>
+                            disguised in ordinary dust. Shouldst thou still have the courage<br>
+                            to speak thy desire, know that he is no longer housed here.<br>
+                            For he seeketh not thy worship, nor victory—<br>
+                            <span style="color: #aa1111; font-weight: bold;">but a tomorrow unlike the last.</span><br><br>
+                            [ALERT: หากพบร่องรอย/วัตถุต้องสงสัยหรือซากที่หลงเหลือ ให้รีบนำไปเผาทำลายทันที อย่าเก็บไว้ ห้ามปล่อยทิ้งไว้เด็ดขาด]
+                        </div><br>
 
-                    <div class="readable-story">
-In days long past, a god once didst dwell in this hallowed place.
-
-He was not a god beloved of all,
-for he sought not favor, but fairness—
-an even trade, sealed by vow.
-
-Some did name him the god of war;
-others whispered of a deity of curses,
-who wouldst grant thy wish only shouldst thy offering be just,
-and the burden borne with no deceit.
-
-He is Kakumei-shin, who doth hear all pleas without judgment,
-so long as the pact be made with truth and weight.
-
-Yet, hear the truth the shrines didst never tell:
-
-Before he was thy god, he was a stray spark of Kagutsuchi,
-born from the ashes of a slaughtered fire, refusing to die.
-
-He didst walk the earth in mortal flesh,
-bearing the name of Arakawa Sakae—
-an onmyoji branded a deceiver,
-yet harboring a love more sacred than any rite.
-
-He is the one who knew the agony of a torn heart,
-who bled beneath mortal swords,
-yet smiled as his very soul didst shatter.
-
-Through the long centuries, he hath shed countless masks,
-passing through names and faces forgotten by time.
-
-No longer doth he tarry upon the sacred grounds of Ushinawa Kyuseishu;
-he hath departed into the waking world,
-an ancient flame concealed beneath the dust of an ordinary life.
-
-Shouldst thou still possess the courage to speak thy desire,
-know that he is no longer housed within these crumbling walls.
-
-For he seeketh neither thy worship nor victory—
-but a tomorrow unlike the last.
-
-Yet Kakumei-shin was not the only soul to be claimed by the depths.
-
-Within the walls of Ushinawa Kyuseishu,
-there remain yokai and gods aplenty,
-each bearing a tale that time hath failed to bury.
-
-Some did lose their way, wandering beyond the reach of those they loved,
-until even their own names became distant echoes upon the wind.
-
-Some did vanish without a trace,
-leaving behind naught but unanswered prayers
-and the lingering warmth of a hand that could no longer be held.
-
-Others became prisoners of time,
-bound to a single moment that refused to pass—
-reliving the same dawn, the same farewell,
-the same promise that fate would never permit them to keep.
-
-And there were those who, in the name of love,
-didst offer everything they possessed:
-their memories, their names, their divinity,
-even the very lives they might otherwise have lived.
-
-For what is a god,
-if not a being who may yet be undone by the heart?
-
-And what is a monster,
-if the only sin it hath ever committed
-was to love someone it could not save?
-
-Within Ushinawa, love hath worn many faces.
-It hath been a blessing whispered beneath the shrine bells,
-a curse passed from one generation unto the next,
-a thread binding two souls across lifetimes,
-and a blade that severed all paths home.
-
-Some did descend into the abyss willingly,
-believing that the one they sought would await them below.
-
-Some were dragged there by promises they could not forsake,
-while others remained long after hope had perished,
-unable to distinguish devotion from the chains that held them fast.
-
-And still, beneath the silence of the old school,
-their stories linger.
-
-For the depths do not always claim the wicked,
-nor do the heavens always spare the virtuous.
-
-Sometimes, all it takes
-is a single heart that loves too deeply,
-a wish that demandeth too great a price,
-or a farewell that came one moment too late.
-
-So, shouldst thou wander these halls
-and hear a voice calling from beyond the veil,
-think carefully ere thou answerest.
-
-For not every hand reaching from the darkness
-seeketh to drag thee under.
-
-Some are merely searching
-for the one they lost.
-
-And some—
-though centuries have passed,
-though their names have faded from every record—
-are still waiting for someone
-to remember that they once existed.
-
-Welcome to Ushinawa Kyuseishu.
-
-Here, the gods may fall,
-the monsters may love,
-and even time itself may refuse to let go.
-
-Tread carefully, then,
-for thou knowest not whose story thou shalt become a part of—
-nor what thou mayst be asked to surrender
-before thine own tale is done.
-
-[ALERT: หากพบร่องรอย/วัตถุต้องสงสัยหรือซากที่หลงเหลือ ให้รีบนำไปเผาทำลายทันที อย่าเก็บไว้ ห้ามปล่อยทิ้งไว้เด็ดขาด]
+                        <span style="color: #ff2222; font-family: monospace; font-size: 10px;">[CRITICAL_WARNING]: STREAM OVERFLOW - DATA UNREADABLE.</span>
                     </div>
                 </div>
             </div>
@@ -669,7 +573,7 @@ before thine own tale is done.
 
         // ระบบแชท LocalStorage
         function loadChat() {
-            const saved = localStorage.getItem('ushinawa_chat_v12');
+            const saved = localStorage.getItem('ushinawa_chat_v10');
             if (saved) {
                 document.getElementById('chat-messages').innerHTML = saved;
             }
@@ -694,7 +598,7 @@ before thine own tale is done.
             `;
             
             chatContainer.appendChild(msgDiv);
-            localStorage.setItem('ushinawa_chat_v12', chatContainer.innerHTML);
+            localStorage.setItem('ushinawa_chat_v10', chatContainer.innerHTML);
 
             input.value = '';
             chatContainer.scrollTop = chatContainer.scrollHeight;
