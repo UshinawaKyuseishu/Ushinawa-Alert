@@ -163,23 +163,39 @@
         }
         .chat-send-btn:hover { background: #ff4d4d; color: #000; }
 
-        /* ERR_404 Tab: Heavy Blur & Masked (Red/Black Theme) */
+        /* ERR_404 Tab: Glitch, Blur & Red/Black Theme */
         .glitch-box {
             background: #120000; border: 1px solid #550000; padding: 15px; border-radius: 8px; margin-bottom: 12px;
+            animation: box-flicker 1.5s infinite steps(4);
+        }
+        @keyframes box-flicker {
+            0% { opacity: 1; transform: translate(0, 0); }
+            20% { opacity: 0.85; transform: translate(-1px, 1px); }
+            40% { opacity: 0.95; transform: translate(1px, -1px); }
+            60% { opacity: 0.7; transform: translate(-2px, 0); }
+            80% { opacity: 0.9; transform: translate(1px, 1px); }
+            100% { opacity: 1; transform: translate(0, 0); }
         }
         .glitch-header {
             color: #cc3333; font-family: monospace; letter-spacing: 1px; font-size: 13px;
         }
         .deep-corrupt {
-            color: #441111;
+            color: #551111;
             background-color: #050000;
             font-family: monospace;
             word-break: break-all;
             line-height: 1.8;
-            filter: blur(4px);
+            filter: blur(3.5px);
             user-select: none;
-            opacity: 0.3;
-            transition: filter 0.3s;
+            opacity: 0.35;
+            animation: text-glitch 2s infinite;
+        }
+        @keyframes text-glitch {
+            0% { filter: blur(3.5px); opacity: 0.35; transform: skewX(0deg); }
+            30% { filter: blur(4.5px); opacity: 0.25; transform: skewX(-2deg); }
+            50% { filter: blur(2.5px); opacity: 0.45; transform: skewX(2deg); }
+            70% { filter: blur(4px); opacity: 0.3; transform: skewX(-1deg); }
+            100% { filter: blur(3.5px); opacity: 0.35; transform: skewX(0deg); }
         }
         .deep-corrupt:hover {
             filter: blur(1.5px);
@@ -454,7 +470,7 @@
                 </div>
             </div>
 
-            <!-- Tab 5: ERR_404 (เบลอทึบและบังมืดแบบอ่านไม่ออกโดยไม่ต้องมีกลิตช์กวนตา) -->
+            <!-- Tab 5: ERR_404 (เบลอทึบ + แสตนด์บายกระพริบแกว่งบัคโทนแดงดำ) -->
             <div id="error" class="tab-content">
                 <div class="glitch-box">
                     <div class="glitch-header" style="font-weight: bold; margin-bottom: 5px;">⚠️ FATAL_ERROR: MEMORY_CORRUPTED_0x800517</div>
