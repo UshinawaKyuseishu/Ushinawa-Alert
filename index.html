@@ -102,18 +102,22 @@
             padding-bottom: 6px; margin-bottom: 10px;
         }
         .calendar-event-row {
-            padding: 8px 10px; margin: 6px 0; font-size: 12px; border-radius: 6px;
+            padding: 8px 10px; margin: 6px 0; font-size: 12px; border-radius: 6px; line-height: 1.5;
         }
         .normal-event {
             background: #1a0808; color: #bbbbbb; border-left: 3px solid #552222;
         }
         .ushinawa-ritual-event {
-            background: #200205; color: #ffcccc; border: 1px solid #800517;
-            border-left: 4px solid #ff4d4d; box-shadow: 0 0 8px rgba(128, 5, 23, 0.4);
+            background: #240206; color: #ffcccc; border: 1px solid #800517;
+            border-left: 5px solid #ff4d4d; box-shadow: 0 0 10px rgba(128, 5, 23, 0.5);
         }
         .ritual-tag {
-            background: #800517; color: #fff; font-size: 10px; padding: 2px 6px;
+            background: #800517; color: #ffffff; font-size: 9px; padding: 2px 6px;
             border-radius: 3px; margin-left: 6px; font-weight: bold; text-transform: uppercase;
+            border: 1px solid #ff4d4d; display: inline-block;
+        }
+        .ritual-details {
+            font-size: 11px; color: #ff9999; margin-top: 5px; border-top: 1px dashed #55111; padding-top: 4px;
         }
 
         /* Chat Room */
@@ -202,7 +206,7 @@
                 <span style="font-size: 11px; color: #885555; font-weight: normal;">GitHub Pages Online</span>
             </h1>
 
-            <!-- แถบเมนูนำทาง (ไม่มี Personal List แล้ว) -->
+            <!-- แถบเมนูนำทาง -->
             <div class="nav-tabs">
                 <button class="tab-btn active" onclick="switchTab(event, 'archive')">🚨 ภัยพิบัติ & ข่าวสาร</button>
                 <button class="tab-btn" onclick="switchTab(event, 'entities')">👁️ สิ่งแปลกปลอม</button>
@@ -275,38 +279,138 @@
                 </div>
             </div>
 
-            <!-- Tab 4: ปฏิทินเมือง -->
+            <!-- Tab 4: ปฏิทินเมือง (รวมวันสำคัญสากล/ญี่ปุ่น และเทศกาลอุชินาวะกรอบพิเศษ) -->
             <div id="calendar" class="tab-content">
+                <!-- เมษายน -->
                 <div class="calendar-month-group">
                     <div class="month-title">เมษายน (April)</div>
-                    <div class="calendar-event-row normal-event">4 เม.ย. & 7 เม.ย. — วันสุขภาพโลก (World Health Day)</div>
+                    <div class="calendar-event-row normal-event">4 เม.ย. — วันสุขภาพแห่งโลก (World Health Day)</div>
+                    <div class="calendar-event-row normal-event">7 เม.ย. — วันสุขภาพโลก (World Health Day - WHO)</div>
                     <div class="calendar-event-row ushinawa-ritual-event">
                         14 เม.ย. — วันเงาแรก (影始めの日) <span class="ritual-tag">พิธีกรรมอุชินาวะ</span>
-                        <div style="font-size: 11px; color: #ff9999; margin-top: 4px;">• ห้ามเดินข้างกำแพงหรือตรอกหลังพระอาทิตย์ตก | พกกระดิ่งที่เอว</div>
+                        <div class="ritual-details">• ห้ามเดินข้างกำแพงหรือตรอกหลังพระอาทิตย์ตก<br>• เด็กพกกระดิ่งที่เอว<br>• ศาลเจ้าตะวันตกจุดไฟพิธีถึงรุ่งเช้า</div>
                     </div>
+                    <div class="calendar-event-row normal-event">14 เม.ย. — วันแบล็กเดย์ (Black Day – คนโสดในเกาหลี ญี่ปุ่นบางกลุ่มก็นับด้วย)</div>
+                    <div class="calendar-event-row normal-event">22 เม.ย. — วันคุ้มครองโลก (Earth Day)</div>
+                    <div class="calendar-event-row normal-event">29 เม.ย. — วันโชวะ (昭和の日 – Showa Day) [วันหยุดญี่ปุ่น, เริ่มเข้าสู่โกลเด้นวีค]</div>
                 </div>
+
+                <!-- พฤษภาคม -->
                 <div class="calendar-month-group">
                     <div class="month-title">พฤษภาคม (May)</div>
+                    <div class="calendar-event-row normal-event">3 พ.ค. — วันรัฐธรรมนูญ (憲法記念日 – Constitution Memorial Day)</div>
+                    <div class="calendar-event-row normal-event">4 พ.ค. — วันสีเขียว (みどりの日 – Greenery Day)</div>
                     <div class="calendar-event-row ushinawa-ritual-event">
-                        5 พ.ค. — เทศกาลสายลมโบราณ (古風祭) <span class="ritual-tag">พิธีกรรมอุชินาวะ</span>
-                        <div style="font-size: 11px; color: #ff9999; margin-top: 4px;">• ธงลมสัตว์ตำนาน | ขบวนโยไคจากนักเรียน</div>
+                        5 พ.ค. — เทศกาลสายลมโบราณ (古風祭・こふうさい) <span class="ritual-tag">พิธีกรรมอุชินาวะ</span>
+                        <div class="ritual-details">• ธงลมสัตว์ตำนานท้องถิ่น<br>• ขบวนโยไคจากนักเรียน<br>• เรียวกัง/ออนเซ็นเปิดบริการฟรีช่วงพิเศษสำหรับผู้แต่งชุดพื้นเมือง</div>
                     </div>
+                    <div class="calendar-event-row normal-event">5 พ.ค. — วันเด็กผู้ชาย (こどもの日 – Children's Day)</div>
+                    <div class="calendar-event-row normal-event">12 พ.ค. — วันพยาบาลโลก</div>
+                    <div class="calendar-event-row normal-event">วันอาทิตย์ที่ 2 ของเดือนพฤษภาคม — วันแม่สากล (บางประเทศ)</div>
                 </div>
+
+                <!-- มิถุนายน -->
                 <div class="calendar-month-group">
                     <div class="month-title">มิถุนายน (June)</div>
+                    <div class="calendar-event-row normal-event">1 มิ.ย. — วันเด็กสากล (International Children’s Day)</div>
+                    <div class="calendar-event-row normal-event">5 มิ.ย. — วันสิ่งแวดล้อมโลก (World Environment Day)</div>
                     <div class="calendar-event-row ushinawa-ritual-event">
                         6 มิ.ย. — วันรักที่ไร้ชื่อ (名もなき恋の日) <span class="ritual-tag">พิธีกรรมอุชินาวะ</span>
-                        <div style="font-size: 11px; color: #ff9999; margin-top: 4px;">• เขียนความรู้สึกลงกระดาษสีฟ้าแขวนหน้าต่าง</div>
+                        <div class="ritual-details">• เขียนความรู้สึกลงบนกระดาษสีฟ้า แขวนหน้าต่างยามค่ำ<br>• ลานสารภาพในโรงเรียนเปิดตลอดวัน<br>• เงาซ้อนอาจปรากฏในมุมมืด หากมีใจตรงกัน</div>
                     </div>
+                    <div class="calendar-event-row normal-event">6 มิ.ย. — วันมังงะญี่ปุ่น (Manga Day – ไม่เป็นทางการ)</div>
+                    <div class="calendar-event-row normal-event">21 มิ.ย. — วันโยคะโลก (International Yoga Day)</div>
+                    <div class="calendar-event-row normal-event">วันอาทิตย์ที่ 3 ของเดือนมิถุนายน — วันพ่อสากล</div>
                 </div>
+
+                <!-- กรกฎาคม -->
                 <div class="calendar-month-group">
-                    <div class="month-title">กรกฎาคม - ธันวาคม (พิธีกรรมสำคัญ)</div>
-                    <div class="calendar-event-row ushinawa-ritual-event">20 ก.ค. — คืนแห่งโคมเงา <span class="ritual-tag">พิธีกรรมอุชินาวะ</span></div>
-                    <div class="calendar-event-row ushinawa-ritual-event">8 ส.ค. — วันว่างเปล่าของเงา <span class="ritual-tag">พิธีกรรมอุชินาวะ</span></div>
-                    <div class="calendar-event-row ushinawa-ritual-event">1 ก.ย. — วันห้ามเงาสะท้อน <span class="ritual-tag">พิธีกรรมอุชินาวะ</span></div>
-                    <div class="calendar-event-row ushinawa-ritual-event">13 ต.ค. — วันยามค่ำไร้เสียง <span class="ritual-tag">พิธีกรรมอุชินาวะ</span></div>
-                    <div class="calendar-event-row ushinawa-ritual-event">22 พ.ย. — คืนดอกไม้เงา <span class="ritual-tag">พิธีกรรมอุชินาวะ</span></div>
-                    <div class="calendar-event-row ushinawa-ritual-event">13 ธ.ค. — คืนรอยต่อสองโลก <span class="ritual-tag">พิธีกรรมอุชินาวะ</span></div>
+                    <div class="month-title">กรกฎาคม (July)</div>
+                    <div class="calendar-event-row normal-event">7 ก.ค. — เทศกาลทานาบาตะ (七夕 – Tanabata)</div>
+                    <div class="calendar-event-row normal-event">17 ก.ค. — วันอีโมจิโลก (World Emoji Day)</div>
+                    <div class="calendar-event-row ushinawa-ritual-event">
+                        20 ก.ค. — คืนแห่งโคมเงา (影灯しの夜) <span class="ritual-tag">พิธีกรรมอุชินาวะ</span>
+                        <div class="ritual-details">• บ้านจุดโคมกระดาษหน้าประตู<br>• หอนางโลมและย่านโคมแดงจัดขบวนโคมเต้นรำ<br>• เด็กแจกขนม "เก็นมะอิ" (ข้าวปิ้งรูปเงาคน)</div>
+                    </div>
+                    <div class="calendar-event-row normal-event">20 ก.ค. — วันทะเล (海の日 – Marine Day, วันหยุดญี่ปุ่น)</div>
+                    <div class="calendar-event-row normal-event">23 ก.ค. — วันมิตรภาพ (World Friendship Day – บางที่นับ 30 ก.ค.)</div>
+                </div>
+
+                <!-- สิงหาคม -->
+                <div class="calendar-month-group">
+                    <div class="month-title">สิงหาคม (August)</div>
+                    <div class="calendar-event-row normal-event">6 ส.ค. — วันรำลึกฮิโรชิมา</div>
+                    <div class="calendar-event-row normal-event">9 ส.ค. — วันรำลึกนางาซากิ</div>
+                    <div class="calendar-event-row ushinawa-ritual-event">
+                        8 ส.ค. — วันว่างเปล่าของเงา (影の空しさ祭り) <span class="ritual-tag">พิธีกรรมอุชินาวะ</span>
+                        <div class="ritual-details">• โยวไคสามารถเดินกลางวันโดยไม่มีใครสังเกต<br>• ทุกคนสวมหน้ากากสีดำ<br>• แลกของตกแต่งโยวไคในครอบครัว</div>
+                    </div>
+                    <div class="calendar-event-row normal-event">13–15 ส.ค. — โอบ้ง (お盆 – Obon, เทศกาลไหว้วิญญาณบรรพบุรุษ)</div>
+                    <div class="calendar-event-row normal-event">22 ส.ค. — วันแมวโลก (International Cat Day – บางปฏิทิน)</div>
+                    <div class="calendar-event-row normal-event">31 ส.ค. — วันบล็อกโลก (World Blog Day)</div>
+                </div>
+
+                <!-- กันยายน -->
+                <div class="calendar-month-group">
+                    <div class="month-title">กันยายน (September)</div>
+                    <div class="calendar-event-row ushinawa-ritual-event">
+                        1 ก.ย. — วันห้ามเงาสะท้อน (影封じ) <span class="ritual-tag">พิธีกรรมอุชินาวะ</span>
+                        <div class="ritual-details">• ห้ามส่องกระจก น้ำ หรือหน้าจอ หลัง 22:22<br>• ศาลเจ้าตะวันออกผูกริบบิ้นสีดำรอบประตู<br>• ร้านสะดวกซื้อคลุมตู้แช่ด้วยผ้าสีม่วง</div>
+                    </div>
+                    <div class="calendar-event-row normal-event">1 ก.ย. — วันป้องกันภัยพิบัติ (防災の日 – Disaster Prevention Day)</div>
+                    <div class="calendar-event-row normal-event">15 ก.ย. — วันผู้สูงอายุ (敬老の日 – Respect for the Aged Day)</div>
+                    <div class="calendar-event-row normal-event">21 ก.ย. — วันสันติภาพโลก (World Peace Day)</div>
+                    <div class="calendar-event-row normal-event">23 ก.ย. — วันวสันตวิษุวัต (秋分の日 – Autumnal Equinox Day)</div>
+                    <div class="calendar-event-row normal-event">วันจันทร์ที่ 3 ของเดือน — วันพูดอย่างสุภาพแห่งชาติ (Respectful Speech Day – unofficial)</div>
+                </div>
+
+                <!-- ตุลาคม -->
+                <div class="calendar-month-group">
+                    <div class="month-title">ตุลาคม (October)</div>
+                    <div class="calendar-event-row normal-event">1 ต.ค. — วันกาแฟสากล (International Coffee Day)</div>
+                    <div class="calendar-event-row normal-event">4 ต.ค. — วันสัตว์โลก (World Animal Day)</div>
+                    <div class="calendar-event-row normal-event">10 ต.ค. — วันสุขภาพจิตโลก (World Mental Health Day)</div>
+                    <div class="calendar-event-row ushinawa-ritual-event">
+                        13 ต.ค. — วันยามค่ำไร้เสียง (静夜の日) <span class="ritual-tag">พิธีกรรมอุชินาวะ</span>
+                        <div class="ritual-details">• ห้ามพูดเสียงดังในเวลากลางคืน<br>• เรียวกังแจก "พัดเสียง" สำหรับใช้สื่อสาร<br>• ห้องอาบน้ำสาธารณะเปิดไฟเทียนแทนหลอดไฟ</div>
+                    </div>
+                    <div class="calendar-event-row normal-event">31 ต.ค. — วันฮาโลวีน</div>
+                </div>
+
+                <!-- พฤศจิกายน -->
+                <div class="calendar-month-group">
+                    <div class="month-title">พฤศจิกายน (November)</div>
+                    <div class="calendar-event-row normal-event">3 พ.ย. — วันวัฒนธรรม (文化の日 – Culture Day)</div>
+                    <div class="calendar-event-row normal-event">11 พ.ย. — วันพ็อกกี้ (Pocky Day – ญี่ปุ่นนิยม)</div>
+                    <div class="calendar-event-row normal-event">20 พ.ย. — วันเด็กโลก (Universal Children's Day)</div>
+                    <div class="calendar-event-row ushinawa-ritual-event">
+                        22 พ.ย. — คืนดอกไม้เงา (影花の宵) <span class="ritual-tag">พิธีกรรมอุชินาวะ</span>
+                        <div class="ritual-details">• เฉลิมฉลองความสงบของเงาและโลกวิญญาณ<br>• ปลูกดอก "คิคุโยอิ" (เบญจมาศม่วงดัดแปลง)<br>• เด็กเขียนข้อความลับใส่กลีบดอกแล้วปล่อยลอยแม่น้ำ</div>
+                    </div>
+                    <div class="calendar-event-row normal-event">23 พ.ย. — วันขอบคุณแรงงาน (勤労感謝の日 – Labor Thanksgiving Day)</div>
+                </div>
+
+                <!-- ธันวาคม -->
+                <div class="calendar-month-group">
+                    <div class="month-title">ธันวาคม (December)</div>
+                    <div class="calendar-event-row normal-event">13 ธ.ค. — วันทำความสะอาดบ้านส่งท้ายปี (大掃除の日 – Japanese House Cleaning Day)</div>
+                    <div class="calendar-event-row ushinawa-ritual-event">
+                        13 ธ.ค. — คืนรอยต่อสองโลก (逢間の夜) <span class="ritual-tag">พิธีกรรมอุชินาวะ</span>
+                        <div class="ritual-details">• คนตายและคนเป็นอาจพบกันในเงา<br>• จุดเทียน วางดอกไม้หน้าบ้าน<br>• ศาลเจ้าเปิดให้เขียนคำอธิษฐานส่งถึงวิญญาณ<br>• คาเงะสึคิอาจมาเฝ้าเงาผู้ที่รอใครบางคน</div>
+                    </div>
+                    <div class="calendar-event-row normal-event">24 ธ.ค. — วันคริสต์มาสอีฟ</div>
+                    <div class="calendar-event-row normal-event">25 ธ.ค. — วันคริสต์มาส</div>
+                    <div class="calendar-event-row normal-event">31 ธ.ค. — วันสิ้นปี (大晦日 – Ōmisoka)</div>
+                </div>
+
+                <!-- เพิ่มเติม – วันน่ารักหรือเฉพาะกลุ่มของญี่ปุ่น -->
+                <div class="calendar-month-group">
+                    <div class="month-title">🐾 วันพิเศษเพิ่มเติม (แมว & ญี่ปุ่น)</div>
+                    <div class="calendar-event-row normal-event">2 ก.พ. — วันแมวญี่ปุ่น (日本の猫の日 – Neko no Hi) → อ่านว่า เนโกะโนะฮิ</div>
+                    <div class="calendar-event-row normal-event">22 ก.พ. — วันแมวโลก (เพราะ 2 = に → にゃん にゃん にゃん = แมวเหมียว 3 ตัว)</div>
+                    <div class="calendar-event-row normal-event">3 มี.ค. — วันเด็กผู้หญิง (雛祭り – Hina Matsuri)</div>
+                    <div class="calendar-event-row normal-event">8 ส.ค. — วันแมวโลก (สากล – International Cat Day)</div>
+                    <div class="calendar-event-row normal-event">11 พ.ย. — วันพ็อกกี้ (เพราะเลข 1 เหมือนแท่งพ็อกกี้)</div>
                 </div>
             </div>
 
@@ -355,7 +459,7 @@
 
         // ระบบแชท LocalStorage
         function loadChat() {
-            const saved = localStorage.getItem('ushinawa_chat_v6');
+            const saved = localStorage.getItem('ushinawa_chat_v7');
             if (saved) {
                 document.getElementById('chat-messages').innerHTML = saved;
             }
@@ -380,7 +484,7 @@
             `;
             
             chatContainer.appendChild(msgDiv);
-            localStorage.setItem('ushinawa_chat_v6', chatContainer.innerHTML);
+            localStorage.setItem('ushinawa_chat_v7', chatContainer.innerHTML);
 
             input.value = '';
             chatContainer.scrollTop = chatContainer.scrollHeight;
