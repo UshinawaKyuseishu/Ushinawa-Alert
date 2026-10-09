@@ -187,6 +187,21 @@
             font-weight: 600;
         }
 
+        /* แท็บพิเศษที่ทำตัวเป็นบัคกะพริบ */
+        .tab-btn.glitch-tab {
+            color: #ff4d4d;
+            border-color: #800517;
+            animation: tab-glitch 2s infinite;
+        }
+        @keyframes tab-glitch {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; border-color: #ff0000; }
+            52% { opacity: 1; }
+            80% { opacity: 0.8; }
+            90% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
         /* ซ่อน/แสดงหน้าเนื้อหา */
         .tab-content {
             display: none;
@@ -226,7 +241,7 @@
             line-height: 1.5;
         }
 
-        /* เอฟเฟกต์บัค / แฮก / ระบบรวน (สำหรับแท็บตามรอยของในตำนาน) */
+        /* เอฟเฟกต์บัค / แฮก / ระบบรวน */
         .glitch-card {
             background: #1c0000;
             border: 1px dashed #ff4d4d;
@@ -319,11 +334,11 @@
         <main>
             <h1>ศูนย์กลางข้อมูลและแจ้งเตือน</h1>
 
-            <!-- เมนูแท็บ -->
+            <!-- เมนูแท็บ (เปลี่ยนแท็บที่ 3 ให้เป็นบัตรคำเตือนระบบรวน) -->
             <div class="nav-tabs">
                 <button class="tab-btn active" onclick="switchTab(event, 'tab1')">🚨 แจ้งเตือนภัยพิบัติ</button>
                 <button class="tab-btn" onclick="switchTab(event, 'tab2')">👁️ สิ่งแปลกปลอม</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab3')">📜 ตามรอยของในตำนาน</button>
+                <button class="tab-btn glitch-tab" onclick="switchTab(event, 'tab3')">⚠️ SYS_ERR_#404</button>
             </div>
             
             <!-- หมวดที่ 1: แจ้งเตือนภัยพิบัติ -->
@@ -354,11 +369,11 @@
                 </div>
             </div>
 
-            <!-- หมวดที่ 3: ตามรอยของในตำนาน (ทำสไตล์บัค/แฮก ระบบรวน - ปิดบังข้อมูลมิดชิด) -->
+            <!-- หมวดที่ 3: ระบบรวน / บัค (ซ่อนความลับแบบมิดชิด) -->
             <div id="tab3" class="tab-content">
                 <div class="glitch-card">
-                    <div class="card-tag glitch-text">⚠️ ERR_CORRUPT // ?????-RECORD</div>
-                    <div class="card-title" style="color: #ff4d4d;">บันทึก<span class="corrupted">ความทรงจำที่ถูกลบ</span> / ข้อมูลถูกปิดผนึก</div>
+                    <div class="card-tag glitch-text">⚠️ CRITICAL_ERR // OVERRIDE_DATA</div>
+                    <div class="card-title" style="color: #ff4d4d;">ไฟล์ข้อมูล<span class="corrupted">ถูกเขียนทับ</span> / บันทึกที่สูญหาย</div>
                     <p class="card-desc glitch-text">
                         ...พิกัด... <span class="corrupted">ไม่สามารถระบุได้</span> ...สัญญาณชีพจากเป้าหมายขาดหาย... ค้นหาสิ่งที่ถูกซ่อนไว้ลึก <span class="corrupted">███████</span> 
                         <br><br>...หากค้นพบสิ่งที่หลบซ่อนอยู่นั้นแล้ว จง<span class="corrupted" style="color: #ff0000; font-weight: bold;">เผามันให้สิ้นเสีย</span>...
@@ -366,10 +381,10 @@
                 </div>
 
                 <div class="glitch-card" style="animation-delay: 0.5s;">
-                    <div class="card-tag glitch-text" style="color: #ff0055;">⚠️ WARNING // DATA PACKET #04</div>
+                    <div class="card-tag glitch-text" style="color: #ff0055;">⚠️ WARNING // KERNEL_PANIC_09</div>
                     <div class="card-title" style="color: #ff6666;">เสียงกระซิบจาก<span class="corrupted">ฟากฝั่งนั้น</span></div>
                     <p class="card-desc" style="color: #bbb; font-family: monospace;">
-                        [SYSTEM ERROR]: ข้อมูลไฟล์ถูกเขียนทับโดยไม่ทราบสาเหตุ... 
+                        [SYSTEM ERROR]: เซิร์ฟเวอร์หลักตอบสนองผิดปกติ... 
                         <br><span class="corrupted">"ใครเป็นคนเปิดประตูรึเปล่า...?"</span> 
                         <br>ตรวจสอบพบการรั่วไหลของอาคมบริเวณพิกัด 0-0-Kyu... โปรดระวังเงาที่สะท้อนในกระจกหลังเที่ยงคืน...
                     </p>
