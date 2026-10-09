@@ -195,7 +195,7 @@
             display: block;
         }
 
-        /* การ์ดเนื้อหา */
+        /* การ์ดเนื้อหาปกติ */
         .card {
             background: #140202;
             border: 1px solid #330000;
@@ -224,6 +224,48 @@
             color: #cccccc;
             margin: 0;
             line-height: 1.5;
+        }
+
+        /* เอฟเฟกต์บัค / แฮก / ระบบรวน (สำหรับแท็บตามรอยของในตำนาน) */
+        .glitch-card {
+            background: #1c0000;
+            border: 1px dashed #ff4d4d;
+            border-left-width: 5px;
+            border-left-color: #ff0000;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            position: relative;
+            overflow: hidden;
+            animation: glitch-box 3s infinite;
+        }
+        @keyframes glitch-box {
+            0% { transform: translate(0); }
+            20% { transform: translate(-1px, 1px); border-color: #800517; }
+            40% { transform: translate(1px, -1px); border-color: #ff4d4d; }
+            60% { transform: translate(0); }
+            80% { transform: translate(-2px, 0); }
+            100% { transform: translate(0); }
+        }
+        .glitch-text {
+            color: #ff4d4d;
+            font-family: monospace;
+            letter-spacing: 1px;
+            animation: text-flicker 1.5s infinite;
+        }
+        @keyframes text-flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            52% { opacity: 1; }
+            80% { opacity: 0.8; }
+            90% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+        .corrupted {
+            color: #880000;
+            background-color: #220000;
+            padding: 0 4px;
+            text-decoration: line-through;
         }
 
         /* Footer ด้านล่างสุด */
@@ -259,7 +301,7 @@
             <h2>USHINAWA EMERGENCY NET</h2>
             <p style="font-size: 12px; color: #cc6666; margin-bottom: 10px;">กรุณาระบุชื่อตัวละคร หรือนามแฝง OC ของท่านเพื่อเข้าสู่ระบบเครือข่ายส่วนกลาง</p>
             <form onsubmit="handleLogin(event)">
-                <input type="text" id="username-input" class="login-input" placeholder="ระบุชื่อตัวละคร (เช่น ยูโตะ / รินะ)" required autocomplete="off">
+                <input type="text" id="username-input" class="login-input" placeholder="ระบุชื่อตัวละคร (เช่น คุโรซาวะ โซสุเกะ)" required autocomplete="off">
                 <button type="submit" class="login-btn">เข้าสู่ระบบเครือข่าย</button>
             </form>
         </div>
@@ -312,17 +354,24 @@
                 </div>
             </div>
 
-            <!-- หมวดที่ 3: ตามรอยของในตำนาน -->
+            <!-- หมวดที่ 3: ตามรอยของในตำนาน (ทำสไตล์บัค/แฮก ระบบรวน) -->
             <div id="tab3" class="tab-content">
-                <div class="card" style="border-left-color: #800517;">
-                    <div class="card-tag">📜 [ตำนานปรัมปรา] วัตถุบรรพกาลสาบสูญ</div>
-                    <div class="card-title">ร่องรอยสิ่งตกค้างจากอดีตกาล</div>
-                    <p class="card-desc">เบาะแสเกี่ยวกับการค้นหาวัตถุลึกลับที่หลับใหลอยู่ในเขตหมู่บ้าน เงื่อนงำที่ถูกกลบฝังไว้ใต้หน้าประวัติศาสตร์อันเงียบงัน</p>
+                <div class="glitch-card">
+                    <div class="card-tag glitch-text">⚠️ ERR_CORRUPT // ?????-RELIC</div>
+                    <div class="card-title" style="color: #ff4d4d;">บันทึก<span class="corrupted">ความทรงจำที่ถูกลบ</span> / วัตถุบรรพกาล</div>
+                    <p class="card-desc glitch-text">
+                        ...พิกัด... <span class="corrupted">ไม่สามารถระบุได้</span> ...สัญญาณชีพจากเป้าหมายขาดหาย... ค้นหาวัตถุชิ้นที่ <span class="corrupted">████</span> ที่ถูกฝังไว้ใต้รากของฮิกังบานะ อย่าให้มัน <span class="corrupted">ตื่นขึ้นมาเด็ดขาด</span>...
+                    </p>
                 </div>
-                <div class="card" style="border-left-color: #800517;">
-                    <div class="card-tag">🌙 [บันทึกรอยต่อ] เสียงกระซิบจากความมืด</div>
-                    <div class="card-title">ร่องรอยการเชื่อมต่อกับอีกฟากฝั่ง</div>
-                    <p class="card-desc">บันทึกร่องรอยและสัญลักษณ์โบราณที่ปรากฏขึ้นตามสถานที่ต่างๆ เบาะแสสำคัญในการทำความเข้าใจเรื่องราวลี้ลับทั้งหมด</p>
+
+                <div class="glitch-card" style="animation-delay: 0.5s;">
+                    <div class="card-tag glitch-text" style="color: #ff0055;">⚠️ WARNING // DATA PACKET #04</div>
+                    <div class="card-title" style="color: #ff6666;">เสียงกระซิบจาก<span class="corrupted">ฟากฝั่งนั้น</span></div>
+                    <p class="card-desc" style="color: #bbb; font-family: monospace;">
+                        [SYSTEM ERROR]: ข้อมูลไฟล์ถูกเขียนทับโดยไม่ทราบสาเหตุ... 
+                        <br><span class="corrupted">"ใครเป็นคนเปิดประตูรึเปล่า...?"</span> 
+                        <br>ตรวจสอบพบการรั่วไหลของอาคมบริเวณพิกัด 0-0-Kyu... โปรดระวังเงาที่สะท้อนในกระจกหลังเที่ยงคืน...
+                    </p>
                 </div>
             </div>
         </main>
