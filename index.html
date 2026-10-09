@@ -124,6 +124,7 @@
         .chat-msg { background: #1a0505; border: 1px solid #330000; padding: 8px 10px; border-radius: 6px; font-size: 12px; }
         .chat-user { font-weight: 700; color: #ff4d4d; margin-bottom: 2px; }
         .chat-text { color: #ddd; word-break: break-all; }
+        .chat-time { font-size: 9px; color: #774444; text-align: right; margin-top: 2px; }
         .chat-input-area { display: flex; padding: 8px; background: #0c0000; border-top: 1px solid #440000; gap: 5px; }
         .chat-input {
             flex: 1; background: #1a0505; border: 1px solid #440000; padding: 8px;
@@ -201,7 +202,7 @@
                 <button class="tab-btn glitch-tab" onclick="switchTab('error')">⚠️ ERR_404</button>
             </div>
 
-            <!-- Tab 1: ภัยพิบัติ & ข่าวสาร (Archive 2004-Present) -->
+            <!-- Tab 1: ภัยพิบัติ & ข่าวสาร (Archive 2004-Present เต็มรูปแบบ) -->
             <div id="archive" class="tab-content active">
                 <div class="card">
                     <div class="archive-year">2004 - เหตุการณ์เงาเคลื่อนตัว</div>
@@ -214,16 +215,25 @@
                     <div class="card-desc">เกิดหมอกหนาทึบกลิ่นสนิมและกลีบดอกไม้สีแดงปนเปื้อนปกคลุมทั่วหมู่บ้าน ระบบสื่อสารตัดขาดทั้งหมด ประชาชนถูกสั่งให้อยู่แต่ในเคหสถาน</div>
                 </div>
                 <div class="card">
+                    <div class="archive-year">2018 - คดีปริศนาอุโมงค์ร้าง</div>
+                    <div class="card-title">พบโครงกระดูกนิรนามใต้อุโมงค์ทางทิศตะวันตก</div>
+                    <div class="card-desc">เจ้าหน้าที่พบชิ้นส่วนโครงกระดูกมนุษย์ถูกฝังอำพรางไว้ใต้อุโมงค์รถไฟเก่า พร้อมร่องรอยการขูดขีดบนผนังปูนเป็นตัวเลขรหัสปริศนา คดีถูกปิดเงียบโดยกองกำลังรักษาความปลอดภัยท้องถิ่น</div>
+                </div>
+                <div class="card">
                     <div class="archive-year">2021 - ประกาศเตือนภัยเสียงกระดิ่ง</div>
                     <div class="card-title">คำสั่งเคอร์ฟิวเสียงกระดิ่งยามวิกาล</div>
                     <div class="card-desc">ประกาศทางการให้งดออกจากเคหสถานหลังเที่ยงคืน หลังมีเสียงกระดิ่งปริศนาดังตามตรอกซอกซอยติดต่อกันหลายคืน</div>
+                </div>
+                <div class="card">
+                    <div class="archive-year">2025 - ภาวะคลื่นความเงียบงัน</div>
+                    <div class="card-title">ประกาศเฝ้าระวังคลื่นเสียงต่ำผิดปกติ</div>
+                    <div class="card-desc">เครื่องวัดแผ่นดินไหวตรวจพบคลื่นความถี่ต่ำที่ทำให้สัตว์เลี้ยงในหมู่บ้านตื่นตระหนก ทางการแจกจ่ายหน้ากากกรองเสียงและประกาศให้งดใช้เสียงดังหลัง 22:00 น.</div>
                 </div>
             </div>
 
             <!-- Tab 2: สิ่งแปลกปลอม -->
             <div id="entities" class="tab-content">
                 <div class="card">
-                    <div class="card-tag">Foreign Entities Database</div>
                     <div class="card-title">กระดานยืนยันและแจ้งเบาะแสสิ่งแปลกปลอม</div>
                     <div class="card-desc">พื้นที่บันทึกและตรวจสอบสิ่งผิดปกติ รอยแยก หรือปรากฏการณ์เงาในเขตชุมชนอุชินาวะ คิวเซชู</div>
                     <div style="background: #080000; border: 1px dashed #800517; padding: 10px; border-radius: 6px; font-size: 11px; color: #ff8080;">
@@ -232,7 +242,7 @@
                 </div>
             </div>
 
-            <!-- Tab 3: ห้องแชทชุมชน -->
+            <!-- Tab 3: ห้องแชทชุมชน (แชทล้วนๆ ไม่มีบอทป่วน) -->
             <div id="chat" class="tab-content">
                 <div class="chat-container">
                     <div class="chat-messages" id="chat-messages">
@@ -403,7 +413,7 @@
 
         // ระบบแชท LocalStorage
         function loadChat() {
-            const saved = localStorage.getItem('ushinawa_chat_v2');
+            const saved = localStorage.getItem('ushinawa_chat_v3');
             if (saved) {
                 document.getElementById('chat-messages').innerHTML = saved;
             }
@@ -428,7 +438,7 @@
             `;
             
             chatContainer.appendChild(msgDiv);
-            localStorage.setItem('ushinawa_chat_v2', chatContainer.innerHTML);
+            localStorage.setItem('ushinawa_chat_v3', chatContainer.innerHTML);
 
             input.value = '';
             chatContainer.scrollTop = chatContainer.scrollHeight;
