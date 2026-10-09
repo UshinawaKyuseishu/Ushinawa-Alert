@@ -41,7 +41,7 @@
             100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
         }
 
-        /* หน้าจอ Login / เลือกตัวละคร */
+        /* หน้าจอ Login / ยืนยันตัวตน */
         #login-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -295,13 +295,13 @@
         }
     </script>
 
-    <!-- หน้าจอ Login / ยืนยันตัวตนตัวละคร -->
+    <!-- หน้าจอ Login / ยืนยันตัวตน -->
     <div id="login-screen">
         <div class="login-box">
             <h2>USHINAWA EMERGENCY NET</h2>
-            <p style="font-size: 12px; color: #cc6666; margin-bottom: 10px;">กรุณาระบุชื่อตัวละคร หรือนามแฝง OC ของท่านเพื่อเข้าสู่ระบบเครือข่ายส่วนกลาง</p>
+            <p style="font-size: 12px; color: #cc6666; margin-bottom: 10px;">กรุณากรอกชื่อหรือรหัสประจำตัว เพื่อเข้าสู่ระบบเครือข่ายส่วนกลาง</p>
             <form onsubmit="handleLogin(event)">
-                <input type="text" id="username-input" class="login-input" placeholder="ระบุชื่อตัวละคร (เช่น คุโรซาวะ โซสุเกะ)" required autocomplete="off">
+                <input type="text" id="username-input" class="login-input" placeholder="ระบุชื่อ หรือรหัสประจำตัว (เช่น คุโรซาวะ โซสุเกะ)" required autocomplete="off">
                 <button type="submit" class="login-btn">เข้าสู่ระบบเครือข่าย</button>
             </form>
         </div>
@@ -354,14 +354,14 @@
                 </div>
             </div>
 
-            <!-- หมวดที่ 3: ตามรอยของในตำนาน (ทำสไตล์บัค/แฮก ระบบรวน) -->
+            <!-- หมวดที่ 3: ตามรอยของในตำนาน (ทำสไตล์บัค/แฮก ระบบรวน - ปิดบังข้อมูลมิดชิด) -->
             <div id="tab3" class="tab-content">
                 <div class="glitch-card">
-                    <div class="card-tag glitch-text">⚠️ ERR_CORRUPT // ?????-RELIC</div>
-                    <div class="card-title" style="color: #ff4d4d;">บันทึก<span class="corrupted">ความทรงจำที่ถูกลบ</span> / วัตถุบรรพกาล</div>
+                    <div class="card-tag glitch-text">⚠️ ERR_CORRUPT // ?????-RECORD</div>
+                    <div class="card-title" style="color: #ff4d4d;">บันทึก<span class="corrupted">ความทรงจำที่ถูกลบ</span> / ข้อมูลถูกปิดผนึก</div>
                     <p class="card-desc glitch-text">
-                        ...พิกัด... <span class="corrupted">ไม่สามารถระบุได้</span> ...สัญญาณชีพจากเป้าหมายขาดหาย... ค้นหาวัตถุชิ้นที่ <span class="corrupted">████</span> ที่ถูกฝังไว้ใต้<span class="corrupted">█อุ██งค█์█</span> 
-                        <br><br>...หากพบเจอสิ่งนั้นแล้ว จง<span class="corrupted" style="color: #ff0000; font-weight: bold;">เผามันให้สิ้นเสีย</span>...
+                        ...พิกัด... <span class="corrupted">ไม่สามารถระบุได้</span> ...สัญญาณชีพจากเป้าหมายขาดหาย... ค้นหาสิ่งที่ถูกซ่อนไว้ลึก <span class="corrupted">███████</span> 
+                        <br><br>...หากค้นพบสิ่งที่หลบซ่อนอยู่นั้นแล้ว จง<span class="corrupted" style="color: #ff0000; font-weight: bold;">เผามันให้สิ้นเสีย</span>...
                     </p>
                 </div>
 
