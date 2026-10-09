@@ -176,22 +176,18 @@
             75% { transform: translate(-1px, -2px); filter: hue-rotate(270deg); }
             100% { transform: translate(0, 0); }
         }
-        .glitch-header {
-            color: #ff4d4d; font-family: monospace; letter-spacing: 2px; animation: text-flicker 0.25s infinite;
-        }
+        .glitch-text { color: #ff4d4d; font-family: monospace; letter-spacing: 2px; animation: text-flicker 0.25s infinite; }
         @keyframes text-flicker { 0% { opacity: 1; } 50% { opacity: 0.1; } 100% { opacity: 0.9; } }
         
-        .readable-story {
-            color: #dcdcdc;
-            background-color: #0b0000;
-            font-family: 'Noto Sans Thai', sans-serif, Arial;
-            font-size: 13px;
-            line-height: 1.8;
-            padding: 15px;
-            border: 1px solid #441111;
-            border-radius: 6px;
-            margin-top: 12px;
-            white-space: pre-line;
+        .deep-corrupt {
+            color: #330000;
+            background-color: #080000;
+            font-family: monospace;
+            word-break: break-all;
+            line-height: 1.6;
+            filter: blur(1.2px);
+            user-select: none;
+            opacity: 0.45;
         }
 
         footer { text-align: center; font-size: 11px; color: #666; padding: 15px; border-top: 1px solid #220000; background: #080000; }
@@ -220,7 +216,7 @@
                 <div class="app-sub">Secure Emergency & Community Portal</div>
             </div>
             <div class="header-right">
-                <!-- Contact Dropdown Menu (สลับมาอยู่ซ้าย) -->
+                <!-- Contact Dropdown Menu (อยู่ซ้าย) -->
                 <div class="contact-dropdown" id="contactDropdown">
                     <button class="contact-btn" onclick="toggleContactMenu(event)">
                         <span>🔗</span> Doc & Contact ▾
@@ -233,7 +229,7 @@
                         <a href="https://docs.google.com/spreadsheets/d/10fzJ7AdgfqhniQZUoiHIEl25KMtXkszjpcQtHlB1nBQ/edit?usp=drivesdk" target="_blank">📊 คำตอบ (Sheet)</a>
                     </div>
                 </div>
-                <!-- User Badge (สลับมาอยู่ขวา) -->
+                <!-- User Badge (อยู่ขวา) -->
                 <div class="user-badge">
                     <span>👤</span> <span id="display-anon-id">กำลังโหลด...</span>
                 </div>
@@ -462,7 +458,7 @@
                 </div>
             </div>
 
-            <!-- Tab 5: ERR_404 -->
+            <!-- Tab 5: ERR_404 (ใส่ข้อมูลตำนาน + คำสั่งเผา/กำจัด แบบบัคและอ่านแทบไม่ออก) -->
             <div id="error" class="tab-content">
                 <div class="glitch-box">
                     <div class="card-title glitch-text">⚠️ FATAL_ERROR: MEMORY_CORRUPTED_0x800517</div>
