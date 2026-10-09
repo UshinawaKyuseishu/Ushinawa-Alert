@@ -76,6 +76,11 @@
             background: #1a0505; color: #cc6666; border: 1px solid #330000;
             padding: 6px 10px; border-radius: 6px; font-size: 11px; cursor: pointer;
             font-family: 'Noto Sans Thai', sans-serif; white-space: nowrap; transition: all 0.2s;
+            text-decoration: none; display: inline-block; text-align: center;
+        }
+        .tab-btn:hover {
+            background: #800517;
+            color: #fff;
         }
         .tab-btn.active { background: #660000; color: #ffffff; border-color: #800517; font-weight: 600; }
         .tab-btn.glitch-tab {
@@ -188,9 +193,9 @@
             </div>
         </header>
 
-        <!-- แถบอัปเดตสภาพอากาศจริงจากโทยามะ ประเทศญี่ปุ่น -->
+        <!-- แถบอัปเดตสภาพอากาศจริงจากโทยามะ (แบบปกติเรียบง่าย) -->
         <div class="status-ticker">
-            <span><span class="live-dot"></span> สภาพอากาศ (โทยามะ ญี่ปุ่น): <span id="toyama-weather">กำลังโหลดข้อมูลสภาพอากาศจริง...</span></span>
+            <span><span class="live-dot"></span> สภาพอากาศ (โทยามะ ญี่ปุ่น): <span id="toyama-weather">กำลังโหลดข้อมูลสภาพอากาศ...</span></span>
             <span id="system-time">00:00:00</span>
         </div>
 
@@ -205,6 +210,8 @@
                 <button class="tab-btn" onclick="switchTab(event, 'tab2')">👁️ สิ่งแปลกปลอม</button>
                 <button class="tab-btn" onclick="switchTab(event, 'tab3')">💬 ห้องแชท</button>
                 <button class="tab-btn" onclick="switchTab(event, 'tab4')">📅 ปฏิทินเมือง</button>
+                <!-- เพิ่มลิงก์ไปยัง Ushinawa Web Board ภายนอก -->
+                <a href="https://ushinawakeijiban.boards.net/" target="_blank" class="tab-btn">🌐 Ushinawa Web Board ↗</a>
                 <button class="tab-btn glitch-tab" onclick="switchTab(event, 'tab5')">⚠️ ERR_404</button>
             </div>
             
@@ -391,7 +398,7 @@
             document.getElementById('system-time').innerText = now.toLocaleTimeString('th-TH');
         }, 1000);
 
-        // ดึงสภาพอากาศจริงจาก Open-Meteo API ของจังหวัดโทยามะ ประเทศญี่ปุ่น (พิกัด 36.6953, 137.2113)
+        // ดึงสภาพอากาศจริงจาก Open-Meteo API ของจังหวัดโทยามะ ประเทศญี่ปุ่น (แบบปกติสมจริง)
         async function fetchToyamaWeather() {
             try {
                 let response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=36.6953&longitude=137.2113&current=temperature_2m,relative_humidity_2m,weather_code');
@@ -401,17 +408,16 @@
                     let code = data.current.weather_code;
                     let weatherDesc = "อากาศแจ่มใส";
                     
-                    // แปลง Weather Code ตามมาตรฐาน WMO
-                    if(code >= 1 && code <= 3) weatherDesc = "มีเมฆบางส่วน / หมอกจาง";
-                    else if(code >= 45 && code <= 48) weatherDesc = "หมอกลงจัด";
-                    else if(code >= 51 && code <= 67) weatherDesc = "ฝนตกปรอยๆ / ฝนฟ้าคะนอง";
-                    else if(code >= 71 && code <= 77) weatherDesc = "หิมะตก / อากาศหนาวจัด";
-                    else if(code >= 80) weatherDesc = "พายุฝนฟ้าคะนอง";
+                    if(code >= 1 && code <= 3) weatherDesc = "มีเมฆบางส่วน";
+                    else if(code >= 45 && code <= 48) weatherDesc = "มีหมอกลงจัด";
+                    else if(code >= 51 && code <= 67) weatherDesc = "ฝนตกปรอยๆ";
+                    else if(code >= 71 && code <= 77) weatherDesc = "หิมะตก";
+                    else if(code >= 80) weatherDesc = "ฝนฟ้าคะนอง";
 
-                    document.getElementById('toyama-weather').innerText = `${weatherDesc} | อุณหภูมิ ${temp}°C (เฝ้าระวังเงาผิดปกติ)`;
+                    document.getElementById('toyama-weather').innerText = `${weatherDesc}, อุณหภูมิ ${temp}°C`;
                 }
             } catch (err) {
-                document.getElementById('toyama-weather').innerText = "หมอกลงจัด / อุณหภูมิลดต่ำลง (โหมดสำรอง)";
+                document.getElementById('toyama-weather').innerText = "อุณหภูมิ 12°C, มีเมฆมาก";
             }
         }
 
@@ -422,7 +428,9 @@
             }
             let buttons = document.getElementsByClassName("tab-btn");
             for (let i = 0; i < buttons.length; i++) {
-                buttons[i].classList.remove("active");
+                if(!buttons[i].hasAttribute('href')) {
+                    buttons[i].classList.remove("active");
+                }
             }
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.classList.add("active");
