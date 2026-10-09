@@ -141,9 +141,18 @@
         .glitch-box {
             background: #1c0000; border: 1px dashed #ff4d4d; border-left-width: 5px;
             border-left-color: #ff0000; padding: 15px; border-radius: 8px; margin-bottom: 12px;
+            position: relative; overflow: hidden; animation: glitch-box 1.5s infinite;
         }
-        .glitch-text { color: #ff4d4d; font-family: monospace; letter-spacing: 1px; animation: text-flicker 1.5s infinite; }
-        @keyframes text-flicker { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+        @keyframes glitch-box {
+            0% { transform: translate(0); }
+            20% { transform: translate(-1px, 1px); filter: brightness(1.2); }
+            40% { transform: translate(1px, -1px); }
+            60% { transform: translate(0); }
+            100% { transform: translate(0); }
+        }
+        .glitch-text { color: #ff4d4d; font-family: monospace; letter-spacing: 1px; animation: text-flicker 1s infinite; }
+        @keyframes text-flicker { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        .corrupted-data { color: #661111; background: #2a0000; padding: 2px 4px; font-family: monospace; text-decoration: line-through; }
 
         footer { text-align: center; font-size: 11px; color: #666; padding: 15px; border-top: 1px solid #220000; background: #080000; }
     </style>
@@ -193,18 +202,17 @@
                 <span style="font-size: 11px; color: #885555; font-weight: normal;">GitHub Pages Online</span>
             </h1>
 
-            <!-- แถบเมนูนำทาง (ครบทุกแท็บตามต้องการ) -->
+            <!-- แถบเมนูนำทาง (ไม่มี Personal List แล้ว) -->
             <div class="nav-tabs">
                 <button class="tab-btn active" onclick="switchTab(event, 'archive')">🚨 ภัยพิบัติ & ข่าวสาร</button>
                 <button class="tab-btn" onclick="switchTab(event, 'entities')">👁️ สิ่งแปลกปลอม</button>
                 <button class="tab-btn" onclick="switchTab(event, 'chat')">💬 ห้องแชท</button>
                 <button class="tab-btn" onclick="switchTab(event, 'calendar')">📅 ปฏิทินเมือง</button>
                 <button class="tab-btn external-link" onclick="window.open('https://ushinawakeijiban.boards.net/', '_blank')">🌐 Ushinawa Web Board ↗</button>
-                <button class="tab-btn" onclick="switchTab(event, 'directory')">🗂️ Personal List</button>
                 <button class="tab-btn glitch-tab" onclick="switchTab(event, 'error')">⚠️ ERR_404</button>
             </div>
 
-            <!-- Tab 1: ภัยพิบัติ & ข่าวสาร (จัดเต็มครบทุกเหตุการณ์ รวมคดีศพใต้อุโมงค์) -->
+            <!-- Tab 1: ภัยพิบัติ & ข่าวสาร -->
             <div id="archive" class="tab-content active">
                 <div class="card" style="border-left-color: #ff4d4d;">
                     <div class="archive-year">2004 - เหตุการณ์เงาเคลื่อนตัว</div>
@@ -217,9 +225,9 @@
                     <p class="card-desc">เกิดหมอกหนาทึบกลิ่นสนิมและกลีบดอกไม้สีแดงปนเปื้อนปกคลุมทั่วหมู่บ้าน ระบบสื่อสารตัดขาดทั้งหมด ประชาชนถูกสั่งให้อยู่แต่ในเคหสถาน</p>
                 </div>
                 <div class="card" style="border-left-color: #ff4d4d;">
-                    <div class="archive-year">2018 - คดีปริศนาอุโมงค์ร้าง</div>
-                    <div class="card-title">พบโครงกระดูกนิรนามใต้อุโมงค์ทางทิศตะวันตก</div>
-                    <p class="card-desc">เจ้าหน้าที่พบชิ้นส่วนโครงกระดูกมนุษย์ถูกฝังอำพรางไว้ใต้อุโมงค์รถไฟเก่า พร้อมร่องรอยการขูดขีดบนผนังปูนเป็นตัวเลขรหัสปริศนา คดีถูกปิดเงียบโดยกองกำลังรักษาความปลอดภัยท้องถิ่น</p>
+                    <div class="archive-year">2018 - คดีปริศนาเขตตะวันตก</div>
+                    <div class="card-title">พบร่องรอยการอำพรางบริเวณเขตเชื่อมต่อร้าง</div>
+                    <p class="card-desc">เจ้าหน้าที่พบร่องรอยการขูดขีดบนผนังปูนเป็นตัวเลขรหัสปริศนาและจุดต้องสงสัยถูกฝังกลบโดยคำสั่งเร่งด่วนจากกองกำลังรักษาความปลอดภัยท้องถิ่น</p>
                 </div>
                 <div class="card" style="border-left-color: #ffaa00;">
                     <div class="archive-year">2021 - ประกาศเตือนภัยเสียงกระดิ่ง</div>
@@ -302,21 +310,17 @@
                 </div>
             </div>
 
-            <!-- Tab 5: Personal List (DIRECTORY) -->
-            <div id="directory" class="tab-content">
-                <div class="card" style="border-left-color: #800517;">
-                    <div class="card-tag">👤 DIRECTORY</div>
-                    <div class="card-title">Ushinawa Kyuseishu personal list</div>
-                    <p class="card-desc">รวบรวมข้อมูลโปรไฟล์ รายชื่อ และสถานะของตัวละครในคอมมู Ushinawa Kyuseishu ทั้งหมด</p>
-                </div>
-            </div>
-
-            <!-- Tab 6: ERR_404 -->
+            <!-- Tab 5: ERR_404 (หน้าบัคสยองขวัญแบบไม่เฉลยและปิดคำบอก) -->
             <div id="error" class="tab-content">
                 <div class="glitch-box">
-                    <div class="card-title glitch-text">⚠️ ERR_404: CONNECTION CORRUPTED</div>
-                    <div class="card-desc glitch-text">สัญญาณจากสถานีตรวจวัดเขต 7 ขาดหาย พิกัดเป้าหมายถูกบิดเบือน</div>
-                    <div style="font-size: 11px; color: #884444;">คำเตือน: กรุณาอย่าจ้องมองที่มุมมืดของจอภาพนานเกิน 10 วินาที</div>
+                    <div class="card-title glitch-text">⚠️ FATAL_ERROR: SIGNAL_LOST_0x800517</div>
+                    <div class="card-desc glitch-text" style="line-height: 1.6; margin-top: 8px;">
+                        พิกัดเป้าหมายถูกบิดเบือนโดย <span class="corrupted-data">ENCRYPTED_SIGNAL</span><br>
+                        ระบบตรวจพบการเข้าถึงไฟล์ข้อมูลลับที่ถูกลบเลือน...<br><br>
+                        <span style="color: #ff8080;">[บันทึกตกค้างจากเซิร์ฟเวอร์สำรอง]:</span><br>
+                        "อย่าขุดคุ้ยสิ่งที่ถูกฝังไว้ใต้ดิน... บางสิ่งไม่ใช่สิ่งของ และมันไม่ควรถูกพบเจออีกครั้งในเขต 7"<br><br>
+                        <span class="corrupted-data">ERR_CONNECTION_RESET_BY_ANOMALY</span>
+                    </div>
                 </div>
             </div>
         </main>
@@ -351,7 +355,7 @@
 
         // ระบบแชท LocalStorage
         function loadChat() {
-            const saved = localStorage.getItem('ushinawa_chat_v4');
+            const saved = localStorage.getItem('ushinawa_chat_v6');
             if (saved) {
                 document.getElementById('chat-messages').innerHTML = saved;
             }
@@ -376,7 +380,7 @@
             `;
             
             chatContainer.appendChild(msgDiv);
-            localStorage.setItem('ushinawa_chat_v4', chatContainer.innerHTML);
+            localStorage.setItem('ushinawa_chat_v6', chatContainer.innerHTML);
 
             input.value = '';
             chatContainer.scrollTop = chatContainer.scrollHeight;
