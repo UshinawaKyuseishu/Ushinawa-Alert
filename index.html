@@ -141,18 +141,21 @@
         }
         .chat-send-btn:hover { background: #ff4d4d; color: #000; }
 
-        /* ERR_404 Tab Styling */
+        /* ERR_404 Tab Styling (Glitch Header + Readable Story) */
         .glitch-box {
             background: #1c0000; border: 1px dashed #ff4d4d; border-left-width: 5px;
             border-left-color: #ff0000; padding: 15px; border-radius: 8px; margin-bottom: 12px;
             position: relative; overflow: hidden;
         }
-        .glitch-text { color: #ff4d4d; font-family: monospace; letter-spacing: 2px; }
+        .glitch-header {
+            color: #ff4d4d; font-family: monospace; letter-spacing: 2px; animation: text-flicker 0.5s infinite;
+        }
+        @keyframes text-flicker { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
         
         .readable-story {
             color: #dcdcdc;
-            background-color: #0e0202;
-            font-family: 'Noto Sans Thai', sans-serif;
+            background-color: #0b0000;
+            font-family: 'Noto Sans Thai', sans-serif, Arial;
             font-size: 13px;
             line-height: 1.8;
             padding: 15px;
@@ -416,11 +419,15 @@
                 </div>
             </div>
 
-            <!-- Tab 5: ERR_404 (หัวข้อกลิตช์ + ข้อความเรื่องเล่าแบบอ่านง่าย ชัดเจน ครบถ้วน) -->
+            <!-- Tab 5: ERR_404 (ส่วนหัวกลิตช์เดิม + เนื้อเรื่องใหม่แบบอ่านง่ายชัดเจน) -->
             <div id="error" class="tab-content">
                 <div class="glitch-box">
-                    <div class="card-title glitch-text">⚠️ FATAL_ERROR: MEMORY_CORRUPTED_0x800517</div>
-                    
+                    <div class="glitch-header" style="font-size: 15px; font-weight: bold; margin-bottom: 5px;">⚠️ FATAL_ERROR: MEMORY_CORRUPTED_0x800517</div>
+                    <div class="glitch-header" style="font-size: 12px; margin-bottom: 10px;">
+                        SYSTEM CORRUPTION DETECTED... <span style="color:#550000;">█▓▒░████████░▒▓█</span><br>
+                        FILE_TARGET: <span style="color: #660000;">UNKNOWN_SECTOR_DATA</span>
+                    </div>
+
                     <div class="readable-story">
 In days long past, a god once didst dwell in this hallowed place.
 
@@ -606,7 +613,7 @@ before thine own tale is done.
 
         // ระบบแชท LocalStorage
         function loadChat() {
-            const saved = localStorage.getItem('ushinawa_chat_v11');
+            const saved = localStorage.getItem('ushinawa_chat_v12');
             if (saved) {
                 document.getElementById('chat-messages').innerHTML = saved;
             }
@@ -631,7 +638,7 @@ before thine own tale is done.
             `;
             
             chatContainer.appendChild(msgDiv);
-            localStorage.setItem('ushinawa_chat_v11', chatContainer.innerHTML);
+            localStorage.setItem('ushinawa_chat_v12', chatContainer.innerHTML);
 
             input.value = '';
             chatContainer.scrollTop = chatContainer.scrollHeight;
