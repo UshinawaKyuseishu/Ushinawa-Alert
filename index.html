@@ -18,7 +18,25 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
         }
+        /* เอฟเฟกต์กลีบดอกไม้ฮิกังบานะโปรยปราย */
+        .petal {
+            position: absolute;
+            background-color: #ff4d4d;
+            border-radius: 150% 0 150% 0;
+            opacity: 0.6;
+            animation: fall linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
         .container {
             background: #110000;
             border: 2px solid #800517;
@@ -27,6 +45,8 @@
             box-shadow: 0 8px 25px rgba(128, 5, 23, 0.4);
             max-width: 500px;
             width: 100%;
+            position: relative;
+            z-index: 2;
         }
         .header-top {
             display: flex;
@@ -41,15 +61,26 @@
             color: #cc6666;
             letter-spacing: 1px;
         }
-        .system-badge {
-            background: #800517;
-            color: #ffffff;
-            font-size: 10px;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-weight: 600;
-            letter-spacing: 1px;
+
+        /* ปุ่มสลับระดับความรุนแรง */
+        .alert-selector {
+            display: flex;
+            gap: 4px;
         }
+        .level-btn {
+            background: #1a0505;
+            border: 1px solid #330000;
+            color: #ccc;
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Noto Sans Thai', sans-serif;
+        }
+        .level-btn.normal.active { background: #004400; border-color: #00aa00; color: #fff; }
+        .level-btn.warning.active { background: #664400; border-color: #ffaa00; color: #fff; }
+        .level-btn.danger.active { background: #800517; border-color: #ff4d4d; color: #fff; }
+
         h1 {
             color: #ff4d4d;
             margin: 0 0 12px 0;
@@ -98,6 +129,14 @@
             padding: 12px;
             border-radius: 6px;
             margin-bottom: 10px;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+        .card.clickable {
+            cursor: pointer;
+        }
+        .card.clickable:hover {
+            transform: translateX(3px);
+            border-color: #ff4d4d;
         }
         .card-tag {
             font-size: 11px;
@@ -117,6 +156,73 @@
             margin: 0;
             line-height: 1.4;
         }
+
+        /* ฟอร์มส่งรายงานในแท็บ 4 */
+        .report-form {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 8px;
+        }
+        .report-input, .report-textarea {
+            background: #110000;
+            border: 1px solid #440000;
+            padding: 8px;
+            border-radius: 6px;
+            color: #fff;
+            font-family: 'Noto Sans Thai', sans-serif;
+            font-size: 12px;
+        }
+        .report-textarea {
+            resize: vertical;
+            height: 60px;
+        }
+        .submit-btn {
+            background: #800517;
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 6px;
+            font-family: 'Noto Sans Thai', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .submit-btn:hover {
+            background: #ff4d4d;
+        }
+
+        /* Modal หน้าต่างเด้งแสดงข้อมูลโปรไฟล์ OC */
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        .modal-content {
+            background: #1a0505;
+            border: 2px solid #ff4d4d;
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 320px;
+            width: 90%;
+            box-shadow: 0 0 20px rgba(255,77,77,0.4);
+        }
+        .close-modal {
+            background: #800517;
+            color: white;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 15px;
+            float: right;
+            font-family: 'Noto Sans Thai', sans-serif;
+        }
+
         .footer {
             font-size: 11px;
             color: #777777;
@@ -128,10 +234,30 @@
     </style>
 </head>
 <body>
+    <!-- เอฟเฟกต์กลีบดอกไม้โปรย -->
+    <script>
+        for (let i = 0; i < 12; i++) {
+            let p = document.createElement('div');
+            p.className = 'petal';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.top = -Math.random() * 20 - 10 + 'vh';
+            p.style.width = (Math.random() * 8 + 5) + 'px';
+            p.style.height = (Math.random() * 12 + 7) + 'px';
+            p.style.animationDuration = (Math.random() * 6 + 4) + 's';
+            p.style.animationDelay = (Math.random() * 5) + 's';
+            document.body.appendChild(p);
+        }
+    </script>
+
     <div class="container">
         <div class="header-top">
             <div class="school-title">USHINAWA ACADEMY</div>
-            <div class="system-badge">ONLINE</div>
+            <!-- ปุ่มเปลี่ยนระดับสถานการณ์ด่วน -->
+            <div class="alert-selector">
+                <button class="level-btn normal active" onclick="setAlertLevel('normal')">ปกติ</button>
+                <button class="level-btn warning" onclick="setAlertLevel('warning')">เฝ้าระวัง</button>
+                <button class="level-btn danger" onclick="setAlertLevel('danger')">ฉุกเฉิน</button>
+            </div>
         </div>
 
         <h1>ระบบข้อมูลส่วนกลาง</h1>
@@ -172,21 +298,27 @@
             </div>
         </div>
 
-        <!-- หมวดที่ 3: Ushinawa Kyuseishu personal list -->
+        <!-- หมวดที่ 3: Ushinawa Kyuseishu personal list (คลิกดูการ์ด OC ได้) -->
         <div id="tab3" class="tab-content">
-            <div class="card" style="border-left-color: #800517;">
+            <div class="card clickable" style="border-left-color: #800517;" onclick="openModal('ยูโตะ (Yuto)', 'สถานะ: ปกติ | สังกัด: ชมรมวิจัยภูตผี', 'มีความสามารถในการรับรู้คลื่นพลังงานวิญญาณระยะไกล มักจะอยู่แถวอาคารเก่าหลังโรงเรียนเป็นประจำ')">
                 <div class="card-tag">👤 DIRECTORY</div>
                 <div class="card-title">Ushinawa Kyuseishu personal list</div>
-                <p class="card-desc">รวบรวมข้อมูลโปรไฟล์ รายชื่อ และสถานะของตัวละครในคอมมู Ushinawa Kyuseishu ทั้งหมด</p>
+                <p class="card-desc">คลิกเพื่อเปิดดูรายชื่อและข้อมูลโปรไฟล์ตัวละครในคอมมู...</p>
             </div>
         </div>
 
-        <!-- หมวดที่ 4: ระบบรายงานเหตุการณ์ -->
+        <!-- หมวดที่ 4: ระบบรายงานเหตุการณ์ (มีช่องให้กรอกส่งข้อมูล) -->
         <div id="tab4" class="tab-content">
             <div class="card" style="border-left-color: #ff4d4d;">
                 <div class="card-tag">📥 แจ้งเบาะแส / ส่งรายงาน</div>
                 <div class="card-title">ส่งเรื่องราวหรือเหตุผิดปกติให้แอดมิน</div>
                 <p class="card-desc">หากพบเจอเหตุการณ์แปลกปลอมในหมู่บ้าน สามารถส่งข้อมูลให้ผู้ตรวจสอบเพื่อทำเรื่องเผยแพร่เป็นประกาศได้ที่นี่</p>
+                
+                <form class="report-form" onsubmit="handleReport(event)">
+                    <input type="text" class="report-input" placeholder="นามแฝง / ชื่อตัวละคร OC" required>
+                    <textarea class="report-textarea" placeholder="ระบุรายละเอียดเหตุการณ์ที่พบเจอ..." required></textarea>
+                    <button type="submit" class="submit-btn">ส่งรายงาน</button>
+                </form>
             </div>
         </div>
 
@@ -195,7 +327,17 @@
         </div>
     </div>
 
-    <!-- สคริปต์สำหรับกดเปลี่ยนแท็บเมนู -->
+    <!-- Modal หน้าต่างเด้งแสดงข้อมูลโปรไฟล์ OC -->
+    <div id="modal">
+        <div class="modal-content">
+            <h3 id="modal-title" style="color:#ff4d4d; margin-top:0;">หัวข้อ</h3>
+            <p id="modal-subtitle" style="font-weight:600; color:#fff; font-size:12px;"></p>
+            <p id="modal-desc" style="color:#ccc; font-size:12px; line-height:1.4;"></p>
+            <button class="close-modal" onclick="closeModal()">ปิดหน้าต่าง</button>
+        </div>
+    </div>
+
+    <!-- สคริปต์การทำงาน -->
     <script>
         function switchTab(evt, tabName) {
             let contents = document.getElementsByClassName("tab-content");
@@ -208,6 +350,38 @@
             }
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.classList.add("active");
+        }
+
+        function openModal(title, subtitle, desc) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-subtitle').innerText = subtitle;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        function setAlertLevel(level) {
+            let btns = document.getElementsByClassName('level-btn');
+            for(let b of btns) b.classList.remove('active');
+            event.currentTarget.classList.add('active');
+            
+            let container = document.querySelector('.container');
+            if(level === 'normal') {
+                container.style.borderColor = '#800517';
+            } else if(level === 'warning') {
+                container.style.borderColor = '#ffaa00';
+            } else if(level === 'danger') {
+                container.style.borderColor = '#ff4d4d';
+            }
+        }
+
+        function handleReport(e) {
+            e.preventDefault();
+            alert('ส่งรายงานเรียบร้อย! ข้อมูลถูกบันทึกเข้าสู่ระบบส่วนกลางแล้ว');
+            e.target.reset();
         }
     </script>
 </body>
