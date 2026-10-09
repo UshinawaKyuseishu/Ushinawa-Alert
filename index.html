@@ -41,7 +41,7 @@
             100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
         }
 
-        /* หน้าจอ Login / Register (ระบบฐานข้อมูลจำลอง) */
+        /* หน้าจอ Login / Register */
         #auth-screen {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -108,7 +108,7 @@
             text-decoration: underline;
         }
 
-        /* โครงสร้างแอปหลัก (เต็มจอ) */
+        /* โครงสร้างแอปหลัก */
         #app-container {
             display: none;
             flex-direction: column;
@@ -119,7 +119,7 @@
             z-index: 2;
         }
 
-        /* Header ดีไซน์สมจริง */
+        /* Header */
         header {
             background: #110000;
             border-bottom: 2px solid #800517;
@@ -170,7 +170,7 @@
             margin-left: 5px;
         }
 
-        /* แถบสถานะระบบสดด้านใต้ Header */
+        /* แถบสถานะระบบสด */
         .status-ticker {
             background: #1a0202;
             border-bottom: 1px solid #330000;
@@ -216,7 +216,7 @@
             align-items: center;
         }
 
-        /* แถบเมนูด้านบน (เพิ่มแท็บห้องแชทและปฏิทินเทศกาล) */
+        /* เมนูแท็บ */
         .nav-tabs {
             display: flex;
             gap: 6px;
@@ -254,7 +254,6 @@
             100% { opacity: 1; }
         }
 
-        /* ซ่อน/แสดงหน้าเนื้อหา */
         .tab-content {
             display: none;
         }
@@ -262,7 +261,7 @@
             display: block;
         }
 
-        /* การ์ดเนื้อหา */
+        /* การ์ดข่าวสาร / ภัยพิบัติ */
         .card {
             background: #140202;
             border: 1px solid #330000;
@@ -291,6 +290,15 @@
             color: #cccccc;
             margin: 0 0 10px 0;
             line-height: 1.5;
+        }
+        .archive-year {
+            font-size: 10px;
+            color: #884444;
+            background: #220000;
+            padding: 2px 6px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 5px;
         }
 
         /* ปุ่ม Interactive ภายใน Card */
@@ -327,7 +335,7 @@
             border-color: #058005;
         }
 
-        /* แผงเช็กอินสถานะผู้ใช้ */
+        /* แผงเช็กอิน */
         .user-status-panel {
             background: #180303;
             border: 1px solid #550000;
@@ -358,7 +366,7 @@
             color: #000;
         }
 
-        /* ระบบห้องแชทคอมมูเรียลไทม์ */
+        /* ห้องแชท */
         .chat-container {
             background: #110000;
             border: 1px solid #440000;
@@ -453,7 +461,7 @@
             margin: 2px 0 5px 0;
         }
 
-        /* เอฟเฟกต์บัค / แฮก (แท็บความลับ) */
+        /* แท็บความลับ */
         .glitch-card {
             background: #1c0000;
             border: 1px dashed #ff4d4d;
@@ -490,7 +498,6 @@
             text-decoration: line-through;
         }
 
-        /* Footer ด้านล่างสุด */
         footer {
             text-align: center;
             font-size: 11px;
@@ -502,7 +509,7 @@
     </style>
 </head>
 <body>
-    <!-- เอฟเฟกต์กลีบดอกไม้โปรยทั่วจอ -->
+    <!-- เอฟเฟกต์กลีบดอกไม้โปรย -->
     <script>
         for (let i = 0; i < 15; i++) {
             let p = document.createElement('div');
@@ -517,7 +524,7 @@
         }
     </script>
 
-    <!-- หน้าจอ Login / Register (ระบบฐานข้อมูลในตัว) -->
+    <!-- หน้าจอ Login / Register -->
     <div id="auth-screen">
         <div class="auth-box">
             <h2 id="auth-title">USHINAWA EMERGENCY NET</h2>
@@ -531,7 +538,7 @@
         </div>
     </div>
 
-    <!-- หน้าจอแอปพลิเคชันหลัก (เต็มจอ) -->
+    <!-- หน้าจอแอปหลัก -->
     <div id="app-container">
         <header>
             <div class="app-brand-area">
@@ -546,28 +553,26 @@
             </div>
         </header>
 
-        <!-- แถบสถานะระบบสดด้านบน -->
         <div class="status-ticker">
-            <span><span class="live-dot"></span> สภาพอากาศเมือง: หมอกหนาและอุณหภูมิลดฮวบ / เฝ้าระวังวิญญาณ</span>
+            <span><span class="live-dot"></span> สภาพอากาศ: หมอกลงจัด / เฝ้าระวังภัยพิบัติและเงาผิดปกติ</span>
             <span id="system-time">00:00:00</span>
         </div>
 
         <main>
             <h1>
                 <span>ศูนย์กลางเครือข่ายอุชินาวะ</span>
-                <span style="font-size: 11px; color: #885555; font-weight: normal;">Live Commu</span>
+                <span style="font-size: 11px; color: #885555; font-weight: normal;">Archive & Live</span>
             </h1>
 
-            <!-- เมนูแท็บหลัก (รวมภัยพิบัติ, สิ่งแปลกปลอม, แชทคอมมู, ปฏิทินเทศกาล, และแท็บลับ) -->
             <div class="nav-tabs">
-                <button class="tab-btn active" onclick="switchTab(event, 'tab1')">🚨 ภัยพิบัติ</button>
+                <button class="tab-btn active" onclick="switchTab(event, 'tab1')">🚨 ภัยพิบัติ & ข่าวสาร</button>
                 <button class="tab-btn" onclick="switchTab(event, 'tab2')">👁️ สิ่งแปลกปลอม</button>
                 <button class="tab-btn" onclick="switchTab(event, 'tab3')">💬 ห้องแชท</button>
                 <button class="tab-btn" onclick="switchTab(event, 'tab4')">📅 ปฏิทินเมือง</button>
                 <button class="tab-btn glitch-tab" onclick="switchTab(event, 'tab5')">⚠️ ERR_404</button>
             </div>
             
-            <!-- หมวดที่ 1: แจ้งเตือนภัยพิบัติและประจำวัน -->
+            <!-- หมวดที่ 1: แจ้งเตือนภัยพิบัติ และคลังข่าวสารย้อนหลังตั้งแต่ยุคอินเทอร์เน็ตเริ่มเข้ามา -->
             <div id="tab1" class="tab-content active">
                 <div class="user-status-panel">
                     <div>
@@ -577,7 +582,10 @@
                     <button class="checkin-btn" onclick="toggleCheckIn()" id="checkin-btn-text">เช็กอินว่าปลอดภัย</button>
                 </div>
 
+                <h3 style="color: #ff4d4d; font-size: 14px; margin: 15px 0 10px 0;">📰 คลังข่าวสารและบันทึกเหตุการณ์ย้อนหลัง (Archive)</h3>
+
                 <div class="card" style="border-left-color: #ff4d4d;">
+                    <span class="archive-year">ปี ค.ศ. 2026 (ปัจจุบัน)</span>
                     <div class="card-tag">🚨 [ภัยพิบัติฉุกเฉิน] เขตอุโมงค์ทางรถไฟ</div>
                     <div class="card-title">ประกาศเตือน: เสียงกระดิ่งปริศนาและภัยกระจกสะท้อน</div>
                     <p class="card-desc">รายงานเหตุการณ์ระทึกขวัญในพื้นที่ พบเสียงเด็กร้องไห้และเสียงกระดิ่งกังวานยามวิกาล ห้ามส่องกระจกหลังเที่ยงคืนเด็ดขาด</p>
@@ -588,13 +596,28 @@
                 </div>
 
                 <div class="card" style="border-left-color: #ffaa00;">
-                    <div class="card-tag">⚠️ [ประกาศประจำวัน] สภาพอากาศ & ภัยพิบัติธรรมชาติ</div>
-                    <div class="card-title">ประกาศเตือนภัยน้ำท่วมเฉียบพลันและไฟไหม้ป่า</div>
-                    <p class="card-desc">เนื่องจากพายุฝนฟ้าคะนองรุนแรงและการเปลี่ยนแปลงของเขตอาคม ส่งผลให้เกิดน้ำท่วมขังในย่านต่ำและเสี่ยงเกิดประกายไฟ ขอให้ทุกท่านระมัดระวังฟืนไฟเป็นพิเศษ</p>
+                    <span class="archive-year">ปี ค.ศ. 2022</span>
+                    <div class="card-tag">⚠️ [ประกาศประจำวัน] ภัยธรรมชาติและข่าวลือ</div>
+                    <div class="card-title">เหตุการณ์น้ำท่วมเฉียบพลันและไฟไหม้ป่ารอบหมู่บ้าน</div>
+                    <p class="card-desc">พายุฝนกระหน่ำส่งผลให้น้ำท่วมย่านการค้าเก่า พร้อมเกิดเหตุเพลิงไหม้ปริศนาบริเวณชายป่า ชาวบ้านต่างลือกันว่าเห็นเงาร่างคนเดินฝ่าเปลวไฟโดยไม่ได้รับอันตราย</p>
                     <div class="card-action-bar">
                         <span class="action-info">ผู้รับทราบประกาศ: <strong id="count-2">98</strong> คน</span>
                         <button class="interact-btn" onclick="ackAlert(this, 'count-2')">รับทราบคำเตือน</button>
                     </div>
+                </div>
+
+                <div class="card" style="border-left-color: #cc6666;">
+                    <span class="archive-year">ปี ค.ศ. 2011</span>
+                    <div class="card-tag">📜 [บันทึกประวัติศาสตร์] ยุคหลังแผ่นดินไหวครั้งใหญ่</div>
+                    <div class="card-title">ประกาศควบคุมการใช้น้ำและไฟ หลังเกิดอาฟเตอร์ช็อกรุนแรง</div>
+                    <p class="card-desc">ประกาศจากทางการเมืองอุชินาวะให้ทุกครัวเรือนสำรองน้ำและระวังภัยไฟไหม้ลุกลาม มีรายงานชาวบ้านได้ยินเสียงเด็กร้องไห้มาจากท่อระบายน้ำร้างช่วงไฟฟ้าดับทั่วเมือง</p>
+                </div>
+
+                <div class="card" style="border-left-color: #884444;">
+                    <span class="archive-year">ปี ค.ศ. 2004</span>
+                    <div class="card-tag">💾 [กระดานข่าวเก่า] ยุคเริ่มต้นอินเทอร์เน็ตไดอัลอัพ</div>
+                    <div class="card-title">กระดานเตือนภัย: ระวังเสียงกระดิ่งและเงาผิดรูปในกระจก</div>
+                    <p class="card-desc">บันทึกยุคแรกเริ่มที่ระบบเครือข่ายท้องถิ่นถูกติดตั้ง เตือนภัยชาวบ้านเรื่องกระจกโบราณตามบ้านเรือนที่สะท้อนภาพผิดเพี้ยน และห้ามออกนอกบ้านยามวิกาลหากได้ยินเสียงกระดิ่งลม</p>
                 </div>
             </div>
 
@@ -621,257 +644,5 @@
                 </div>
             </div>
 
-            <!-- หมวดที่ 3: ห้องแชทคอมมูเรียลไทม์ (ใช้งานได้จริง) -->
-            <div id="tab3" class="tab-content">
-                <div class="chat-container">
-                    <div class="chat-messages" id="chat-messages-box">
-                        <!-- ข้อความแชทจะถูกโหลดผ่าน JS -->
-                    </div>
-                    <div class="chat-input-area">
-                        <input type="text" id="chat-input-field" class="chat-input" placeholder="พิมพ์ข้อความพูดคุยในคอมมู..." autocomplete="off">
-                        <button class="chat-send-btn" onclick="sendChatMessage()">ส่ง</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- หมวดที่ 4: ปฏิทินเทศกาลเมืองอุชินาวะ -->
-            <div id="tab4" class="tab-content">
-                <h3 style="color: #ff4d4d; font-size: 15px; margin-top: 0;">📅 ปฏิทินเทศกาล & วันสำคัญเมืองอุชินาวะ</h3>
-                
-                <div class="festival-card">
-                    <div class="festival-date">14 เมษายน</div>
-                    <div class="festival-name">วันเงาแรก (影始めの日)</div>
-                    <p class="card-desc" style="margin:0;">ห้ามเดินข้างกำแพงหรือตรอกหลังพระอาทิตย์ตก เด็กพกกระดิ่งที่เอว ศาลเจ้าตะวันตกจุดไฟพิธีถึงรุ่งเช้า</p>
-                </div>
-
-                <div class="festival-card">
-                    <div class="festival-date">5 พฤษภาคม</div>
-                    <div class="festival-name">เทศกาลสายลมโบราณ (古風祭)</div>
-                    <p class="card-desc" style="margin:0;">ธงลมสัตว์ตำนานท้องถิ่น ขบวนโยไคจากนักเรียน เรียวกัง/ออนเซ็นเปิดบริการฟรีช่วงพิเศษ</p>
-                </div>
-
-                <div class="festival-card">
-                    <div class="festival-date">20 กรกฎาคม</div>
-                    <div class="festival-name">คืนแห่งโคมเงา (影灯しの夜)</div>
-                    <p class="card-desc" style="margin:0;">บ้านจุดโคมกระดาษหน้าประตู ย่านโคมแดงจัดขบวนโคมเต้นรำ แจกขนม "เก็นมะอิ" (ข้าวปิ้งรูปเงาคน)</p>
-                </div>
-
-                <div class="festival-card">
-                    <div class="festival-date">1 กันยายน</div>
-                    <div class="festival-name">วันห้ามเงาสะท้อน (影封じ)</div>
-                    <p class="card-desc" style="margin:0;">ห้ามส่องกระจก น้ำ หรือหน้าจอ หลัง 22:22 ศาลเจ้าตะวันออกผูกริบบิ้นสีดำ ร้านสะดวกซื้อคลุมตู้แช่ด้วยผ้าสีม่วง</p>
-                </div>
-
-                <div class="festival-card">
-                    <div class="festival-date">13 ธันวาคม</div>
-                    <div class="festival-name">คืนรอยต่อสองโลก (逢間の夜)</div>
-                    <p class="card-desc" style="margin:0;">คนตายและคนเป็นอาจพบกันในเงา จุดเทียน วางดอกไม้หน้าบ้าน ศาลเจ้าเปิดให้เขียนคำอธิษฐานส่งถึงวิญญาณ</p>
-                </div>
-            </div>
-
-            <!-- หมวดที่ 5: ระบบรวน / บัค (แท็บความลับ) -->
-            <div id="tab5" class="tab-content">
-                <div class="glitch-card">
-                    <div class="card-tag glitch-text">⚠️ CRITICAL_ERR // OVERRIDE_DATA</div>
-                    <div class="card-title" style="color: #ff4d4d;">ไฟล์ข้อมูล<span class="corrupted">ถูกเขียนทับ</span> / บันทึกที่สูญหาย</div>
-                    <p class="card-desc glitch-text">
-                        ...พิกัด... <span class="corrupted">ไม่สามารถระบุได้</span> ...สัญญาณชีพจากเป้าหมายขาดหาย... ค้นหาสิ่งที่ถูกซ่อนไว้ลึก <span class="corrupted">███████</span> 
-                        <br><br>...หากค้นพบสิ่งที่หลบซ่อนอยู่นั้นแล้ว จง<span class="corrupted" style="color: #ff0000; font-weight: bold;">เผามันให้สิ้นเสีย</span>...
-                    </p>
-                </div>
-
-                <div class="glitch-card" style="animation-delay: 0.5s;">
-                    <div class="card-tag glitch-text" style="color: #ff0055;">⚠️ WARNING // KERNEL_PANIC_09</div>
-                    <div class="card-title" style="color: #ff6666;">เสียงกระซิบจาก<span class="corrupted">ฟากฝั่งนั้น</span></div>
-                    <p class="card-desc" style="color: #bbb; font-family: monospace;">
-                        [SYSTEM ERROR]: เซิร์ฟเวอร์หลักตอบสนองผิดปกติ... 
-                        <br><span class="corrupted">"ใครเป็นคนเปิดประตูรึเปล่า...?"</span> 
-                        <br>ตรวจสอบพบการรั่วไหลของอาคมบริเวณพิกัด 0-0-Kyu... โปรดระวังเงาที่สะท้อนในกระจกหลังเที่ยงคืน...
-                    </p>
-                </div>
-            </div>
-        </main>
-
-        <footer>
-            Ushinawa Kyuseishu Community Network &bull; Emergency Response System
-        </footer>
-    </div>
-
-    <!-- สคริปต์ควบคุมฐานข้อมูลผู้ใช้, แชท และระบบ Interactive -->
-    <script>
-        // อัปเดตเวลาเรียลไทม์
-        setInterval(() => {
-            const now = new Date();
-            document.getElementById('system-time').innerText = now.toLocaleTimeString('th-TH');
-        }, 1000);
-
-        let isRegisterMode = false;
-
-        // ตรวจสอบสถานะการล็อกอินเมื่อโหลดหน้าเว็บ
-        window.onload = function() {
-            let currentUser = localStorage.getItem('ushinaig_current_user');
-            if(currentUser) {
-                document.getElementById('display-user').innerText = currentUser;
-                document.getElementById('auth-screen').style.display = 'none';
-                document.getElementById('app-container').style.display = 'flex';
-                loadChatMessages();
-            }
-        }
-
-        function toggleAuthMode() {
-            isRegisterMode = !isRegisterMode;
-            let title = document.getElementById('auth-title');
-            let desc = document.getElementById('auth-desc');
-            let btn = document.getElementById('auth-submit-btn');
-            let switchText = document.getElementById('auth-switch-text');
-
-            if(isRegisterMode) {
-                title.innerText = "ลงทะเบียนสมาชิกใหม่";
-                desc.innerText = "สร้างบัญชีผู้ใช้สำหรับเข้าสู่ระบบเครือข่ายอุชินาวะ";
-                btn.innerText = "สมัครสมาชิก";
-                switchText.innerText = "มีบัญชีอยู่แล้ว? เข้าสู่ระบบ";
-            } else {
-                title.innerText = "USHINAWA EMERGENCY NET";
-                desc.innerText = "กรุณากรอกชื่อผู้ใช้และรหัสผ่านเพื่อเข้าสู่ระบบ";
-                btn.innerText = "เข้าสู่ระบบ";
-                switchText.innerText = "ยังไม่มีบัญชี? สมัครสมาชิกใหม่";
-            }
-        }
-
-        // ระบบฐานข้อมูลผู้ใช้จำลองด้วย LocalStorage
-        function handleAuth(e) {
-            e.preventDefault();
-            let user = document.getElementById('auth-user').value.trim();
-            let pass = document.getElementById('auth-pass').value.trim();
-
-            if(!user || !pass) return;
-
-            let usersDB = JSON.parse(localStorage.getItem('ushinaig_users_db') || '{}');
-
-            if(isRegisterMode) {
-                if(usersDB[user]) {
-                    alert("ชื่อผู้ใช้นี้ถูกใช้งานแล้ว กรุณาใช้ชื่ออื่น");
-                    return;
-                }
-                usersDB[user] = pass;
-                localStorage.setItem('ushinaig_users_db', JSON.stringify(usersDB));
-                alert("สมัครสมาชิกสำเร็จ! กรุณาเข้าสู่ระบบ");
-                toggleAuthMode();
-            } else {
-                if(usersDB[user] && usersDB[user] === pass) {
-                    localStorage.setItem('ushinaig_current_user', user);
-                    document.getElementById('display-user').innerText = user;
-                    document.getElementById('auth-screen').style.display = 'none';
-                    document.getElementById('app-container').style.display = 'flex';
-                    loadChatMessages();
-                } else {
-                    alert("ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง");
-                }
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem('ushinaig_current_user');
-            location.reload();
-        }
-
-        function switchTab(evt, tabName) {
-            let contents = document.getElementsByClassName("tab-content");
-            for (let i = 0; i < contents.length; i++) {
-                contents[i].classList.remove("active");
-            }
-            let buttons = document.getElementsByClassName("tab-btn");
-            for (let i = 0; i < buttons.length; i++) {
-                buttons[i].classList.remove("active");
-            }
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
-            
-            if(tabName === 'tab3') {
-                let box = document.getElementById('chat-messages-box');
-                box.scrollTop = box.scrollHeight;
-            }
-        }
-
-        // ระบบเช็กอินความปลอดภัย
-        let isCheckedIn = false;
-        function toggleCheckIn() {
-            isCheckedIn = !isCheckedIn;
-            let statusText = document.getElementById('my-safety-status');
-            let btnText = document.getElementById('checkin-btn-text');
-            if(isCheckedIn) {
-                statusText.innerHTML = "✅ ปลอดภัย (เช็กอินเมื่อ " + new Date().toLocaleTimeString('th-TH', {hour: '2-digit', minute:'2-digit'}) + " น.)";
-                statusText.style.color = "#4dff4d";
-                btnText.innerText = "ยกเลิกเช็กอิน";
-                btnText.style.background = "#330000";
-            } else {
-                statusText.innerHTML = "⚠️ ยังไม่ได้เช็กอินยืนยันตัวตน";
-                statusText.style.color = "#ffaa00";
-                btnText.innerText = "เช็กอินว่าปลอดภัย";
-                btnText.style.background = "#800517";
-            }
-        }
-
-        // ระบบรับทราบประกาศ
-        function ackAlert(btn, countId) {
-            if(!btn.classList.contains('checked')) {
-                let counter = document.getElementById(countId);
-                counter.innerText = parseInt(counter.innerText) + 1;
-                btn.innerText = "รับทราบแล้ว ✓";
-                btn.classList.add('checked');
-            }
-        }
-
-        // ระบบรายงานสิ่งแปลกปลอม
-        function confirmSighting(countId) {
-            let counter = document.getElementById(countId);
-            counter.innerText = parseInt(counter.innerText) + 1;
-            alert("บันทึกการยืนยันพิกัดเข้าสู่ระบบส่วนกลางเรียบร้อย");
-        }
-
-        // ระบบห้องแชทร่วมกัน (บันทึกใน LocalStorage)
-        function loadChatMessages() {
-            let box = document.getElementById('chat-messages-box');
-            let messages = JSON.parse(localStorage.getItem('ushinaig_chat_msgs') || '[]');
-            
-            if(messages.length === 0) {
-                messages = [
-                    {user: 'ระบบกลาง', text: 'ยินดีต้อนรับสู่เครือข่ายสื่อสารฉุกเฉินอุชินาวะ โปรดระวังตัวยามค่ำคืน', time: '00:00'}
-                ];
-            }
-
-            box.innerHTML = '';
-            messages.forEach(msg => {
-                let div = document.createElement('div');
-                div.className = 'chat-msg';
-                div.innerHTML = `<div class="chat-user">${msg.user}</div><div class="chat-text">${msg.text}</div><div class="chat-time">${msg.time}</div>`;
-                box.appendChild(div);
-            });
-            box.scrollTop = box.scrollHeight;
-        }
-
-        function sendChatMessage() {
-            let input = document.getElementById('chat-input-field');
-            let text = input.value.trim();
-            if(!text) return;
-
-            let currentUser = localStorage.getItem('ushinaig_current_user') || 'ผู้ใช้งาน';
-            let time = new Date().toLocaleTimeString('th-TH', {hour: '2-digit', minute:'2-digit'});
-
-            let messages = JSON.parse(localStorage.getItem('ushinaig_chat_msgs') || '[]');
-            messages.push({user: currentUser, text: text, time: time});
-            localStorage.setItem('ushinaig_chat_msgs', JSON.stringify(messages));
-
-            input.value = '';
-            loadChatMessages();
-        }
-
-        // กด Enter เพื่อส่งแชท
-        document.getElementById('chat-input-field').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                sendChatMessage();
-            }
-        });
-    </script>
-</body>
-</html>
+            <!-- หมวดที่ 3: ห้องแชท -->
+            <div id="tab3" class="tab-content
