@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ushinawa Kyuseishu Academy - ระบบแจ้งเตือน</title>
-    <!-- ดึงฟอนต์ Noto Sans Thai จาก Google Fonts -->
+    <title>Ushinawa Kyuseishu Academy - ระบบส่วนกลาง</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -23,7 +22,7 @@
         .container {
             background: #110000;
             border: 2px solid #800517;
-            padding: 25px;
+            padding: 20px;
             border-radius: 16px;
             box-shadow: 0 8px 25px rgba(128, 5, 23, 0.4);
             max-width: 500px;
@@ -34,8 +33,8 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #330000;
-            padding-bottom: 12px;
-            margin-bottom: 15px;
+            padding-bottom: 10px;
+            margin-bottom: 12px;
         }
         .school-title {
             font-size: 11px;
@@ -53,29 +52,30 @@
         }
         h1 {
             color: #ff4d4d;
-            margin: 0 0 15px 0;
+            margin: 0 0 12px 0;
             text-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
         }
-        /* แถบเมนูด้านบน (Tabs) */
+        /* แถบเมนูด้านบน */
         .nav-tabs {
             display: flex;
-            gap: 8px;
-            margin-bottom: 20px;
+            gap: 5px;
+            margin-bottom: 15px;
             border-bottom: 1px solid #330000;
             padding-bottom: 10px;
+            overflow-x: auto;
         }
         .tab-btn {
             background: #1a0505;
             color: #cc6666;
             border: 1px solid #330000;
-            padding: 6px 12px;
+            padding: 6px 10px;
             border-radius: 6px;
-            font-size: 13px;
+            font-size: 12px;
             cursor: pointer;
             font-family: 'Noto Sans Thai', sans-serif;
-            transition: all 0.2s;
+            white-space: nowrap;
         }
         .tab-btn.active {
             background: #660000;
@@ -83,84 +83,132 @@
             border-color: #800517;
             font-weight: 600;
         }
-        /* กล่องประกาศสถานการณ์ */
-        .alert-card {
-            background: #1a0505;
-            border-left: 5px solid #ff4d4d;
-            border-top: 1px solid #330000;
-            border-right: 1px solid #330000;
-            border-bottom: 1px solid #330000;
-            padding: 15px;
-            border-radius: 6px;
-            margin-bottom: 15px;
+        /* ซ่อน/แสดงหน้าเนื้อหา */
+        .tab-content {
+            display: none;
         }
-        .alert-tag {
+        .tab-content.active {
+            display: block;
+        }
+        /* การ์ดเนื้อหา */
+        .card {
+            background: #1a0505;
+            border: 1px solid #330000;
+            border-left-width: 4px;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+        .card-tag {
             font-size: 11px;
             color: #ff4d4d;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
             font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 5px;
         }
-        .alert-tag::before {
-            content: '';
-            display: inline-block;
-            width: 6px;
-            height: 6px;
-            background-color: #ff4d4d;
-            border-radius: 50%;
-        }
-        .alert-title {
-            font-size: 16px;
+        .card-title {
+            font-size: 15px;
             font-weight: 700;
             color: #ffffff;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
-        .alert-desc {
-            font-size: 13px;
+        .card-desc {
+            font-size: 12px;
             color: #d0d0d0;
             margin: 0;
-            line-height: 1.5;
+            line-height: 1.4;
         }
         .footer {
             font-size: 11px;
             color: #777777;
-            margin-top: 20px;
+            margin-top: 15px;
             border-top: 1px solid #220000;
-            padding-top: 10px;
+            padding-top: 8px;
             text-align: center;
-            font-weight: 300;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- ส่วนหัวของระบบ -->
         <div class="header-top">
             <div class="school-title">USHINAWA ACADEMY</div>
-            <div class="system-badge">SYSTEM</div>
+            <div class="system-badge">ONLINE</div>
         </div>
 
-        <h1>ประกาศสถานการณ์</h1>
+        <h1>ระบบข้อมูลส่วนกลาง</h1>
 
-        <!-- แถบเมนูด้านบน (Tabs) -->
+        <!-- เมนูปุ่มกดเปลี่ยนหมวดหมู่ -->
         <div class="nav-tabs">
-            <button class="tab-btn active">🔴 ประกาศ</button>
-            <button class="tab-btn">📋 รายงานเหตุ</button>
-            <button class="tab-btn">🗂️ ข้อมูล</button>
+            <button class="tab-btn active" onclick="switchTab(event, 'tab1')">🔴 แจ้งเตือน</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab2')">📋 บอร์ดข่าว</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab3')">🗂️ Personal List</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tab4')">📝 ส่งรายงาน</button>
         </div>
         
-        <!-- เนื้อหาการแจ้งเตือน -->
-        <div class="alert-card">
-            <div class="alert-tag">เฝ้าระวัง • พื้นที่เขตหวงห้าม</div>
-            <div class="alert-title">[แจ้งเตือน] รายงานเหตุผิดปกติในอาคารเรียน</div>
-            <p class="alert-desc">ประกาศจากฝ่ายปกครองโรงเรียน: ตรวจพบความผิดปกติบริเวณเขตหอพัก ขอให้ลูกบ้านทุกท่านโปรดระมัดระวังและติดตามข่าวสารอย่างใกล้ชิด</p>
+        <!-- หมวดที่ 1: ระบบแจ้งเตือนสถานการณ์ -->
+        <div id="tab1" class="tab-content active">
+            <div class="card" style="border-left-color: #ff4d4d;">
+                <div class="card-tag">🚨 [ฉุกเฉิน] เขตหวงห้าม</div>
+                <div class="card-title">ประกาศปิดกั้นเขตหอพักชั่วคราว</div>
+                <p class="card-desc">เนื่องจากตรวจพบความผิดปกติทางพลังงาน ขอให้ผู้พักอาศัยทุกท่านงดเข้าออกในพื้นที่ดังกล่าวจนกว่าจะมีคำสั่งเปลี่ยนแปลง</p>
+            </div>
+            <div class="card" style="border-left-color: #ffaa00;">
+                <div class="card-tag">⚠️ [เฝ้าระวัง] อาคารเรียน</div>
+                <div class="card-title">พบร่องรอยโยไคผิดปกติ</div>
+                <p class="card-desc">รายงานจากสภานักเรียน พบร่องรอยพลังงานต้องสงสัยบริเวณชั้น 3 อาคารเรียนหลัก โปรดระมัดระวังในการเดินทางคนเดียว</p>
+            </div>
+        </div>
+
+        <!-- หมวดที่ 2: กระดานประกาศโรงเรียน -->
+        <div id="tab2" class="tab-content">
+            <div class="card" style="border-left-color: #cc6666;">
+                <div class="card-tag">🏫 สภานักเรียน</div>
+                <div class="card-title">ตารางกิจกรรมประจำสัปดาห์</div>
+                <p class="card-desc">ตรวจสอบตารางเรียนพิเศษและกิจกรรมชุมนุมได้ที่บอร์ดประชาสัมพันธ์หลักของแต่ละอาคาร</p>
+            </div>
+            <div class="card" style="border-left-color: #cc6666;">
+                <div class="card-tag">🔍 ตามหาของหาย</div>
+                <div class="card-title">ประกาศตามหาเครื่องรางประจำตัว</div>
+                <p class="card-desc">พบเครื่องรางตกอยู่บริเวณโรงอาหาร ใครเป็นเจ้าของติดต่อรับคืนได้ที่ห้องสภานักเรียน</p>
+            </div>
+        </div>
+
+        <!-- หมวดที่ 3: Ushinawa Kyuseishu personal list -->
+        <div id="tab3" class="tab-content">
+            <div class="card" style="border-left-color: #800517;">
+                <div class="card-tag">👤 DIRECTORY</div>
+                <div class="card-title">Ushinawa Kyuseishu personal list</div>
+                <p class="card-desc">รวบรวมข้อมูลโปรไฟล์ รายชื่อ และสถานะของตัวละครในคอมมู Ushinawa Kyuseishu ทั้งหมด</p>
+            </div>
+        </div>
+
+        <!-- หมวดที่ 4: ระบบรายงานเหตุการณ์ -->
+        <div id="tab4" class="tab-content">
+            <div class="card" style="border-left-color: #ff4d4d;">
+                <div class="card-tag">📥 แจ้งเบาะแส / ส่งรายงาน</div>
+                <div class="card-title">ส่งเรื่องราวหรือเหตุผิดปกติให้แอดมิน</div>
+                <p class="card-desc">หากผู้เล่นพบเจอเหตุการณ์แปลกปลอมในคอมมู สามารถส่งข้อมูลให้ผู้ตรวจสอบเพื่อทำเรื่องเผยแพร่เป็นประกาศได้ที่นี่</p>
+            </div>
         </div>
 
         <div class="footer">
-            ระบบแจ้งเตือนอัตโนมัติ • Ushinawa Kyuseishu
+            Ushinawa Kyuseishu Community Network
         </div>
     </div>
+
+    <!-- สคริปต์สำหรับกดเปลี่ยนแท็บเมนู -->
+    <script>
+        function switchTab(evt, tabName) {
+            let contents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+            let buttons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
 </body>
 </html>
