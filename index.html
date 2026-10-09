@@ -3,519 +3,427 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ushinawa Kyuseishu - Emergency Network</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Ushinawa-Alert | ระบบเตือนภัยและชุมชนอุชินาวะ คิวเซชู</title>
     <style>
-        * { box-sizing: border-box; }
+        :root {
+            --bg-color: #000000;
+            --card-bg: #0a0a0a;
+            --accent-red: #800517;
+            --bright-red: #ff4d4d;
+            --text-main: #e0e0e0;
+            --text-muted: #888888;
+            --border-color: #220005;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Courier New', Courier, monospace, sans-serif;
+        }
+
         body {
-            font-family: 'Noto Sans Thai', sans-serif, Arial;
-            background-color: #000000;
-            color: #ffffff;
-            margin: 0; padding: 0;
-            width: 100vw; min-height: 100vh;
-            overflow-x: hidden; position: relative;
-            display: flex; flex-direction: column;
-        }
-        .petal {
-            position: fixed; background-color: #ff4d4d;
-            border-radius: 150% 0 150% 0; opacity: 0.5;
-            animation: fall linear infinite; z-index: 1; pointer-events: none;
-        }
-        @keyframes fall {
-            0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.7; }
-            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
-        #app-container {
-            display: flex; flex-direction: column; width: 100%; min-height: 100vh;
-            background: #0d0000; position: relative; z-index: 2;
-        }
         header {
-            background: #110000; border-bottom: 2px solid #800517;
-            padding: 10px 15px; display: flex; justify-content: space-between; align-items: center;
-            position: sticky; top: 0; z-index: 10;
+            border-bottom: 2px solid var(--accent-red);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 0, 0, 0.9);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
-        .app-brand-area { display: flex; flex-direction: column; }
-        .app-brand { font-size: 13px; color: #ff4d4d; letter-spacing: 1px; font-weight: 700; }
-        .app-sub { font-size: 10px; color: #995555; }
-        .header-right { display: flex; align-items: center; gap: 8px; }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-area h1 {
+            font-size: 1.2rem;
+            color: var(--bright-red);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
         .user-badge {
-            background: #800517; color: #ff4d4d; font-size: 11px;
-            padding: 4px 10px; border-radius: 20px; font-weight: 600;
-            border: 1px solid #ff4d4d; display: flex; align-items: center; gap: 5px;
+            background: #1a0003;
+            border: 1px solid var(--accent-red);
+            padding: 5px 10px;
+            font-size: 0.85rem;
+            color: var(--bright-red);
+            border-radius: 4px;
         }
 
-        .status-ticker {
-            background: #1a0202; border-bottom: 1px solid #330000;
-            padding: 6px 15px; font-size: 11px; color: #cc6666;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .live-dot {
-            height: 8px; width: 8px; background-color: #ff4d4d; border-radius: 50%;
-            display: inline-block; box-shadow: 0 0 8px #ff4d4d; animation: pulse-dot 1.5s infinite;
-        }
-        @keyframes pulse-dot {
-            0% { transform: scale(0.95); opacity: 0.8; }
-            50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 12px #ff0000; }
-            100% { transform: scale(0.95); opacity: 0.8; }
+        /* Weather Widget Style */
+        .weather-banner {
+            background: #0f0507;
+            border-bottom: 1px solid var(--accent-red);
+            padding: 8px 20px;
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #b0b0b0;
         }
 
-        main { flex: 1; padding: 15px; max-width: 600px; width: 100%; margin: 0 auto; }
-        h1 {
-            color: #ff4d4d; margin: 0 0 15px 0; font-size: 18px; font-weight: 700;
-            text-shadow: 0 0 10px rgba(255, 77, 77, 0.3); display: flex; justify-content: space-between; align-items: center;
+        .weather-info {
+            display: flex;
+            gap: 15px;
         }
-        .nav-tabs {
-            display: flex; gap: 5px; margin-bottom: 20px;
-            border-bottom: 1px solid #330000; padding-bottom: 10px; overflow-x: auto;
-        }
-        .tab-btn {
-            background: #1a0505; color: #cc6666; border: 1px solid #330000;
-            padding: 6px 10px; border-radius: 6px; font-size: 11px; cursor: pointer;
-            font-family: 'Noto Sans Thai', sans-serif; white-space: nowrap; transition: all 0.2s;
-            text-decoration: none; display: inline-block; text-align: center;
-        }
-        .tab-btn:hover { background: #800517; color: #fff; }
-        .tab-btn.active { background: #660000; color: #ffffff; border-color: #800517; font-weight: 600; }
-        .tab-btn.glitch-tab {
-            color: #ff4d4d; border-color: #800517; animation: tab-glitch 2s infinite;
-        }
-        @keyframes tab-glitch {
-            0% { opacity: 1; } 50% { opacity: 0.5; border-color: #ff0000; } 100% { opacity: 1; }
-        }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
 
+        /* Navigation Tabs */
+        nav {
+            display: flex;
+            overflow-x: auto;
+            background: #050000;
+            border-bottom: 1px solid var(--accent-red);
+            white-space: nowrap;
+        }
+
+        nav button {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 12px 18px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav button:hover, nav button.active {
+            color: var(--bright-red);
+            border-bottom: 2px solid var(--bright-red);
+            background: rgba(128, 5, 23, 0.05);
+        }
+
+        .external-link-btn {
+            color: #ff8080 !important;
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        h2.section-title {
+            color: var(--bright-red);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            border-left: 3px solid var(--bright-red);
+            padding-left: 10px;
+            text-transform: uppercase;
+        }
+
+        /* Cards & Archive */
         .card {
-            background: #140202; border: 1px solid #330000; border-left-width: 5px;
-            padding: 15px; border-radius: 8px; margin-bottom: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 4px;
         }
-        .card-tag { font-size: 11px; color: #ff4d4d; margin-bottom: 6px; font-weight: 600; text-transform: uppercase; }
-        .card-title { font-size: 15px; font-weight: 700; color: #ffffff; margin-bottom: 6px; }
-        .card-desc { font-size: 13px; color: #cccccc; margin: 0 0 10px 0; line-height: 1.5; }
-        .archive-year { font-size: 10px; color: #884444; background: #220000; padding: 2px 6px; border-radius: 4px; display: inline-block; margin-bottom: 5px; }
 
-        .card-action-bar { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #260505; padding-top: 10px; margin-top: 10px; }
-        .action-info { font-size: 11px; color: #885555; }
-        .interact-btn {
-            background: #200505; color: #ff4d4d; border: 1px solid #800517;
-            padding: 5px 10px; border-radius: 4px; font-size: 11px; cursor: pointer;
-            font-family: 'Noto Sans Thai', sans-serif; transition: all 0.2s;
+        .archive-item {
+            border-left: 2px solid var(--accent-red);
+            padding-left: 12px;
+            margin-bottom: 12px;
         }
-        .interact-btn:hover { background: #800517; color: #fff; }
-        .interact-btn.checked { background: #052005; color: #4dff4d; border-color: #058005; }
 
-        .user-status-panel {
-            background: #180303; border: 1px solid #550000; padding: 12px;
-            border-radius: 8px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;
+        .archive-year {
+            font-size: 0.8rem;
+            color: var(--bright-red);
+            font-weight: bold;
         }
-        .user-status-panel div span { font-weight: 700; color: #ff4d4d; }
-        .checkin-btn {
-            background: #800517; color: white; border: none; padding: 8px 12px;
-            border-radius: 6px; font-size: 12px; cursor: pointer; font-family: 'Noto Sans Thai', sans-serif; font-weight: 600;
-        }
-        .checkin-btn:hover { background: #ff4d4d; color: #000; }
 
-        .chat-container {
-            background: #110000; border: 1px solid #440000; border-radius: 8px;
-            height: 350px; display: flex; flex-direction: column; overflow: hidden;
+        /* Calendar Special Style */
+        .calendar-month-group {
+            margin-bottom: 20px;
+            border: 1px solid #33000a;
+            padding: 12px;
+            background: #050001;
+            border-radius: 4px;
         }
-        .chat-messages { flex: 1; padding: 10px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; }
-        .chat-msg { background: #1a0505; border: 1px solid #330000; padding: 8px 10px; border-radius: 6px; font-size: 12px; }
-        .chat-user { font-weight: 700; color: #ff4d4d; margin-bottom: 2px; }
-        .chat-text { color: #ddd; word-break: break-all; }
-        .chat-time { font-size: 9px; color: #774444; text-align: right; margin-top: 2px; }
-        .chat-input-area { display: flex; padding: 8px; background: #0c0000; border-top: 1px solid #440000; gap: 5px; }
-        .chat-input {
-            flex: 1; background: #1a0505; border: 1px solid #440000; padding: 8px;
-            border-radius: 4px; color: #fff; font-family: 'Noto Sans Thai', sans-serif; font-size: 12px; outline: none;
-        }
-        .chat-send-btn {
-            background: #800517; color: white; border: none; padding: 0 15px;
-            border-radius: 4px; font-family: 'Noto Sans Thai', sans-serif; font-weight: 600; cursor: pointer; font-size: 12px;
-        }
-        .chat-send-btn:hover { background: #ff4d4d; color: #000; }
 
-        .festival-card {
-            background: #140202; border: 1px solid #440000; border-left: 5px solid #ff4d4d;
-            padding: 12px; border-radius: 6px; margin-bottom: 10px;
+        .month-title {
+            color: var(--bright-red);
+            font-size: 1rem;
+            margin-bottom: 8px;
+            border-bottom: 1px dashed var(--accent-red);
+            padding-bottom: 4px;
         }
-        .festival-date { font-size: 11px; color: #ff4d4d; font-weight: 700; }
-        .festival-name { font-size: 14px; font-weight: 700; color: #fff; margin: 2px 0 5px 0; }
 
-        .glitch-card {
-            background: #1c0000; border: 1px dashed #ff4d4d; border-left-width: 5px;
-            border-left-color: #ff0000; padding: 15px; border-radius: 8px; margin-bottom: 12px; position: relative; overflow: hidden;
-            animation: glitch-box 3s infinite;
+        .calendar-event-row {
+            padding: 6px 10px;
+            margin: 6px 0;
+            font-size: 0.85rem;
+            border-radius: 3px;
         }
-        @keyframes glitch-box {
-            0% { transform: translate(0); } 20% { transform: translate(-1px, 1px); border-color: #800517; } 100% { transform: translate(0); }
-        }
-        .glitch-text { color: #ff4d4d; font-family: monospace; letter-spacing: 1px; animation: text-flicker 1.5s infinite; }
-        @keyframes text-flicker { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-        .corrupted { color: #880000; background-color: #220000; padding: 0 4px; text-decoration: line-through; }
 
-        footer { text-align: center; font-size: 11px; color: #666; padding: 15px; border-top: 1px solid #220000; background: #080000; }
+        .normal-event {
+            background: #0c0c0c;
+            color: #b0b0b0;
+            border-left: 3px solid #444;
+        }
+
+        .ushinawa-ritual-event {
+            background: #1a0205;
+            color: #ffcccc;
+            border: 1px solid var(--accent-red);
+            border-left: 4px solid var(--bright-red);
+            box-shadow: 0 0 8px rgba(128, 5, 23, 0.4);
+        }
+
+        .ritual-tag {
+            background: var(--accent-red);
+            color: #fff;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 2px;
+            margin-left: 8px;
+            text-transform: uppercase;
+        }
+
+        /* Chat Room */
+        .chat-box {
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chat-msg {
+            background: #140204;
+            border: 1px solid #33050a;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .chat-msg .sender {
+            color: var(--bright-red);
+            font-size: 0.75rem;
+            margin-bottom: 2px;
+        }
+
+        .chat-input-area {
+            display: flex;
+            border-top: 1px solid var(--border-color);
+            background: #000;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 12px;
+            color: var(--text-main);
+            font-size: 0.9rem;
+            outline: none;
+        }
+
+        .chat-input-area button {
+            background: var(--accent-red);
+            color: #fff;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Glitched Tab */
+        .glitch-text {
+            color: #ff4d4d;
+            animation: glitch 1.5s infinite;
+        }
+
+        @keyframes glitch {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+        }
     </style>
 </head>
 <body>
-    <script>
-        for (let i = 0; i < 15; i++) {
-            let p = document.createElement('div');
-            p.className = 'petal';
-            p.style.left = Math.random() * 100 + 'vw';
-            p.style.top = -Math.random() * 20 - 10 + 'vh';
-            p.style.width = (Math.random() * 8 + 5) + 'px';
-            p.style.height = (Math.random() * 12 + 7) + 'px';
-            p.style.animationDuration = (Math.random() * 6 + 4) + 's';
-            p.style.animationDelay = (Math.random() * 5) + 's';
-            document.body.appendChild(p);
-        }
-    </script>
 
-    <!-- หน้าจอแอปหลัก (นิรนามอัตโนมัติ) -->
-    <div id="app-container">
-        <header>
-            <div class="app-brand-area">
-                <div class="app-brand">USHINAWA SYSTEM</div>
-                <div class="app-sub">Secure Emergency & Community Portal</div>
-            </div>
-            <div class="header-right">
-                <div class="user-badge">
-                    <span>👤</span> <span id="display-anon-id">นิรนาม #0000</span>
-                </div>
-            </div>
-        </header>
-
-        <!-- สภาพอากาศจริงจากโทยามะ (แบบปกติเรียบง่าย ไม่มีข้อความระวังเงา) -->
-        <div class="status-ticker">
-            <span><span class="live-dot"></span> สภาพอากาศ (โทยามะ ญี่ปุ่น): <span id="toyama-weather">กำลังโหลดข้อมูลสภาพอากาศ...</span></span>
-            <span id="system-time">00:00:00</span>
+    <header>
+        <div class="logo-area">
+            <span style="font-size: 1.4rem;">🔴</span>
+            <h1>Ushinawa-Alert</h1>
         </div>
+        <div class="user-badge" id="user-id-display">กำลังโหลดรหัส...</div>
+    </header>
 
-        <main>
-            <h1>
-                <span>ศูนย์กลางเครือข่ายอุชินาวะ</span>
-                <span style="font-size: 11px; color: #885555; font-weight: normal;">โหมด: ผู้ใช้งานนิรนาม</span>
-            </h1>
-
-            <div class="nav-tabs">
-                <button class="tab-btn active" onclick="switchTab(event, 'tab1')">🚨 ภัยพิบัติ & ข่าวสาร</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab2')">👁️ สิ่งแปลกปลอม</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab3')">💬 ห้องแชท</button>
-                <button class="tab-btn" onclick="switchTab(event, 'tab4')">📅 ปฏิทินเมือง</button>
-                <!-- ลิงก์ตรงไปยัง Ushinawa Web Board ภายนอก -->
-                <a href="https://ushinawakeijiban.boards.net/" target="_blank" class="tab-btn">🌐 Ushinawa Web Board ↗</a>
-                <button class="tab-btn glitch-tab" onclick="switchTab(event, 'tab5')">⚠️ ERR_404</button>
-            </div>
-            
-            <!-- แท็บที่ 1: ภัยพิบัติ & ข่าวสารย้อนหลัง -->
-            <div id="tab1" class="tab-content active">
-                <div class="user-status-panel">
-                    <div>
-                        <div style="font-size: 12px; color: #aaa;">สถานะความปลอดภัยของคุณ:</div>
-                        <div id="my-safety-status" style="font-size: 14px; color: #ffaa00;">⚠️ ยังไม่ได้เช็กอินยืนยันตัวตน</div>
-                    </div>
-                    <button class="checkin-btn" onclick="toggleCheckIn()" id="checkin-btn-text">เช็กอินว่าปลอดภัย</button>
-                </div>
-
-                <h3 style="color: #ff4d4d; font-size: 14px; margin: 15px 0 10px 0;">📰 คลังข่าวสารและบันทึกเหตุการณ์ย้อนหลัง (Archive)</h3>
-
-                <div class="card" style="border-left-color: #ff4d4d;">
-                    <span class="archive-year">ปี ค.ศ. 2026 (ปัจจุบัน)</span>
-                    <div class="card-tag">🚨 [ภัยพิบัติฉุกเฉิน] เขตอุโมงค์ทางรถไฟ</div>
-                    <div class="card-title">ประกาศเตือน: เสียงกระดิ่งปริศนาและภัยกระจกสะท้อน</div>
-                    <p class="card-desc">รายงานเหตุการณ์ระทึกขวัญในพื้นที่ พบเสียงเด็กร้องไห้และเสียงกระดิ่งกังวานยามวิกาล ห้ามส่องกระจกหลังเที่ยงคืนเด็ดขาด</p>
-                    <div class="card-action-bar">
-                        <span class="action-info">ผู้รับทราบประกาศ: <strong id="count-1">142</strong> คน</span>
-                        <button class="interact-btn" onclick="ackAlert(this, 'count-1')">รับทราบคำเตือน</button>
-                    </div>
-                </div>
-
-                <div class="card" style="border-left-color: #ffaa00;">
-                    <span class="archive-year">ปี ค.ศ. 2025</span>
-                    <div class="card-tag">⚠️ [ประกาศประจำวัน] สภาพอากาศ & ภัยธรรมชาติ</div>
-                    <div class="card-title">เตือนภัยน้ำท่วมเฉียบพลันและไฟไหม้บริเวณย่านการค้าเก่า</div>
-                    <p class="card-desc">ฝนตกหนักต่อเนื่องส่งผลให้น้ำเอ่อล้นคลองระบายน้ำ พร้อมกับเกิดเหตุเพลิงไหม้ปริศนาบ้านเรือนไม้โบราณ เจ้าหน้าที่เร่งควบคุมสถานะความปลอดภัย</p>
-                    <div class="card-action-bar">
-                        <span class="action-info">ผู้รับทราบประกาศ: <strong id="count-2">87</strong> คน</span>
-                        <button class="interact-btn" onclick="ackAlert(this, 'count-2')">รับทราบคำเตือน</button>
-                    </div>
-                </div>
-
-                <div class="card" style="border-left-color: #cc6666;">
-                    <span class="archive-year">ปี ค.ศ. 2024</span>
-                    <div class="card-tag">📢 [ประกาศด่วน] เสียงปริศนากลางดึก</div>
-                    <div class="card-title">รายงานเสียงเด็กร้องไห้และเสียงกุญแจกระทบกันยามวิกาล</div>
-                    <p class="card-desc">มีเสียงลึคลับคล้ายเด็กทารกร้องไห้บริเวณตรอกแคบหลังศาลเจ้า ทางการประกาศห้ามผู้ใดออกนอกเคหสถานหลังเที่ยงคืนเพื่อความปลอดภัย</p>
-                </div>
-
-                <div class="card" style="border-left-color: #cc6666;">
-                    <span class="archive-year">ปี ค.ศ. 2023</span>
-                    <div class="card-tag">🔥 [เหตุการณ์สำคัญ] ไฟไหม้ป่ารอบภูเขาอุชินาวะ</div>
-                    <div class="card-title">ควบคุมเพลิงป่ารอบเขตอาคมและประกาศเฝ้าระวังควันพิษ</div>
-                    <p class="card-desc">เกิดเหตุไฟไหม้ป่าลุกลามอย่างรวดเร็วในช่วงดูแล้ง ชาวบ้านรายงานว่าเห็นเงาร่างคนยืนท่ามกลางเปลวไฟแต่ไม่ได้รับบาดเจ็บใดๆ สร้างความตื่นกลัวแก่ผู้พบเห็น</p>
-                </div>
-
-                <div class="card" style="border-left-color: #884444;">
-                    <span class="archive-year">ปี ค.ศ. 2020</span>
-                    <div class="card-tag">📜 [บันทึกชุมชน] ภัยพิบัติน้ำท่วมใหญ่ในรอบทศวรรษ</div>
-                    <div class="card-title">ประกาศอพยพเร่งด่วนหลังเขื่อนกั้นน้ำชั่วคราวชำรุด</div>
-                    <p class="card-desc">พายุไต้ฝุ่นพัดถล่มหมู่บ้านอย่างรุนแรง น้ำเอ่อล้นทะลักเข้าท่วมชั้นใต้ดินและอาคารเรียนร้าง ชาวบ้านต่างพากันอพยพขึ้นที่สูงตามประกาศของระบบกลาง</p>
-                </div>
-
-                <div class="card" style="border-left-color: #884444;">
-                    <span class="archive-year">ปี ค.ศ. 2018</span>
-                    <div class="card-tag">⚠️ [ประกาศเตือนภัย] ปรากฏการณ์กระจกเงาร้าว</div>
-                    <div class="card-title">รายงานความผิดปกติของกระจกโบราณทั่วเมือง</div>
-                    <p class="card-desc">ชาวบ้านหลายครัวเรือนพบว่ากระจกเงาภายในบ้านเกิดรอยร้าวเองพร้อมกับเงาสะท้อนที่ขยับช้ากว่าตัวจริง ทางการแนะนำให้นำผ้าคลุมกระจกทุกบาน</p>
-                </div>
-
-                <div class="card" style="border-left-color: #663333;">
-                    <span class="archive-year">ปี ค.ศ. 2011</span>
-                    <div class="card-tag">📜 [บันทึกประวัติศาสตร์] ยุคหลังแผ่นดินไหวครั้งใหญ่</div>
-                    <div class="card-title">ประกาศควบคุมการใช้น้ำและไฟ หลังเกิดอาฟเตอร์ช็อกรุนแรง</div>
-                    <p class="card-desc">ประกาศจากทางการเมืองอุชินาวะให้ทุกครัวเรือนสำรองน้ำและระวังภัยไฟไหม้ลุกลาม มีรายงานชาวบ้านได้ยินเสียงเด็กร้องไห้มาจากท่อระบายน้ำร้างช่วงไฟฟ้าดับทั่วเมือง</p>
-                </div>
-
-                <div class="card" style="border-left-color: #552222;">
-                    <span class="archive-year">ปี ค.ศ. 2004</span>
-                    <div class="card-tag">💾 [กระดานข่าวเก่า] ยุคเริ่มต้นเครือข่ายไดอัลอัพ</div>
-                    <div class="card-title">กระดานเตือนภัย: ระวังเสียงกระดิ่งและเงาผิดรูปในกระจก</div>
-                    <p class="card-desc">บันทึกยุคแรกเริ่มที่ระบบเครือข่ายท้องถิ่นถูกติดตั้ง เตือนภัยชาวบ้านเรื่องกระจกโบราณตามบ้านเรือนที่สะท้อนภาพผิดเพี้ยน และห้ามออกนอกบ้านยามวิกาลหากได้ยินเสียงกระดิ่งลม</p>
-                </div>
-            </div>
-
-            <!-- แท็บที่ 2: สิ่งแปลกปลอม -->
-            <div id="tab2" class="tab-content">
-                <div class="card" style="border-left-color: #cc6666;">
-                    <div class="card-tag">👁️ [รายงานสิ่งแปลกปลอม] อาคารเรียนเก่า</div>
-                    <div class="card-title">เงาร่างไร้หน้าและรอยเท้าปริศนา</div>
-                    <p class="card-desc">มีผู้พบเห็นเงาร่างผิดรูปเคลื่อนไหวบริเวณชั้น 3 ของอาคารร้าง หากพบเจอสิ่งมีลักษณะดังกล่าว ห้ามเข้าใกล้และให้รีบแจ้งเจ้าหน้าที่ทันที</p>
-                    <div class="card-action-bar">
-                        <span class="action-info">ยืนยันการพบเห็น: <strong id="sighting-1">19</strong> รายงาน</span>
-                        <button class="interact-btn" onclick="confirmSighting('sighting-1')">ฉันเคยพบเห็นสิ่งนี้</button>
-                    </div>
-                </div>
-
-                <div class="card" style="border-left-color: #cc6666;">
-                    <div class="card-tag">👁️ [สิ่งผิดปกติ] เขตศาลเจ้า</div>
-                    <div class="card-title">การเปลี่ยนแปลงของเขตอาคม</div>
-                    <p class="card-desc">พบความผิดปกติของเสาโทริอิและกลีบดอกฮิกังบานะที่บานผิดฤดูกาล ส่อเค้าลางเหตุการณ์ไม่ปกติในพื้นที่</p>
-                    <div class="card-action-bar">
-                        <span class="action-info">ยืนยันการพบเห็น: <strong id="sighting-2">31</strong> รายงาน</span>
-                        <button class="interact-btn" onclick="confirmSighting('sighting-2')">ฉันเคยพบเห็นสิ่งนี้</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- แท็บที่ 3: ห้องแชทนิรนาม -->
-            <div id="tab3" class="tab-content">
-                <div class="chat-container">
-                    <div class="chat-messages" id="chat-messages-box"></div>
-                    <div class="chat-input-area">
-                        <input type="text" id="chat-input-field" class="chat-input" placeholder="พิมพ์ข้อความพูดคุยในแชทนี้..." autocomplete="off">
-                        <button class="chat-send-btn" onclick="sendChatMessage()">ส่ง</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- แท็บที่ 4: ปฏิทินเมือง -->
-            <div id="tab4" class="tab-content">
-                <h3 style="color: #ff4d4d; font-size: 15px; margin-top: 0;">📅 ปฏิทินเทศกาล & วันสำคัญเมืองอุชินาวะ</h3>
-                
-                <div class="festival-card">
-                    <div class="festival-date">14 เมษายน</div>
-                    <div class="festival-name">วันเงาแรก (影始めの日)</div>
-                    <p class="card-desc" style="margin:0;">ห้ามเดินข้างกำแพงหรือตรอกหลังพระอาทิตย์ตก เด็กพกกระดิ่งที่เอว ศาลเจ้าตะวันตกจุดไฟพิธีถึงรุ่งเช้า</p>
-                </div>
-
-                <div class="festival-card">
-                    <div class="festival-date">5 พฤษภาคม</div>
-                    <div class="festival-name">เทศกาลสายลมโบราณ (古風祭)</div>
-                    <p class="card-desc" style="margin:0;">ธงลมสัตว์ตำนานท้องถิ่น ขบวนโยไคจากนักเรียน เรียวกัง/ออนเซ็นเปิดบริการฟรีช่วงพิเศษ</p>
-                </div>
-
-                <div class="festival-card">
-                    <div class="festival-date">20 กรกฎาคม</div>
-                    <div class="festival-name">คืนแห่งโคมเงา (影灯しの夜)</div>
-                    <p class="card-desc" style="margin:0;">บ้านจุดโคมกระดาษหน้าประตู ย่านโคมแดงจัดขบวนโคมเต้นรำ แจกขนม "เก็นมะอิ" (ข้าวปิ้งรูปเงาคน)</p>
-                </div>
-
-                <div class="festival-card">
-                    <div class="festival-date">1 กันยายน</div>
-                    <div class="festival-name">วันห้ามเงาสะท้อน (影封じ)</div>
-                    <p class="card-desc" style="margin:0;">ห้ามส่องกระจก น้ำ หรือหน้าจอ หลัง 22:22 ศาลเจ้าตะวันออกผูกริบบิ้นสีดำ ร้านสะดวกซื้อคลุมตู้แช่ด้วยผ้าสีม่วง</p>
-                </div>
-
-                <div class="festival-card">
-                    <div class="festival-date">13 ธันวาคม</div>
-                    <div class="festival-name">คืนรอยต่อสองโลก (逢間の夜)</div>
-                    <p class="card-desc" style="margin:0;">คนตายและคนเป็นอาจพบกันในเงา จุดเทียน วางดอกไม้หน้าบ้าน ศาลเจ้าเปิดให้เขียนคำอธิษฐานส่งถึงวิญญาณ</p>
-                </div>
-            </div>
-
-            <!-- แท็บที่ 5: ERR_404 (แท็บลับ) -->
-            <div id="tab5" class="tab-content">
-                <div class="glitch-card">
-                    <div class="card-tag glitch-text">⚠️ CRITICAL_ERR // OVERRIDE_DATA</div>
-                    <div class="card-title" style="color: #ff4d4d;">ไฟล์ข้อมูล<span class="corrupted">ถูกเขียนทับ</span> / บันทึกที่สูญหาย</div>
-                    <p class="card-desc glitch-text">
-                        ...พิกัด... <span class="corrupted">ไม่สามารถระบุได้</span> ...สัญญาณชีพจากเป้าหมายขาดหาย... ค้นหาสิ่งที่ถูกซ่อนไว้ลึก <span class="corrupted">███████</span> 
-                        <br><br>...หากค้นพบสิ่งที่หลบซ่อนอยู่นั้นแล้ว จง<span class="corrupted" style="color: #ff0000; font-weight: bold;">เผามันให้สิ้นเสีย</span>...
-                    </p>
-                </div>
-
-                <div class="glitch-card" style="animation-delay: 0.5s;">
-                    <div class="card-tag glitch-text" style="color: #ff0055;">⚠️ WARNING // KERNEL_PANIC_09</div>
-                    <div class="card-title" style="color: #ff6666;">เสียงกระซิบจาก<span class="corrupted">ฟากฝั่งนั้น</span></div>
-                    <p class="card-desc" style="color: #bbb; font-family: monospace;">
-                        [SYSTEM ERROR]: เซิร์ฟเวอร์หลักตอบสนองผิดปกติ... 
-                        <br><span class="corrupted">"ใครเป็นคนเปิดประตูรึเปล่า...?"</span> 
-                        <br>ตรวจสอบพบการรั่วไหลของอาคมบริเวณพิกัด 0-0-Kyu... โปรดระวังเงาที่สะท้อนในกระจกหลังเที่ยงคืน...
-                    </p>
-                </div>
-            </div>
-        </main>
-
-        <footer>
-            Ushinawa Kyuseishu Community Network &bull; Emergency Response System
-        </footer>
+    <!-- Weather Widget (Toyama Meteorological Data) -->
+    <div class="weather-banner">
+        <div>📍 สภาพอากาศโทยามะ (Toyama, Japan)</div>
+        <div class="weather-info" id="weather-data">
+            <span>อุณหภูมิ: 14°C</span>
+            <span>ความชื้น: 68%</span>
+            <span>สภาพอากาศ: มีเมฆบางส่วน</span>
+        </div>
     </div>
 
-    <script>
-        let anonId = "นิรนาม #" + Math.floor(1000 + Math.random() * 9000);
-        document.getElementById('display-anon-id').innerText = anonId;
+    <!-- Navigation Tabs -->
+    <nav>
+        <button class="tab-btn active" onclick="switchTab('archive')">🚨 ภัยพิบัติ & ข่าวสาร</button>
+        <button class="tab-btn" onclick="switchTab('entities')">👁️ สิ่งแปลกปลอม</button>
+        <button class="tab-btn" onclick="switchTab('chat')">💬 ห้องแชท</button>
+        <button class="tab-btn" onclick="switchTab('calendar')">📅 ปฏิทินเมือง</button>
+        <button class="tab-btn external-link-btn" onclick="window.open('https://ushinawakeijiban.boards.net/', '_blank')">🌐 Ushinawa Web Board ↗</button>
+        <button class="tab-btn" onclick="switchTab('error')" style="color: #ff4d4d;">⚠️ ERR_404</button>
+    </nav>
 
-        setInterval(() => {
-            const now = new Date();
-            document.getElementById('system-time').innerText = now.toLocaleTimeString('th-TH');
-        }, 1000);
+    <main>
+        <!-- Tab 1: Archive -->
+        <div id="archive" class="tab-content active">
+            <h2 class="section-title">คลังข้อมูลและเหตุการณ์ผิดปกติ (2004 - ปัจจุบัน)</h2>
+            <div class="card">
+                <div class="archive-item">
+                    <div class="archive-year">2004 - เหตุการณ์เงาเคลื่อนตัว</div>
+                    <p style="font-size: 0.85rem; color: #b0b0b0; margin-top: 4px;">รายงานการสูญหายบริเวณสถานีรถไฟเก่าช่วงเดือนกันยายน ชาวบ้านพบเห็นเงาซ้อนทับตัวบุคคล</p>
+                </div>
+                <div class="archive-item" style="margin-top: 15px;">
+                    <div class="archive-year">2012 - หมอกสีชาดแห่งอุชินาวะ</div>
+                    <p style="font-size: 0.85rem; color: #b0b0b0; margin-top: 4px;">เกิดหมอกหนาทึบกลิ่นสนิมปกคลุมหมู่บ้านนานกว่า 72 ชั่วโมง ระบบสื่อสารตัดขาดทั้งหมด</p>
+                </div>
+                <div class="archive-item" style="margin-top: 15px;">
+                    <div class="archive-year">2021 - ประกาศเตือนภัยเสียงกระดิ่งยามวิกาล</div>
+                    <p style="font-size: 0.85rem; color: #b0b0b0; margin-top: 4px;">ประกาศทางการให้งดออกจากเคหสถานหลังเที่ยงคืน หลังมีเสียงกระดิ่งปริศนาดังตามตรอกซอกซอย</p>
+                </div>
+            </div>
+        </div>
 
-        // ดึงสภาพอากาศจริงจาก Open-Meteo API ของจังหวัดโทยามะ (ตามจริงแบบเพียวๆ)
-        async function fetchToyamaWeather() {
-            try {
-                let response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=36.6953&longitude=137.2113&current=temperature_2m,relative_humidity_2m,weather_code');
-                let data = await response.json();
-                if(data && data.current) {
-                    let temp = data.current.temperature_2m;
-                    let code = data.current.weather_code;
-                    let weatherDesc = "อากาศแจ่มใส";
-                    
-                    if(code >= 1 && code <= 3) weatherDesc = "มีเมฆบางส่วน";
-                    else if(code >= 45 && code <= 48) weatherDesc = "มีหมอกลงจัด";
-                    else if(code >= 51 && code <= 67) weatherDesc = "ฝนตกปรอยๆ";
-                    else if(code >= 71 && code <= 77) weatherDesc = "หิมะตก";
-                    else if(code >= 80) weatherDesc = "ฝนฟ้าคะนอง";
+        <!-- Tab 2: Foreign Entities -->
+        <div id="entities" class="tab-content">
+            <h2 class="section-title">กระดานยืนยันสิ่งแปลกปลอม</h2>
+            <div class="card">
+                <p style="font-size: 0.85rem; margin-bottom: 10px;">แจ้งเบาะแสหรือตรวจสอบสิ่งผิดปกติที่พบเจอในเขตชุมชนอุชินาวะ</p>
+                <div style="background: #050000; padding: 10px; border: 1px dashed var(--accent-red); font-size: 0.8rem; color: #ff8080;">
+                    [สถานะระบบยืนยันตัวตน]: ปลอดภัย - ตรวจไม่พบคลื่นรบกวนความหนาแน่นสูงในรัศมี 5 กิโลเมตร
+                </div>
+            </div>
+        </div>
 
-                    document.getElementById('toyama-weather').innerText = `${weatherDesc}, อุณหภูมิ ${temp}°C`;
-                }
-            } catch (err) {
-                document.getElementById('toyama-weather').innerText = "อุณหภูมิ 12°C, มีเมฆมาก";
-            }
-        }
+        <!-- Tab 3: Chat Room -->
+        <div id="chat" class="tab-content">
+            <h2 class="section-title">ห้องแชทชุมชน (ไม่เปิดเผยตัวตน)</h2>
+            <div class="chat-box">
+                <div class="chat-messages" id="chat-messages">
+                    <div class="chat-msg">
+                        <div class="sender">นิรนาม #8921</div>
+                        <div>แถวศาลเจ้าตะวันออกวันนี้มีหมอกลงจัดแปลกๆ ระวังตัวกันด้วยนะ</div>
+                    </div>
+                    <div class="chat-msg">
+                        <div class="sender">นิรนาม #3042</div>
+                        <div>ได้รับแจกพัดเสียงมาจากเรียวกังแล้ว เรียบร้อยดี</div>
+                    </div>
+                </div>
+                <div class="chat-input-area">
+                    <input type="text" id="chat-input" placeholder="พิมพ์ข้อความ..." onkeypress="handleChatPress(event)">
+                    <button onclick="sendChatMessage()">ส่ง</button>
+                </div>
+            </div>
+        </div>
 
-        function switchTab(evt, tabName) {
-            let contents = document.getElementsByClassName("tab-content");
-            for (let i = 0; i < contents.length; i++) {
-                contents[i].classList.remove("active");
-            }
-            let buttons = document.getElementsByClassName("tab-btn");
-            for (let i = 0; i < buttons.length; i++) {
-                if(!buttons[i].hasAttribute('href')) {
-                    buttons[i].classList.remove("active");
-                }
-            }
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
+        <!-- Tab 4: Calendar -->
+        <div id="calendar" class="tab-content">
+            <h2 class="section-title">ปฏิทินเทศกาลและวันสำคัญเมืองอุชินาวะ</h2>
             
-            if(tabName === 'tab3') {
-                let box = document.getElementById('chat-messages-box');
-                box.scrollTop = box.scrollHeight;
-            }
-        }
+            <!-- เมษายน -->
+            <div class="calendar-month-group">
+                <div class="month-title">เมษายน (April)</div>
+                <div class="calendar-event-row normal-event">4 เม.ย. & 7 เม.ย. — วันสุขภาพโลก (World Health Day)</div>
+                <div class="calendar-event-row ushinawa-ritual-event">
+                    14 เม.ย. — วันเงาแรก (影始めの日) <span class="ritual-tag">พิธีกรรมอุชินาวะ</span>
+                    <div style="font-size: 0.75rem; color: #ff9999; margin-top: 2px;">• ห้ามเดินข้างกำแพงหรือตรอกหลังพระอาทิตย์ตก | พกกระดิ่งที่เอว | ศาลเจ้าตะวันตกจุดไฟพิธี</div>
+                </div>
+                <div class="calendar-event-row normal-event">14 เม.ย. — วันแบล็กเดย์ (Black Day)</div>
+                <div class="calendar-event-row normal-event">22 เม.ย. — วันคุ้มครองโลก (Earth Day)</div>
+                <div class="calendar-event-row normal-event">29 เม.ย. — วันโชวะ (Showa Day) [วันหยุดญี่ปุ่น]</div>
+            </div>
 
-        let isCheckedIn = false;
-        function toggleCheckIn() {
-            isCheckedIn = !isCheckedIn;
-            let statusText = document.getElementById('my-safety-status');
-            let btnText = document.getElementById('checkin-btn-text');
-            if(isCheckedIn) {
-                statusText.innerHTML = "✅ ปลอดภัย (เช็กอินเมื่อ " + new Date().toLocaleTimeString('th-TH', {hour: '2-digit', minute:'2-digit'}) + " น.)";
-                statusText.style.color = "#4dff4d";
-                btnText.innerText = "ยกเลิกเช็กอิน";
-                btnText.style.background = "#330000";
-            } else {
-                statusText.innerHTML = "⚠️ ยังไม่ได้เช็กอินยืนยันตัวตน";
-                statusText.style.color = "#ffaa00";
-                btnText.innerText = "เช็กอินว่าปลอดภัย";
-                btnText.style.background = "#800517";
-            }
-        }
+            <!-- พฤษภาคม -->
+            <div class="calendar-month-group">
+                <div class="month-title">พฤษภาคม (May)</div>
+                <div class="calendar-event-row normal-event">3 พ.ค. — วันรัฐธรรมนูญ (Constitution Memorial Day)</div>
+                <div class="calendar-event-row normal-event">4 พ.ค. — วันสีเขียว (Greenery Day)</div>
+                <div class="calendar-event-row ushinawa-ritual-event">
+                    5 พ.ค. — เทศกาลสายลมโบราณ (古風祭・こふうさい) <span class="ritual-tag">พิธีกรรมอุชินาวะ</span>
+                    <div style="font-size: 0.75rem; color: #ff9999; margin-top: 2px;">• ธงลมสัตว์ตำนาน | ขบวนโยวไคจากนักเรียน | เรียวกัง/ออนเซ็นเปิดฟรีสำหรับชุดพื้นเมือง</div>
+                </div>
+                <div class="calendar-event-row normal-event">5 พ.ค. — วันเด็กผู้ชาย (Children's Day)</div>
+                <div class="calendar-event-row normal-event">12 พ.ค. — วันพยาบาลโลก / วันแม่สากล (อาทิตย์ที่ 2)</div>
+            </div>
 
-        function ackAlert(btn, countId) {
-            if(!btn.classList.contains('checked')) {
-                let counter = document.getElementById(countId);
-                counter.innerText = parseInt(counter.innerText) + 1;
-                btn.innerText = "รับทราบแล้ว ✓";
-                btn.classList.add('checked');
-            }
-        }
+            <!-- มิถุนายน -->
+            <div class="calendar-month-group">
+                <div class="month-title">มิถุนายน (June)</div>
+                <div class="calendar-event-row normal-event">1 มิ.ย. — วันเด็กสากล</div>
+                <div class="calendar-event-row normal-event">5 มิ.ย. — วันสิ่งแวดล้อมโลก / 6 มิ.ย. วันมังงะญี่ปุ่น</div>
+                <div class="calendar-event-row ushinawa-ritual-event">
+                    6 มิ.ย. — วันรักที่ไร้ชื่อ (名もなき恋の日) <span class="ritual-tag">พิธีกรรมอุชินาวะ</span>
+                    <div style="font-size: 0.75rem; color: #ff9999; margin-top: 2px;">• เขียนความรู้สึกลงกระดาษสีฟ้าแขวนหน้าต่าง | ลานสารภาพเปิดตลอดวัน | ระวังเงาซ้อน</div>
+                </div>
+                <div class="calendar-event-row normal-event">21 มิ.ย. — วันโยคะโลก / วันพ่อสากล (อาทิตย์ที่ 3)</div>
+            </div>
 
-        function confirmSighting(countId) {
-            let counter = document.getElementById(countId);
-            counter.innerText = parseInt(counter.innerText) + 1;
-            alert("บันทึกการยืนยันพิกัดเข้าสู่ระบบส่วนกลางเรียบร้อย");
-        }
+            <!-- กรกฎาคม -->
+            <div class="calendar-month-group">
+                <div class="month-title">กรกฎาคม (July)</div>
+                <div class="calendar-event-row normal-event">7 ก.ค. — เทศกาลทานาบาตะ (Tanabata)</div>
+                <div class="calendar-event-row normal-event">17 ก.ค. — วันอีโมจิโลก</div>
+                <div class="calendar-event-row ushinawa-ritual-event">
+                    20 ก.ค. — คืนแห่งโคมเงา (影灯しの夜) <span class="ritual-tag">พิธีกรรมอุชินาวะ</span>
+                    <div style="font-size: 0.75rem; color: #ff9999; margin-top: 2px;">• จุดโคมกระดาษหน้าประตู | ย่านโคมแดงจัดขบวนเต้นรำ | แจกขนม "เก็นมะอิ"</div>
+                </div>
+                <div class="calendar-event-row normal-event">20 ก.ค. — วันทะเล (Marine Day) | 23 ก.ค. วันมิตรภาพ</div>
+            </div>
 
-        function loadChatMessages() {
-            let box = document.getElementById('chat-messages-box');
-            let messages = JSON.parse(localStorage.getItem('ushinaig_chat_msgs') || '[]');
-            
-            if(messages.length === 0) {
-                messages = [
-                    {user: 'ระบบกลาง', text: 'ยินดีต้อนรับสู่แชทนี้ โปรดระวังตัวยามค่ำคืน', time: '00:00'}
-                ];
-            }
-
-            box.innerHTML = '';
-            messages.forEach(msg => {
-                let div = document.createElement('div');
-                div.className = 'chat-msg';
-                div.innerHTML = `<div class="chat-user">${msg.user}</div><div class="chat-text">${msg.text}</div><div class="chat-time">${msg.time}</div>`;
-                box.appendChild(div);
-            });
-            box.scrollTop = box.scrollHeight;
-        }
-
-        function sendChatMessage() {
-            let input = document.getElementById('chat-input-field');
-            let text = input.value.trim();
-            if(!text) return;
-
-            let time = new Date().toLocaleTimeString('th-TH', {hour: '2-digit', minute:'2-digit'});
-
-            let messages = JSON.parse(localStorage.getItem('ushinaig_chat_msgs') || '[]');
-            messages.push({user: anonId, text: text, time: time});
-            localStorage.setItem('ushinaig_chat_msgs', JSON.stringify(messages));
-
-            input.value = '';
-            loadChatMessages();
-        }
-
-        document.getElementById('chat-input-field').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                sendChatMessage();
-            }
-        });
-
-        window.onload = function() {
-            loadChatMessages();
-            fetchToyamaWeather();
-        }
-    </script>
-</body>
-</html>
+            <!-- สิงหาคม -->
+            <div class="calendar-month-group">
+                <div class="month-title">สิงหาคม (August)</div>
+                <div class="calendar-event-row normal-event">6 ส.ค. — รำลึกฮิโรชิมา / 9 ส.ค. รำลึกนางาซากิ</div>
+                <div class="calendar-event-row normal-event">13–15 ส.ค. — เทศกาลโอบ้ง (Obon)</div>
+                <div class="calendar-event-row ushinawa-ritual
