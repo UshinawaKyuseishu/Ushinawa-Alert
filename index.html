@@ -78,10 +78,7 @@
             font-family: 'Noto Sans Thai', sans-serif; white-space: nowrap; transition: all 0.2s;
             text-decoration: none; display: inline-block; text-align: center;
         }
-        .tab-btn:hover {
-            background: #800517;
-            color: #fff;
-        }
+        .tab-btn:hover { background: #800517; color: #fff; }
         .tab-btn.active { background: #660000; color: #ffffff; border-color: #800517; font-weight: 600; }
         .tab-btn.glitch-tab {
             color: #ff4d4d; border-color: #800517; animation: tab-glitch 2s infinite;
@@ -193,7 +190,7 @@
             </div>
         </header>
 
-        <!-- แถบอัปเดตสภาพอากาศจริงจากโทยามะ (แบบปกติเรียบง่าย) -->
+        <!-- สภาพอากาศจริงจากโทยามะ (แบบปกติเรียบง่าย ไม่มีข้อความระวังเงา) -->
         <div class="status-ticker">
             <span><span class="live-dot"></span> สภาพอากาศ (โทยามะ ญี่ปุ่น): <span id="toyama-weather">กำลังโหลดข้อมูลสภาพอากาศ...</span></span>
             <span id="system-time">00:00:00</span>
@@ -210,7 +207,7 @@
                 <button class="tab-btn" onclick="switchTab(event, 'tab2')">👁️ สิ่งแปลกปลอม</button>
                 <button class="tab-btn" onclick="switchTab(event, 'tab3')">💬 ห้องแชท</button>
                 <button class="tab-btn" onclick="switchTab(event, 'tab4')">📅 ปฏิทินเมือง</button>
-                <!-- เพิ่มลิงก์ไปยัง Ushinawa Web Board ภายนอก -->
+                <!-- ลิงก์ตรงไปยัง Ushinawa Web Board ภายนอก -->
                 <a href="https://ushinawakeijiban.boards.net/" target="_blank" class="tab-btn">🌐 Ushinawa Web Board ↗</a>
                 <button class="tab-btn glitch-tab" onclick="switchTab(event, 'tab5')">⚠️ ERR_404</button>
             </div>
@@ -260,7 +257,7 @@
                     <span class="archive-year">ปี ค.ศ. 2023</span>
                     <div class="card-tag">🔥 [เหตุการณ์สำคัญ] ไฟไหม้ป่ารอบภูเขาอุชินาวะ</div>
                     <div class="card-title">ควบคุมเพลิงป่ารอบเขตอาคมและประกาศเฝ้าระวังควันพิษ</div>
-                    <p class="card-desc">เกิดเหตุไฟไหม้ป่าลุกลามอย่างรวดเร็วในช่วงฤดูแล้ง ชาวบ้านรายงานว่าเห็นเงาร่างคนยืนท่ามกลางเปลวไฟแต่ไม่ได้รับบาดเจ็บใดๆ สร้างความตื่นกลัวแก่ผู้พบเห็น</p>
+                    <p class="card-desc">เกิดเหตุไฟไหม้ป่าลุกลามอย่างรวดเร็วในช่วงดูแล้ง ชาวบ้านรายงานว่าเห็นเงาร่างคนยืนท่ามกลางเปลวไฟแต่ไม่ได้รับบาดเจ็บใดๆ สร้างความตื่นกลัวแก่ผู้พบเห็น</p>
                 </div>
 
                 <div class="card" style="border-left-color: #884444;">
@@ -398,7 +395,7 @@
             document.getElementById('system-time').innerText = now.toLocaleTimeString('th-TH');
         }, 1000);
 
-        // ดึงสภาพอากาศจริงจาก Open-Meteo API ของจังหวัดโทยามะ ประเทศญี่ปุ่น (แบบปกติสมจริง)
+        // ดึงสภาพอากาศจริงจาก Open-Meteo API ของจังหวัดโทยามะ (ตามจริงแบบเพียวๆ)
         async function fetchToyamaWeather() {
             try {
                 let response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=36.6953&longitude=137.2113&current=temperature_2m,relative_humidity_2m,weather_code');
