@@ -111,11 +111,11 @@
             z-index: 2;
         }
 
-        /* Header ด้านบนสุด */
+        /* Header ดีไซน์ใหม่ให้ดูสมจริงเหมือนแอปศูนย์กลาง */
         header {
             background: #110000;
             border-bottom: 2px solid #800517;
-            padding: 12px 15px;
+            padding: 10px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -123,11 +123,24 @@
             top: 0;
             z-index: 10;
         }
+        .app-brand-area {
+            display: flex;
+            flex-direction: column;
+        }
         .app-brand {
-            font-size: 12px;
-            color: #cc6666;
+            font-size: 13px;
+            color: #ff4d4d;
             letter-spacing: 1px;
             font-weight: 700;
+        }
+        .app-sub {
+            font-size: 10px;
+            color: #995555;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         .user-badge {
             background: #800517;
@@ -142,6 +155,32 @@
             gap: 5px;
         }
 
+        /* แถบสถานะระบบสด (Live Status Bar) ด้านใต้ Header */
+        .status-ticker {
+            background: #1a0202;
+            border-bottom: 1px solid #330000;
+            padding: 6px 15px;
+            font-size: 11px;
+            color: #cc6666;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .live-dot {
+            height: 8px;
+            width: 8px;
+            background-color: #ff4d4d;
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 8px #ff4d4d;
+            animation: pulse-dot 1.5s infinite;
+        }
+        @keyframes pulse-dot {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 12px #ff0000; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+
         /* ส่วนแสดงเนื้อหาหลัก */
         main {
             flex: 1;
@@ -154,9 +193,12 @@
         h1 {
             color: #ff4d4d;
             margin: 0 0 15px 0;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
             text-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         /* แถบเมนูด้านบน */
@@ -186,8 +228,6 @@
             border-color: #800517;
             font-weight: 600;
         }
-
-        /* แท็บพิเศษที่ทำตัวเป็นบัคกะพริบ */
         .tab-btn.glitch-tab {
             color: #ff4d4d;
             border-color: #800517;
@@ -196,9 +236,6 @@
         @keyframes tab-glitch {
             0% { opacity: 1; }
             50% { opacity: 0.5; border-color: #ff0000; }
-            52% { opacity: 1; }
-            80% { opacity: 0.8; }
-            90% { opacity: 0.3; }
             100% { opacity: 1; }
         }
 
@@ -210,7 +247,7 @@
             display: block;
         }
 
-        /* การ์ดเนื้อหาปกติ */
+        /* การ์ดเนื้อหา */
         .card {
             background: #140202;
             border: 1px solid #330000;
@@ -219,6 +256,7 @@
             border-radius: 8px;
             margin-bottom: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: transform 0.2s;
         }
         .card-tag {
             font-size: 11px;
@@ -237,11 +275,76 @@
         .card-desc {
             font-size: 13px;
             color: #cccccc;
-            margin: 0;
+            margin: 0 0 10px 0;
             line-height: 1.5;
         }
 
-        /* เอฟเฟกต์บัค / แฮก / ระบบรวน */
+        /* ปุ่ม Interactive ภายใน Card */
+        .card-action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #260505;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+        .action-info {
+            font-size: 11px;
+            color: #885555;
+        }
+        .interact-btn {
+            background: #200505;
+            color: #ff4d4d;
+            border: 1px solid #800517;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            cursor: pointer;
+            font-family: 'Noto Sans Thai', sans-serif;
+            transition: all 0.2s;
+        }
+        .interact-btn:hover {
+            background: #800517;
+            color: #fff;
+        }
+        .interact-btn.checked {
+            background: #052005;
+            color: #4dff4d;
+            border-color: #058005;
+        }
+
+        /* แผงควบคุมเช็กอินสถานะผู้ใช้ด้านบนแท็บ 1 */
+        .user-status-panel {
+            background: #180303;
+            border: 1px solid #550000;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .user-status-panel div span {
+            font-weight: 700;
+            color: #ff4d4d;
+        }
+        .checkin-btn {
+            background: #800517;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Noto Sans Thai', sans-serif;
+            font-weight: 600;
+        }
+        .checkin-btn:hover {
+            background: #ff4d4d;
+            color: #000;
+        }
+
+        /* เอฟเฟกต์บัค / แฮก (แท็บ 3) */
         .glitch-card {
             background: #1c0000;
             border: 1px dashed #ff4d4d;
@@ -258,8 +361,6 @@
             0% { transform: translate(0); }
             20% { transform: translate(-1px, 1px); border-color: #800517; }
             40% { transform: translate(1px, -1px); border-color: #ff4d4d; }
-            60% { transform: translate(0); }
-            80% { transform: translate(-2px, 0); }
             100% { transform: translate(0); }
         }
         .glitch-text {
@@ -271,9 +372,6 @@
         @keyframes text-flicker {
             0% { opacity: 1; }
             50% { opacity: 0.4; }
-            52% { opacity: 1; }
-            80% { opacity: 0.8; }
-            90% { opacity: 0.2; }
             100% { opacity: 1; }
         }
         .corrupted {
@@ -316,7 +414,7 @@
             <h2>USHINAWA EMERGENCY NET</h2>
             <p style="font-size: 12px; color: #cc6666; margin-bottom: 10px;">กรุณากรอกชื่อหรือรหัสประจำตัว เพื่อเข้าสู่ระบบเครือข่ายส่วนกลาง</p>
             <form onsubmit="handleLogin(event)">
-                <input type="text" id="username-input" class="login-input" placeholder="ระบุชื่อ หรือรหัสประจำตัว (เช่น คุโรซาวะ โซสุเกะ)" required autocomplete="off">
+                <input type="text" id="username-input" class="login-input" placeholder="ระบุชื่อ หรือรหัสประจำตัว" required autocomplete="off">
                 <button type="submit" class="login-btn">เข้าสู่ระบบเครือข่าย</button>
             </form>
         </div>
@@ -325,51 +423,92 @@
     <!-- หน้าจอแอปพลิเคชันหลัก (เต็มจอ) -->
     <div id="app-container">
         <header>
-            <div class="app-brand">USHINAWA COMMU SYSTEM</div>
-            <div class="user-badge">
-                <span>👤</span> <span id="display-user">ผู้ใช้งาน</span>
+            <div class="app-brand-area">
+                <div class="app-brand">USHINAWA SYSTEM</div>
+                <div class="app-sub">Secure Emergency Portal</div>
+            </div>
+            <div class="header-right">
+                <div class="user-badge">
+                    <span>👤</span> <span id="display-user">ผู้ใช้งาน</span>
+                </div>
             </div>
         </header>
 
-        <main>
-            <h1>ศูนย์กลางข้อมูลและแจ้งเตือน</h1>
+        <!-- แถบสถานะระบบสดด้านบน -->
+        <div class="status-ticker">
+            <span><span class="live-dot"></span> สถานะเครือข่าย: เฝ้าระวังระดับสูงสุด</span>
+            <span id="system-time">00:00:00</span>
+        </div>
 
-            <!-- เมนูแท็บ (เปลี่ยนแท็บที่ 3 ให้เป็นบัตรคำเตือนระบบรวน) -->
+        <main>
+            <h1>
+                <span>ศูนย์กลางประกาศและภัยพิบัติ</span>
+                <span style="font-size: 11px; color: #885555; font-weight: normal;" id="active-zone">เขต: ทั้งหมด</span>
+            </h1>
+
+            <!-- เมนูแท็บหลัก -->
             <div class="nav-tabs">
                 <button class="tab-btn active" onclick="switchTab(event, 'tab1')">🚨 แจ้งเตือนภัยพิบัติ</button>
                 <button class="tab-btn" onclick="switchTab(event, 'tab2')">👁️ สิ่งแปลกปลอม</button>
                 <button class="tab-btn glitch-tab" onclick="switchTab(event, 'tab3')">⚠️ SYS_ERR_#404</button>
             </div>
             
-            <!-- หมวดที่ 1: แจ้งเตือนภัยพิบัติ -->
+            <!-- หมวดที่ 1: แจ้งเตือนภัยพิบัติ (มีระบบ Check-in และกดตอบสนอง) -->
             <div id="tab1" class="tab-content active">
+                <!-- แผงสถานะตัวผู้ใช้เอง -->
+                <div class="user-status-panel">
+                    <div>
+                        <div style="font-size: 12px; color: #aaa;">สถานะความปลอดภัยของคุณ:</div>
+                        <div id="my-safety-status" style="font-size: 14px; color: #ffaa00;">⚠️ ยังไม่ได้เช็กอินยืนยันตัวตน</div>
+                    </div>
+                    <button class="checkin-btn" onclick="toggleCheckIn()" id="checkin-btn-text">กดเช็กอินว่าปลอดภัย</button>
+                </div>
+
                 <div class="card" style="border-left-color: #ff4d4d;">
                     <div class="card-tag">🚨 [ภัยพิบัติฉุกเฉิน] เขตอุโมงค์ทางรถไฟ</div>
                     <div class="card-title">ประกาศปิดกั้นพื้นที่และห้ามเข้าใกล้</div>
                     <p class="card-desc">ตรวจพบความผิดปกติทางคลื่นพลังงานและอาณาเขตบิดเบี้ยว ขอให้ผู้พักอาศัยหลบเลี่ยงเส้นทางดังกล่าวทันทีจนกว่าจะมีประกาศยกเลิก</p>
+                    <div class="card-action-bar">
+                        <span class="action-info">ผู้รับทราบประกาศ: <strong id="count-1">142</strong> คน</span>
+                        <button class="interact-btn" onclick="ackAlert(this, 'count-1')">รับทราบคำเตือน</button>
+                    </div>
                 </div>
+
                 <div class="card" style="border-left-color: #ffaa00;">
                     <div class="card-tag">⚠️ [ประกาศเฝ้าระวัง] เขตที่อยู่อาศัย</div>
                     <div class="card-title">คำเตือนช่วงเวลากลางคืน</div>
                     <p class="card-desc">เนื่องจากหมอกหนาผิดธรรมชาติและเสียงกระดิ่งปริศนาในยามวิกาล ขอความร่วมมือทุกท่านล็อกประตูและงดออกนอกเคหสถานคนเดียว</p>
+                    <div class="card-action-bar">
+                        <span class="action-info">ผู้รับทราบประกาศ: <strong id="count-2">98</strong> คน</span>
+                        <button class="interact-btn" onclick="ackAlert(this, 'count-2')">รับทราบคำเตือน</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- หมวดที่ 2: สิ่งแปลกปลอม -->
+            <!-- หมวดที่ 2: สิ่งแปลกปลอม (มีปุ่มโต้ตอบยืนยันการพบเห็น) -->
             <div id="tab2" class="tab-content">
                 <div class="card" style="border-left-color: #cc6666;">
                     <div class="card-tag">👁️ [รายงานสิ่งแปลกปลอม] อาคารเรียนเก่า</div>
                     <div class="card-title">เงาร่างไร้หน้าและรอยเท้าปริศนา</div>
                     <p class="card-desc">มีผู้พบเห็นเงาร่างผิดรูปเคลื่อนไหวบริเวณชั้น 3 ของอาคารร้าง หากพบเจอสิ่งมีลักษณะดังกล่าว ห้ามเข้าใกล้และให้รีบแจ้งเจ้าหน้าที่ทันที</p>
+                    <div class="card-action-bar">
+                        <span class="action-info">ยืนยันการพบเห็น: <strong id="sighting-1">19</strong> รายงาน</span>
+                        <button class="interact-btn" onclick="confirmSighting('sighting-1')">ฉันเคยพบเห็นสิ่งนี้</button>
+                    </div>
                 </div>
+
                 <div class="card" style="border-left-color: #cc6666;">
                     <div class="card-tag">👁️ [สิ่งผิดปกติ] เขตศาลเจ้า</div>
                     <div class="card-title">การเปลี่ยนแปลงของเขตอาคม</div>
                     <p class="card-desc">พบความผิดปกติของเสาโทริอิและกลีบดอกฮิกังบานะที่บานผิดฤดูกาล ส่อเค้าลางเหตุการณ์ไม่ปกติในพื้นที่</p>
+                    <div class="card-action-bar">
+                        <span class="action-info">ยืนยันการพบเห็น: <strong id="sighting-2">31</strong> รายงาน</span>
+                        <button class="interact-btn" onclick="confirmSighting('sighting-2')">ฉันเคยพบเห็นสิ่งนี้</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- หมวดที่ 3: ระบบรวน / บัค (ซ่อนความลับแบบมิดชิด) -->
+            <!-- หมวดที่ 3: ระบบรวน / บัค (ตามบรีฟเดิม ห้ามยุ่งโครงสร้างหลัก) -->
             <div id="tab3" class="tab-content">
                 <div class="glitch-card">
                     <div class="card-tag glitch-text">⚠️ CRITICAL_ERR // OVERRIDE_DATA</div>
@@ -397,8 +536,14 @@
         </footer>
     </div>
 
-    <!-- สคริปต์ควบคุมระบบล็อกอินและการเปลี่ยนแท็บ -->
+    <!-- สคริปต์ควบคุมระบบ Interactive -->
     <script>
+        // อัปเดตเวลาเรียลไทม์บนแถบสถานะ
+        setInterval(() => {
+            const now = new Date();
+            document.getElementById('system-time').innerText = now.toLocaleTimeString('th-TH');
+        }, 1000);
+
         function handleLogin(e) {
             e.preventDefault();
             let username = document.getElementById('username-input').value.trim();
@@ -420,6 +565,42 @@
             }
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.classList.add("active");
+        }
+
+        // ระบบกดเช็กอินความปลอดภัย
+        let isCheckedIn = false;
+        function toggleCheckIn() {
+            isCheckedIn = !isCheckedIn;
+            let statusText = document.getElementById('my-safety-status');
+            let btnText = document.getElementById('checkin-btn-text');
+            if(isCheckedIn) {
+                statusText.innerHTML = "✅ ปลอดภัย (เช็กอินเมื่อ " + new Date().toLocaleTimeString('th-TH', {hour: '2-digit', minute:'2-digit'}) + " น.)";
+                statusText.style.color = "#4dff4d";
+                btnText.innerText = "ยกเลิกเช็กอิน";
+                btnText.style.background = "#330000";
+            } else {
+                statusText.innerHTML = "⚠️ ยังไม่ได้เช็กอินยืนยันตัวตน";
+                statusText.style.color = "#ffaa00";
+                btnText.innerText = "กดเช็กอินว่าปลอดภัย";
+                btnText.style.background = "#800517";
+            }
+        }
+
+        // ระบบกดรับทราบประกาศ (ตัวเลขเพิ่มขึ้นจริง)
+        function ackAlert(btn, countId) {
+            if(!btn.classList.contains('checked')) {
+                let counter = document.getElementById(countId);
+                counter.innerText = parseInt(counter.innerText) + 1;
+                btn.innerText = "รับทราบแล้ว ✓";
+                btn.classList.add('checked');
+            }
+        }
+
+        // ระบบกดรายงานสิ่งแปลกปลอม
+        function confirmSighting(countId) {
+            let counter = document.getElementById(countId);
+            counter.innerText = parseInt(counter.innerText) + 1;
+            alert("บันทึกการยืนยันพิกัดเข้าสู่ระบบส่วนกลางเรียบร้อย");
         }
     </script>
 </body>
