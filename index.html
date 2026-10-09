@@ -3,92 +3,167 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ushinawa Kyuseishu - ระบบแจ้งเตือนภัยและเบาะแส</title>
+    <title>Ushinawa Kyuseishu - Emergency Network</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
             font-family: 'Noto Sans Thai', sans-serif, Arial;
             background-color: #000000;
             color: #ffffff;
             margin: 0;
-            padding: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 0;
+            width: 100vw;
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
-        /* เอฟเฟกต์กลีบดอกไม้ฮิกังบานะโปรยปราย */
+
+        /* เอฟเฟกต์กลีบดอกไม้ฮิกังบานะโปรยปรายเต็มจอ */
         .petal {
-            position: absolute;
+            position: fixed;
             background-color: #ff4d4d;
             border-radius: 150% 0 150% 0;
-            opacity: 0.6;
+            opacity: 0.5;
             animation: fall linear infinite;
             z-index: 1;
             pointer-events: none;
         }
         @keyframes fall {
             0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
-            20% { opacity: 0.8; }
-            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+            20% { opacity: 0.7; }
+            100% { transform: translateY(105vh) rotate(360deg); opacity: 0; }
         }
 
-        .container {
+        /* หน้าจอ Login / เลือกตัวละคร */
+        #login-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #080000;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .login-box {
             background: #110000;
             border: 2px solid #800517;
-            padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 8px 25px rgba(128, 5, 23, 0.4);
-            max-width: 500px;
+            padding: 25px;
+            border-radius: 12px;
             width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 30px rgba(128, 5, 23, 0.6);
+            text-align: center;
+        }
+        .login-box h2 {
+            color: #ff4d4d;
+            margin-top: 0;
+            font-size: 20px;
+        }
+        .login-input {
+            width: 100%;
+            background: #1a0505;
+            border: 1px solid #440000;
+            padding: 12px;
+            border-radius: 6px;
+            color: #fff;
+            font-family: 'Noto Sans Thai', sans-serif;
+            font-size: 14px;
+            margin: 15px 0;
+            outline: none;
+        }
+        .login-input:focus {
+            border-color: #ff4d4d;
+        }
+        .login-btn {
+            width: 100%;
+            background: #800517;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-family: 'Noto Sans Thai', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .login-btn:hover {
+            background: #ff4d4d;
+            color: #000;
+        }
+
+        /* โครงสร้างแอปหลัก (เต็มจอ) */
+        #app-container {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            min-height: 100vh;
+            background: #0d0000;
             position: relative;
             z-index: 2;
         }
-        .header-top {
+
+        /* Header ด้านบนสุด */
+        header {
+            background: #110000;
+            border-bottom: 2px solid #800517;
+            padding: 12px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #330000;
-            padding-bottom: 10px;
-            margin-bottom: 12px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
         }
-        .school-title {
-            font-size: 11px;
+        .app-brand {
+            font-size: 12px;
             color: #cc6666;
             letter-spacing: 1px;
-        }
-        .system-badge {
-            background: #800517;
-            color: #ff4d4d;
-            font-size: 10px;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-weight: 600;
-            letter-spacing: 1px;
-            border: 1px solid #ff4d4d;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { opacity: 0.6; }
-            50% { opacity: 1; }
-            100% { opacity: 0.6; }
-        }
-        h1 {
-            color: #ff4d4d;
-            margin: 0 0 12px 0;
-            text-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
-            font-size: 18px;
             font-weight: 700;
         }
+        .user-badge {
+            background: #800517;
+            color: #ff4d4d;
+            font-size: 11px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 600;
+            border: 1px solid #ff4d4d;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* ส่วนแสดงเนื้อหาหลัก */
+        main {
+            flex: 1;
+            padding: 15px;
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #ff4d4d;
+            margin: 0 0 15px 0;
+            font-size: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 77, 77, 0.3);
+        }
+
         /* แถบเมนูด้านบน */
         .nav-tabs {
             display: flex;
-            gap: 5px;
-            margin-bottom: 15px;
+            gap: 8px;
+            margin-bottom: 20px;
             border-bottom: 1px solid #330000;
             padding-bottom: 10px;
             overflow-x: auto;
@@ -97,12 +172,13 @@
             background: #1a0505;
             color: #cc6666;
             border: 1px solid #330000;
-            padding: 6px 10px;
+            padding: 8px 14px;
             border-radius: 6px;
-            font-size: 11px;
+            font-size: 12px;
             cursor: pointer;
             font-family: 'Noto Sans Thai', sans-serif;
             white-space: nowrap;
+            transition: all 0.2s;
         }
         .tab-btn.active {
             background: #660000;
@@ -110,6 +186,7 @@
             border-color: #800517;
             font-weight: 600;
         }
+
         /* ซ่อน/แสดงหน้าเนื้อหา */
         .tab-content {
             display: none;
@@ -117,47 +194,53 @@
         .tab-content.active {
             display: block;
         }
+
         /* การ์ดเนื้อหา */
         .card {
-            background: #1a0505;
+            background: #140202;
             border: 1px solid #330000;
-            border-left-width: 4px;
-            padding: 12px;
-            border-radius: 6px;
-            margin-bottom: 10px;
+            border-left-width: 5px;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
         .card-tag {
             font-size: 11px;
             color: #ff4d4d;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .card-title {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 700;
             color: #ffffff;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
         .card-desc {
-            font-size: 12px;
-            color: #d0d0d0;
+            font-size: 13px;
+            color: #cccccc;
             margin: 0;
-            line-height: 1.4;
+            line-height: 1.5;
         }
-        .footer {
-            font-size: 11px;
-            color: #777777;
-            margin-top: 15px;
-            border-top: 1px solid #220000;
-            padding-top: 8px;
+
+        /* Footer ด้านล่างสุด */
+        footer {
             text-align: center;
+            font-size: 11px;
+            color: #666;
+            padding: 15px;
+            border-top: 1px solid #220000;
+            background: #080000;
         }
     </style>
 </head>
 <body>
-    <!-- เอฟเฟกต์กลีบดอกไม้โปรย -->
+    <!-- เอฟเฟกต์กลีบดอกไม้โปรยทั่วจอ -->
     <script>
-        for (let i = 0; i < 10; i++) {
+        for (let i = 0; i < 15; i++) {
             let p = document.createElement('div');
             p.className = 'petal';
             p.style.left = Math.random() * 100 + 'vw';
@@ -170,70 +253,97 @@
         }
     </script>
 
-    <div class="container">
-        <div class="header-top">
-            <div class="school-title">USHINAWA EMERGENCY NET</div>
-            <div class="system-badge">ALERT ACTIVE</div>
-        </div>
-
-        <h1>ระบบแจ้งเตือนภัยและเบาะแส</h1>
-
-        <!-- เมนูปุ่มกดเปลี่ยนหมวดหมู่ (3 แท็บธีมภัยพิบัติและคีย์หลัก) -->
-        <div class="nav-tabs">
-            <button class="tab-btn active" onclick="switchTab(event, 'tab1')">🚨 แจ้งเตือนภัย</button>
-            <button class="tab-btn" onclick="switchTab(event, 'tab2')">👁️ สิ่งแปลกปลอม</button>
-            <button class="tab-btn" onclick="switchTab(event, 'tab3')">🗝️ เบาะแส</button>
-        </div>
-        
-        <!-- หมวดที่ 1: แจ้งเตือนภัยพิบัติ -->
-        <div id="tab1" class="tab-content active">
-            <div class="card" style="border-left-color: #ff4d4d;">
-                <div class="card-tag">🚨 [ภัยพิบัติฉุกเฉิน] เขตอุโมงค์ทางรถไฟ</div>
-                <div class="card-title">ประกาศปิดกั้นพื้นที่และห้ามเข้าใกล้</div>
-                <p class="card-desc">ตรวจพบความผิดปกติทางคลื่นพลังงานและอาณาเขตบิดเบี้ยว ขอให้ผู้พักอาศัยหลบเลี่ยงเส้นทางดังกล่าวทันทีจนกว่าจะมีประกาศยกเลิก</p>
-            </div>
-            <div class="card" style="border-left-color: #ffaa00;">
-                <div class="card-tag">⚠️ [ประกาศเฝ้าระวัง] เขตที่อยู่อาศัย</div>
-                <div class="card-title">คำเตือนช่วงเวลากลางคืน</div>
-                <p class="card-desc">เนื่องจากหมอกหนาผิดธรรมชาติและเสียงกระดิ่งปริศนาในยามวิกาล ขอความร่วมมือทุกท่านล็อกประตูและงดออกนอกเคหสถานคนเดียว</p>
-            </div>
-        </div>
-
-        <!-- หมวดที่ 2: สิ่งแปลกปลอม -->
-        <div id="tab2" class="tab-content">
-            <div class="card" style="border-left-color: #cc6666;">
-                <div class="card-tag">👁️ [รายงานสิ่งแปลกปลอม] อาคารเรียนเก่า</div>
-                <div class="card-title">เงาร่างไร้หน้าและรอยเท้าปริศนา</div>
-                <p class="card-desc">มีผู้พบเห็นเงาร่างผิดรูปเคลื่อนไหวบริเวณชั้น 3 ของอาคารร้าง หากพบเจอสิ่งมีลักษณะดังกล่าว ห้ามเข้าใกล้และให้รีบแจ้งเจ้าหน้าที่ทันที</p>
-            </div>
-            <div class="card" style="border-left-color: #cc6666;">
-                <div class="card-tag">👁️ [สิ่งผิดปกติ] เขตศาลเจ้า</div>
-                <div class="card-title">การเปลี่ยนแปลงของเขตอาคม</div>
-                <p class="card-desc">พบความผิดปกติของเสาโทริอิและกลีบดอกฮิกังบานะที่บานผิดฤดูกาล ส่อเค้าลางเหตุการณ์ไม่ปกติในพื้นที่</p>
-            </div>
-        </div>
-
-        <!-- หมวดที่ 3: เบาะแส (Ushinawa Kyuseishu personal list / คีย์ลับ) -->
-        <div id="tab3" class="tab-content">
-            <div class="card" style="border-left-color: #800517;">
-                <div class="card-tag">🗝️ [คีย์หลักที่ต้องตามหา] บันทึกหน้าหาย</div>
-                <div class="card-title">ร่องรอยผู้กอบกู้และเงื่อนงำในหมู่บ้าน</div>
-                <p class="card-desc">รวบรวมเบาะแส คีย์เวิร์ดสำคัญ และชิ้นส่วนความทรงจำที่กระจัดกระจาย เพื่อไขปริศนาและหาทางออกให้กับหมู่บ้าน Ushinawa</p>
-            </div>
-            <div class="card" style="border-left-color: #800517;">
-                <div class="card-tag">📌 [เป้าหมายสืบสวน] สัญญาณปริศนา</div>
-                <div class="card-title">รหัสลับจากสถานีวิทยุร้าง</div>
-                <p class="card-desc">ถอดรหัสข้อความเสียงที่ขาดหายเพื่อเข้าถึงเบาะแสระดับลึกของคอมมู ที่ซ่อนอยู่ภายใต้ความเงียบงันของเมืองนี้</p>
-            </div>
-        </div>
-
-        <div class="footer">
-            Ushinawa Kyuseishu Community Network
+    <!-- หน้าจอ Login / ยืนยันตัวตนตัวละคร -->
+    <div id="login-screen">
+        <div class="login-box">
+            <h2>USHINAWA EMERGENCY NET</h2>
+            <p style="font-size: 12px; color: #cc6666; margin-bottom: 10px;">กรุณาระบุชื่อตัวละคร หรือนามแฝง OC ของท่านเพื่อเข้าสู่ระบบเครือข่ายส่วนกลาง</p>
+            <form onsubmit="handleLogin(event)">
+                <input type="text" id="username-input" class="login-input" placeholder="ระบุชื่อตัวละคร (เช่น ยูโตะ / รินะ)" required autocomplete="off">
+                <button type="submit" class="login-btn">เข้าสู่ระบบเครือข่าย</button>
+            </form>
         </div>
     </div>
 
-    <!-- สคริปต์สำหรับกดเปลี่ยนแท็บเมนู -->
+    <!-- หน้าจอแอปพลิเคชันหลัก (เต็มจอ) -->
+    <div id="app-container">
+        <header>
+            <div class="app-brand">USHINAWA COMMU SYSTEM</div>
+            <div class="user-badge">
+                <span>👤</span> <span id="display-user">ผู้ใช้งาน</span>
+            </div>
+        </header>
+
+        <main>
+            <h1>ศูนย์กลางข้อมูลและแจ้งเตือน</h1>
+
+            <!-- เมนูแท็บ -->
+            <div class="nav-tabs">
+                <button class="tab-btn active" onclick="switchTab(event, 'tab1')">🚨 แจ้งเตือนภัยพิบัติ</button>
+                <button class="tab-btn" onclick="switchTab(event, 'tab2')">👁️ สิ่งแปลกปลอม</button>
+                <button class="tab-btn" onclick="switchTab(event, 'tab3')">📜 ตามรอยของในตำนาน</button>
+            </div>
+            
+            <!-- หมวดที่ 1: แจ้งเตือนภัยพิบัติ -->
+            <div id="tab1" class="tab-content active">
+                <div class="card" style="border-left-color: #ff4d4d;">
+                    <div class="card-tag">🚨 [ภัยพิบัติฉุกเฉิน] เขตอุโมงค์ทางรถไฟ</div>
+                    <div class="card-title">ประกาศปิดกั้นพื้นที่และห้ามเข้าใกล้</div>
+                    <p class="card-desc">ตรวจพบความผิดปกติทางคลื่นพลังงานและอาณาเขตบิดเบี้ยว ขอให้ผู้พักอาศัยหลบเลี่ยงเส้นทางดังกล่าวทันทีจนกว่าจะมีประกาศยกเลิก</p>
+                </div>
+                <div class="card" style="border-left-color: #ffaa00;">
+                    <div class="card-tag">⚠️ [ประกาศเฝ้าระวัง] เขตที่อยู่อาศัย</div>
+                    <div class="card-title">คำเตือนช่วงเวลากลางคืน</div>
+                    <p class="card-desc">เนื่องจากหมอกหนาผิดธรรมชาติและเสียงกระดิ่งปริศนาในยามวิกาล ขอความร่วมมือทุกท่านล็อกประตูและงดออกนอกเคหสถานคนเดียว</p>
+                </div>
+            </div>
+
+            <!-- หมวดที่ 2: สิ่งแปลกปลอม -->
+            <div id="tab2" class="tab-content">
+                <div class="card" style="border-left-color: #cc6666;">
+                    <div class="card-tag">👁️ [รายงานสิ่งแปลกปลอม] อาคารเรียนเก่า</div>
+                    <div class="card-title">เงาร่างไร้หน้าและรอยเท้าปริศนา</div>
+                    <p class="card-desc">มีผู้พบเห็นเงาร่างผิดรูปเคลื่อนไหวบริเวณชั้น 3 ของอาคารร้าง หากพบเจอสิ่งมีลักษณะดังกล่าว ห้ามเข้าใกล้และให้รีบแจ้งเจ้าหน้าที่ทันที</p>
+                </div>
+                <div class="card" style="border-left-color: #cc6666;">
+                    <div class="card-tag">👁️ [สิ่งผิดปกติ] เขตศาลเจ้า</div>
+                    <div class="card-title">การเปลี่ยนแปลงของเขตอาคม</div>
+                    <p class="card-desc">พบความผิดปกติของเสาโทริอิและกลีบดอกฮิกังบานะที่บานผิดฤดูกาล ส่อเค้าลางเหตุการณ์ไม่ปกติในพื้นที่</p>
+                </div>
+            </div>
+
+            <!-- หมวดที่ 3: ตามรอยของในตำนาน -->
+            <div id="tab3" class="tab-content">
+                <div class="card" style="border-left-color: #800517;">
+                    <div class="card-tag">📜 [ตำนานปรัมปรา] วัตถุบรรพกาลสาบสูญ</div>
+                    <div class="card-title">ร่องรอยสิ่งตกค้างจากอดีตกาล</div>
+                    <p class="card-desc">เบาะแสเกี่ยวกับการค้นหาวัตถุลึกลับที่หลับใหลอยู่ในเขตหมู่บ้าน เงื่อนงำที่ถูกกลบฝังไว้ใต้หน้าประวัติศาสตร์อันเงียบงัน</p>
+                </div>
+                <div class="card" style="border-left-color: #800517;">
+                    <div class="card-tag">🌙 [บันทึกรอยต่อ] เสียงกระซิบจากความมืด</div>
+                    <div class="card-title">ร่องรอยการเชื่อมต่อกับอีกฟากฝั่ง</div>
+                    <p class="card-desc">บันทึกร่องรอยและสัญลักษณ์โบราณที่ปรากฏขึ้นตามสถานที่ต่างๆ เบาะแสสำคัญในการทำความเข้าใจเรื่องราวลี้ลับทั้งหมด</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            Ushinawa Kyuseishu Community Network &bull; Emergency Response System
+        </footer>
+    </div>
+
+    <!-- สคริปต์ควบคุมระบบล็อกอินและการเปลี่ยนแท็บ -->
     <script>
+        function handleLogin(e) {
+            e.preventDefault();
+            let username = document.getElementById('username-input').value.trim();
+            if(username) {
+                document.getElementById('display-user').innerText = username;
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('app-container').style.display = 'flex';
+            }
+        }
+
         function switchTab(evt, tabName) {
             let contents = document.getElementsByClassName("tab-content");
             for (let i = 0; i < contents.length; i++) {
