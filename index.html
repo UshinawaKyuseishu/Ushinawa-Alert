@@ -165,8 +165,16 @@
 
         /* ERR_404 Tab: Glitch, Blur & Red/Black Theme */
         .glitch-box {
-            background: #120000; border: 1px solid #550000; padding: 15px; border-radius: 8px; margin-bottom: 12px;
+            background: #120000; border: 1px dashed #ff3333; border-left: 6px solid #ff0000; padding: 15px; border-radius: 8px; margin-bottom: 15px;
             animation: box-flicker 1.5s infinite steps(4);
+            position: relative;
+            overflow: hidden;
+        }
+        .glitch-box::before {
+            content: "";
+            position: absolute;
+            left: 0; top: 0; width: 6px; height: 100%;
+            background: repeating-linear-gradient(0deg, #ff0000, #ff0000 4px, transparent 4px, transparent 8px);
         }
         @keyframes box-flicker {
             0% { opacity: 1; transform: translate(0, 0); }
@@ -177,29 +185,29 @@
             100% { opacity: 1; transform: translate(0, 0); }
         }
         .glitch-header {
-            color: #cc3333; font-family: monospace; letter-spacing: 1px; font-size: 13px;
+            color: #ff4d4d; font-family: monospace; letter-spacing: 1px; font-size: 13px; font-weight: bold;
         }
         .deep-corrupt {
-            color: #551111;
+            color: #ff6666;
             background-color: #050000;
             font-family: monospace;
             word-break: break-all;
             line-height: 1.8;
-            filter: blur(3.5px);
+            filter: blur(2.5px);
             user-select: none;
-            opacity: 0.35;
+            opacity: 0.7;
             animation: text-glitch 2s infinite;
         }
         @keyframes text-glitch {
-            0% { filter: blur(3.5px); opacity: 0.35; transform: skewX(0deg); }
-            30% { filter: blur(4.5px); opacity: 0.25; transform: skewX(-2deg); }
-            50% { filter: blur(2.5px); opacity: 0.45; transform: skewX(2deg); }
-            70% { filter: blur(4px); opacity: 0.3; transform: skewX(-1deg); }
-            100% { filter: blur(3.5px); opacity: 0.35; transform: skewX(0deg); }
+            0% { filter: blur(2.5px); opacity: 0.7; transform: skewX(0deg); }
+            30% { filter: blur(3.5px); opacity: 0.5; transform: skewX(-2deg); }
+            50% { filter: blur(1.5px); opacity: 0.85; transform: skewX(2deg); }
+            70% { filter: blur(3px); opacity: 0.6; transform: skewX(-1deg); }
+            100% { filter: blur(2.5px); opacity: 0.7; transform: skewX(0deg); }
         }
         .deep-corrupt:hover {
-            filter: blur(1.5px);
-            opacity: 0.6;
+            filter: blur(1px);
+            opacity: 0.9;
         }
 
         footer { text-align: center; font-size: 11px; color: #666; padding: 15px; border-top: 1px solid #220000; background: #080000; }
@@ -275,9 +283,9 @@
             <!-- Tab 1: ภัยพิบัติ & ข่าวสาร -->
             <div id="archive" class="tab-content active">
                 <div class="card" style="border-left-color: #ff4d4d;">
-    <div class="archive-year">1976</div>
-    <div class="card-title">เหตุการณ์ไฟไหม้ปริศนา</div>
-    <p class="card-desc">เกิดเหตุไฟไหม้และลุกลามจากบริเวณใต้ทางรถไฟ@_&()&฿3-(;</p>
+                    <div class="archive-year">1976</div>
+                    <div class="card-title">เหตุการณ์ไฟไหม้ปริศนา</div>
+                    <p class="card-desc">เกิดเหตุไฟไหม้และลุกลามจากบริเวณใต้ทางรถไฟ@_&()&฿3-(;</p>
                 </div>
                 <div class="card" style="border-left-color: #ff4d4d;">
                     <div class="archive-year">2004 - เหตุการณ์เงาเคลื่อนตัว</div>
@@ -475,8 +483,32 @@
                 </div>
             </div>
 
-            <!-- Tab 5: ERR_404 (เบลอทึบ + แสตนด์บายกระพริบแกว่งบัคโทนแดงดำ) -->
+            <!-- Tab 5: ERR_404 (เพิ่มกล่องแจ้งเตือนสไตล์ตามภาพไว้ด้านบนสุด) -->
             <div id="error" class="tab-content">
+                <!-- กล่องที่ 1: บันทึกความทรงจำที่ถูกลบ -->
+                <div class="glitch-box">
+                    <div class="glitch-header" style="margin-bottom: 6px;">⚠️ ERR_CORRUPT // ?????-RECORD</div>
+                    <div class="card-title" style="color: #ff4d4d; font-size: 14px; margin-bottom: 6px;">บันทึก ความทรงจำที่ถูกลบ / ข้อมูลถูกปิดผนึก</div>
+                    <div class="deep-corrupt" style="padding: 8px; border: 1px solid #330000; border-radius: 4px; font-size: 12px;">
+                        . . . พิกัด . . . ไม่สามารถระบุได้ . . . สัญญาณชีพจากเป้าหมายขาดหาย . . . ค้นหาสิ่งที่ถูกซ่อนไว้ลึก<br>
+                        <span style="background: #ff0000; color: #ff0000; padding: 0 15px;">██████</span><br><br>
+                        . . . หากค้นพบสิ่งที่หลบซ่อนอยู่ นั้นแล้ว จง <span style="color: #ff2222; font-weight: bold;">เผามมันให้สิ้นเสีย</span> . . .
+                    </div>
+                </div>
+
+                <!-- กล่องที่ 2: เสียงกระซิบจากฟากฝั่งนั้น -->
+                <div class="glitch-box">
+                    <div class="glitch-header" style="margin-bottom: 6px;">⚠️ WARNING // DATA PACKET #04</div>
+                    <div class="card-title" style="color: #ff4d4d; font-size: 14px; margin-bottom: 6px;">เสียงกระซิบจาก ฟากฝั่งนั้น</div>
+                    <div class="deep-corrupt" style="padding: 8px; border: 1px solid #330000; border-radius: 4px; font-size: 12px;">
+                        [SYSTEM ERROR]: ข้อมูลไฟล์ถูกเขียนทับโดยไม่ทราบสาเหตุ . . .<br>
+                        <span style="color: #ff3333; font-style: italic;">"ใครเป็นคนเปิดประตูเปล่า...?"</span><br>
+                        ตรวจสอบพบการรั่วไหลของอาคมบริเวณพิกัด 0-0-Kyu . . .<br>
+                        โปรดระวังเงาที่สะท้อนในกระจกหลังเที่ยงคืน . . .
+                    </div>
+                </div>
+
+                <!-- กล่องเดิม: ตำนานและความมืด -->
                 <div class="glitch-box">
                     <div class="glitch-header" style="font-weight: bold; margin-bottom: 5px;">⚠️ FATAL_ERROR: MEMORY_CORRUPTED_0x800517</div>
                     <div class="glitch-header" style="font-size: 11px; margin-bottom: 10px; color: #883333;">
